@@ -23,4 +23,4 @@ Used: [https://learngitbranching.js.org/?locale=en_US](https://learngitbranching
 - Understood commit trees, branching, merging
 
 - 📸 Screenshot:
-- ![Git Branching Practice](./gitGuide.png)
+- ![Git Branching Practice](./gitGuide2.png)
