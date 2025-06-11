@@ -29,4 +29,4 @@
 
 ## Git Branch Learn
 ![git1](./git_branch_learn.png)
-![git1](./git_branch_learn2.png)
+![git2](./git_branch_learn2.png)
