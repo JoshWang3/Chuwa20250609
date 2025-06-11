@@ -1,9 +1,18 @@
-Necessary tools setup:
-1. maven![maven.png](..%2F..%2F..%2Fmaven.png)
-2. JDK download![JDK.png](..%2F..%2F..%2FJDK.png)
-3. Github Setup![github setup1.png](..%2F..%2F..%2Fgithub%20setup1.png)![github setup2.png](..%2F..%2F..%2Fgithub%20setup2.png)
-4. MySQL ![mysql.png](..%2F..%2F..%2Fmysql.png)![mysqlworkbench.png](..%2F..%2F..%2Fmysqlworkbench.png)
-5. NoSQL- MongoDB:![MongoDB.png](..%2F..%2F..%2FMongoDB.png)
-   No-SQL - Cassandra![Cassandra.png](..%2F..%2F..%2FCassandra.png)
-6. Postman:![postman.png](..%2F..%2F..%2Fpostman.png)
-7. Docker:![docker.png](..%2F..%2F..%2Fdocker.png)
+Necessary tools setup
+
+1. maven ![maven](hw1_image/maven.png)  
+2. JDK download ![JDK](hw1_image/JDK.png)  
+
+3. Github Setup  
+   ![GitHub SSH](hw1_image/github setup1.png)  
+   ![GitHub HTTPS](hw1_image/github setup2.png)  
+
+4. MySQL  
+   ![MySQL CLI](hw1_image/mysql.png)  
+   ![MySQL Workbench](hw1_image/mysqlworkbench.png)  
+
+5. NoSQL – MongoDB: ![MongoDB](hw1_image/MongoDB.png)  
+   No-SQL – Cassandra: ![Cassandra](hw1_image/Cassandra.png)  
+
+6. Postman: ![postman](hw1_image/postman.png)  
+7. Docker: ![docker](hw1_image/docker.png)  
