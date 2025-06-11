@@ -1,28 +1,28 @@
 # HW1 Setup Screenshots
 
 ## GitHub Desktop
-![GitHub Desktop](./hw1/github_desktop.png)
+![GitHub Desktop](./github_desktop.png)
 
 ## Docker Running MySQL
-![Docker](./hw1/docker.png)
+![Docker](./docker.png)
 
 ## Maven & Java Version
-![Maven + Java](./hw1/maven_java_version.png)
+![Maven + Java](./maven_java_version.png)
 
 ## Hello World IntelliJ
-![Hello World](./hw1/helloworld.png)
+![Hello World](./helloworld.png)
 
 ## Reverse String IntelliJ
-![Reverse String](./hw1/reversestring.png)
+![Reverse String](./reversestring.png)
 
 ## ySQL Workbench Setup
-![MySQL](./hw1/mysql.png)
+![MySQL](./mysql.png)
 
 ## MongoDB Running
-![MongoDB](./hw1/mongodb.png)
+![MongoDB](./mongodb.png)
 
 ## Cassandra Running
-![Cassandra](./hw1/cassandra.png)
+![Cassandra](./cassandra.png)
 
 ## Tomcat Version
-![Tomcat](./hw1/tomcat.png)
+![Tomcat](./tomcat.png)
