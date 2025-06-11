@@ -15,7 +15,7 @@
 ## Reverse String IntelliJ
 ![Reverse String](./reversestring.png)
 
-## ySQL Workbench Setup
+## MySQL Workbench Setup
 ![MySQL](./mysql.png)
 
 ## MongoDB Running
