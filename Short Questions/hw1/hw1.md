@@ -1,5 +1,6 @@
-### hw1
-JDK:
+## hw1
+#### 1. Tool Setup
+JDK 17:
 ![Alt Text](images/JDK17.png)
 
 Java IDE: </br>
@@ -30,3 +31,6 @@ Postman Desktop:
 Docker Desktop:
 ![Alt Text](images/Docker.png)
 
+#### 2. Git Learning
+![Alt Text](images/Git_Local.png)
+![Alt Text](images/Git_Remote.png)
