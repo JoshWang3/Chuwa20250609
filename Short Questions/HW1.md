@@ -22,12 +22,5 @@ Used: [https://learngitbranching.js.org/?locale=en_US](https://learngitbranching
 - Completed basic and advanced Git branching exercises
 - Understood commit trees, branching, merging
 
-📸 Screenshot:
-![Git Branching Practice](./git-branching.png)
-
----
-
-## ✅ 4. Submission
-
-- This file and screenshots were committed and pushed to:
-  > 🔗 `ruihan_wang` on `Josh J's repo`
+- 📸 Screenshot:
+- ![Git Branching Practice](./gitGuide.png)
