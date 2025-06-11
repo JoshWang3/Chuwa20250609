@@ -1,3 +1,9 @@
-![image-20250611151559352](/Users/yj/Library/Application Support/typora-user-images/image-20250611151559352.png)
+# Git Practice Homework
 
-![image-20250611151610950](/Users/yj/Library/Application Support/typora-user-images/image-20250611151610950.png)
+## 1. Screenshot 1
+
+![image1](./screenshots/HW1_1.png)
+
+## 2. Screenshot 2
+
+![image2](./screenshots/HW1_2.png)
