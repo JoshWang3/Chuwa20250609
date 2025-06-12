@@ -1,4 +1,4 @@
-Necessary tools setup
+# Necessary tools setup
 
 1. maven ![maven](hw1_image/maven.png)  
 2. JDK download ![JDK](hw1_image/JDK.png)  
@@ -14,5 +14,9 @@ Necessary tools setup
 5. NoSQL – MongoDB: ![MongoDB](hw1_image/MongoDB.png)  
    No-SQL – Cassandra: ![Cassandra](hw1_image/Cassandra.png)  
 
-6. Postman: ![postman](hw1_image/postman.png)  
-7. Docker: ![docker](hw1_image/docker.png)  
+6. Postman: ![Postman](hw1_image/postman.png)  
+7. Docker: ![Docker](hw1_image/docker.png)  
+
+8. Additional screenshots  
+   ![g1](hw1_image/g1.png)  
+   ![g2](hw1_image/g2.png)
