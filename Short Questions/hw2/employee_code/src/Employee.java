@@ -19,7 +19,13 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee Name: " + name;
+        return "Employee {" +
+                "name='" + name + '\'' +
+                ", dob='" + dob + '\'' +
+                ", department='" + department + '\'' +
+                ", ssn='" + ssn + '\'' +
+                ", addr='" + addr + '\'' +
+                '}';
     }
 
     @Override
