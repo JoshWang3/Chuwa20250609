@@ -44,7 +44,7 @@ Key Points:
 - **Instance data → Heap**
 - **Class and static info → Method Area**
 - **Local variables → Stack**
-- **Shared Strings → String Pool in Heap**
+- **Same String literals → String Pool in Heap**
  
 
 ### 3. 
