@@ -1,7 +1,32 @@
 # IntelliJ IDEA
-.idea/
-*.iml
-*.iws
+**/.idea/
+**/*.iml
+**/*.iws
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# Visual Studio Code
+**/.vscode/
+**/.code-workspace
+
+# Eclipse
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings
+**/.springBeans
+**/.sts4-cache
+**/bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
 
 # Compiled class files
 *.class
@@ -45,9 +70,9 @@ ehthumbs_vista.db
 *~
 
 # Build directories
-out/
-build/
-target/
+**/out/
+**/build/
+**/target/
 
 # Maven
 .mvn/timing.properties
@@ -64,4 +89,3 @@ gradle-app.setting
 # Other
 *.swp
 *.swo
-
