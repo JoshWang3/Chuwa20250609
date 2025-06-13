@@ -6,7 +6,7 @@
   - Except for Maven, all tools have been successfully installed
 
   - **Contacts Table** completed in MySQL Workbench. ⬇️
-  ![SQL](./hw1sql.png)
+  ![SQL](hw1sql.png)
 
 ---
 
@@ -23,4 +23,4 @@ Used: [https://learngitbranching.js.org/?locale=en_US](https://learngitbranching
 - Understood commit trees, branching, merging
 
 - 📸 Screenshot:
-- ![Git Branching Practice](./gitGuide.png)
+- ![Git Branching Practice](gitGuide.png)
