@@ -1,6 +1,5 @@
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.Stack;
 
 public class Main {
 
@@ -40,7 +39,7 @@ public class Main {
         Employee employee2 = new Employee(
                 "Sherlock Holmes",
                 "987-65-4321",
-                LocalDate.of(1854, 1, 6),     // Example: Sherlock's birthday
+                LocalDate.of(1854, 1, 6),
                 department2,
                 address2
         );
