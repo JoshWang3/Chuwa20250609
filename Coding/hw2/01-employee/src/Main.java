@@ -8,32 +8,22 @@ public class Main {
         Employee employee1 = new Employee("John Smith", "1990-05-15", "Engineering", "123-45-6789", address1);
         Employee employee2 = new Employee("Sarah Johnson", "1985-12-03", "Marketing", "987-65-4321", address2);
 
-        System.out.println("Address 1: " + address1);
-        System.out.println("Address 2: " + address2);
-        System.out.println("\nEmployee 1: " + employee1);
-        System.out.println("Employee 2: " + employee2);
-
         System.out.println("=== OBJECT INSTANCES ===");
         System.out.println("Employee 1: " + employee1);
         System.out.println("Employee 2: " + employee2);
 
-        System.out.println("\n=== JVM MEMORY ALLOCATION ANALYSIS ===");
 
+        System.out.println("\n=== JVM MEMORY ALLOCATION ANALYSIS ===");
         // 1. Object Identity Hash Codes (memory addresses)
         System.out.println("1. Object Identity Hash Codes (indicates memory location):");
         System.out.println("employee1 hash: " + System.identityHashCode(employee1));
         System.out.println("employee2 hash: " + System.identityHashCode(employee2));
-        System.out.println("address1 hash:  " + System.identityHashCode(address1));
-        System.out.println("address2 hash:  " + System.identityHashCode(address2));
 
         // 2. Class information in Method Area
         System.out.println("\n2. Class Information (stored in Method Area):");
         Class<?> empClass = employee1.getClass();
-        Class<?> addrClass = address1.getClass();
         System.out.println("Employee class: " + empClass.getName());
-        System.out.println("Address class:  " + addrClass.getName());
         System.out.println("Employee class hash: " + System.identityHashCode(empClass));
-        System.out.println("Address class hash:  " + System.identityHashCode(addrClass));
 
         // 3. Field analysis using reflection
         System.out.println("\n3. Field Analysis (instance data in Heap):");
@@ -72,6 +62,14 @@ public class Main {
         System.out.println("\nSTACK MEMORY:");
         System.out.println("- Local variables (employee1, employee2, address1, address2 references)");
         System.out.println("- Method call frames");
+
+
+        System.out.println("\n=== STATIC VS INSTANCE ===");
+        System.out.println("Accessing static content WITHOUT creating any instances:");
+        System.out.println("Employee1's Name: " + employee1.getName());
+        System.out.println("Employee2's Name: " + employee2.getName());
+        System.out.println("Total Employees: " + Employee.getEmployeeCount());
+        System.out.println();
     }
 
     private static void analyzeObjectFields(Object obj, String objName) {

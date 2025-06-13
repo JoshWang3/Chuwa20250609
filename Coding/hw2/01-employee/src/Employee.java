@@ -6,6 +6,8 @@ class Employee {
     private String department;
     private String socialSecurityNumber;
     private Address homeAddress;
+    private static int employeeCount = 0;  // Static variable - shared across all instances
+
 
     public Employee(String name, String dateOfBirth, String department,
                     String socialSecurityNumber, Address homeAddress) {
@@ -14,6 +16,11 @@ class Employee {
         this.department = department;
         this.socialSecurityNumber = socialSecurityNumber;
         this.homeAddress = homeAddress;
+        employeeCount++;
+    }
+
+    public static int getEmployeeCount() {
+        return employeeCount;
     }
 
     @Override
@@ -30,13 +37,13 @@ class Employee {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Employee employee = (Employee) obj;
-        return Objects.equals(name, employee.name) &&
-                Objects.equals(dateOfBirth, employee.dateOfBirth) &&
-                Objects.equals(department, employee.department) &&
-                Objects.equals(socialSecurityNumber, employee.socialSecurityNumber) &&
-                Objects.equals(homeAddress, employee.homeAddress);
+        if (!(obj instanceof Employee)) return false;
+        Employee other = (Employee) obj;
+        return Objects.equals(name, other.name) &&
+                Objects.equals(dateOfBirth, other.dateOfBirth) &&
+                Objects.equals(department, other.department) &&
+                Objects.equals(socialSecurityNumber, other.socialSecurityNumber) &&
+                Objects.equals(homeAddress, other.homeAddress);
     }
 
     @Override
@@ -44,8 +51,14 @@ class Employee {
         return Objects.hash(name, dateOfBirth, department, socialSecurityNumber, homeAddress);
     }
 
+
     // Getter for demonstrating JVM Memory Allocation
     public Address getHomeAddress() {
         return homeAddress;
+    }
+
+    // Additional getter to demonstrate instance vs static access
+    public String getName() {
+        return name;
     }
 }

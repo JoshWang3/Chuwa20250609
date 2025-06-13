@@ -1,3 +1,43 @@
+### hw2
+
+### 1. 
+Write a Java POJO (plain old java object) named "Employee", inside Employ class, you should have
+    1. Employee's name
+    2. Employee's Date of Birth
+    3. Employee's Department (it can be another POJO)
+    4. Employee's Social Security Number
+    5. Employee's home address (it can be another POJO)
+* Override toString method, so that when an Employee object is being printed, the print out looks meaningful and readable.
+* Override equals method, so that only when two Employees have identical information, we consider they are the same employee.
+
+#### All code is located at: `Coding/hw2/01-employee`
+[Employee](../../Coding/hw2/01-employee/src/Employee.java)
+
+[Address](../../Coding/hw2/01-employee/src/Address.java)
+
+
+### 2.
+Write code to instantiate at least two instances of above Employee class, use code snippets to explain how these Employee objects are allocated to JVM memory. 
+You may use java reflection utilities to demonstrate it.
+
+[Main](../../Coding/hw2/01-employee/src/Main.java)
+
+### 3. 
+Write static utilities in your Employee class, demonstrate how static content differs from others during class instantiation.
+
+[Employee](../../Coding/hw2/01-employee/src/Employee.java)
+
+- **Static variables** belong to the **class**, not objects.
+- **Instance variables** belong to **each object**.
+
+Key Differences:
+- **Memory**: Static content is stored once in memory; instance variables are stored per object.
+- **Access**: Static variables can be accessed via class name; instance variables require an object.
+- **Initialization**: Static variables are initialized when the class loads; instance variables are initialized during object creation.
+- **Sharing**: Static variables are shared across all instances; instance variables are not.
+
+
+
 ### 4. Explain why global variables are NOT recommended, you may use code snippets.
 - A global variable is accessible from anywhere in the code.
 

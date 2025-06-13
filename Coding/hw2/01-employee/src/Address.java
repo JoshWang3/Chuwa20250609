@@ -21,12 +21,12 @@ class Address {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Address address = (Address) obj;
-        return Objects.equals(street, address.street) &&
-                Objects.equals(city, address.city) &&
-                Objects.equals(state, address.state) &&
-                Objects.equals(zipCode, address.zipCode);
+        if (!(obj instanceof Address)) return false;
+        Address other = (Address) obj;
+        return Objects.equals(street, other.street) &&
+                Objects.equals(city, other.city) &&
+                Objects.equals(state, other.state) &&
+                Objects.equals(zipCode, other.zipCode);
     }
 
     @Override
