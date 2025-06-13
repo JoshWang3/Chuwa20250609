@@ -22,6 +22,31 @@ You may use java reflection utilities to demonstrate it.
 
 [Main](../../Coding/hw2/01-employee/src/Main.java)
 
+To summarize how Employee objects are allocated to JVM memory:
+1. **Heap Memory (Stores object instance data)**
+- `employee1` and `employee2` objects are stored in the heap, each with their own fields:
+    - Instance fields like `name`, `dateOfBirth`, `department`, etc. are separate for each object.
+
+- Immutable `String` objects (like names, dates, departments) are allocated in the heap if not interned.
+
+2. **String Pool (Part of Heap, optimized area)**
+- Strings like `"Engineering"` used in both `employee1` and `employee2` point to the **same reference**, confirming interning.
+ 
+3. **Method Area (Stores class metadata and static fields)**
+- Class metadata (like structure and method definitions)  are stored here.
+- Static fields like `employeeCount = 2` are also stored here (only one copy per class).
+
+4. **Stack Memory (Per-thread, stores method frames and local refs)**
+- Local variables like `employee1`, `employee2`, `address1`, `address2` are **references**, not objects.
+- These references point to the actual object instances in the heap.
+
+Key Points:
+- **Instance data → Heap**
+- **Class and static info → Method Area**
+- **Local variables → Stack**
+- **Shared Strings → String Pool in Heap**
+ 
+
 ### 3. 
 Write static utilities in your Employee class, demonstrate how static content differs from others during class instantiation.
 
