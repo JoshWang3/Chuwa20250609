@@ -22,7 +22,7 @@ instantiation.
 
 4. Explain why global variables are NOT recommended, you may use code snippets.
 
-	Global variables can be modified from anywhere, making it difficult to track changes and debug bugs. Any part of the program can change the global variable, potentially introducing unintended behavior.
+Global variables can be modified from anywhere, making it difficult to track changes and debug bugs. Any part of the program can change the global variable, potentially introducing unintended behavior.
 
 ```
 public class Globals {
@@ -43,21 +43,21 @@ public class B {
 }
 ```	
 
-	Now the value of Globals.count changes in both A and B, but there’s no clear control over who changed what, or why bugs happen.
+Now the value of Globals.count changes in both A and B, but there’s no clear control over who changed what, or why bugs happen.
 
 5. Explain why Strings in Java are considered "Immutable"?
 
-	In Java, Strings are considered immutable because once a String object is created, its contents cannot be changed. Any "modification" creates a new String object, leaving the original unchanged.
+In Java, Strings are considered immutable because once a String object is created, its contents cannot be changed. Any "modification" creates a new String object, leaving the original unchanged.
 
 6. Write code snippets to explain what does "Final" keyword do, and what we need it?
 
-	1. final with Variables – Value Cannot Change
+1. final with Variables – Value Cannot Change
 ```
 final int MAX_USERS = 100;
 MAX_USERS = 200; // Compile error!
 ```
 
-	2. final with Methods – Cannot Override
+2. final with Methods – Cannot Override
 ```
 class Animal {
     public final void eat() {
@@ -70,7 +70,7 @@ class Dog extends Animal {
 }
 ```
 
-	3. final with Classes – Cannot Extend
+3. final with Classes – Cannot Extend
 ```
 final class Utility {
     public static void printHello() {
@@ -85,7 +85,7 @@ final class Utility {
 
 7. Write code snippets to explain why Java is "pass-by-value", and why do some people think it might be "pass-by-reference"?
 
-	"Pass-by-Value": In Java, when you pass a variable to a method, you pass a copy of its value — not the original.
+"Pass-by-Value": In Java, when you pass a variable to a method, you pass a copy of its value — not the original.
 
 ```
 public class Test {
@@ -101,11 +101,11 @@ public class Test {
 }
 ```
 
-	People think Java is pass-by-reference because you can modify the object passed into a method. But Java does not pass the actual reference, it passes a copy of the reference — like passing a pointer by value.
+People think Java is pass-by-reference because you can modify the object passed into a method. But Java does not pass the actual reference, it passes a copy of the reference — like passing a pointer by value.
 
 8. Write code snippets to explain overloading in Java, explain how does Java define method signature.
 
-	Overloading means defining multiple methods in the same class with the same name, but different parameters.
+Overloading means defining multiple methods in the same class with the same name, but different parameters.
 
 ```
 public class Printer {
@@ -128,15 +128,15 @@ public class Printer {
 }
 ```
 
-	The method signature consists of:
-	* Method name
-	* Parameter types (order and number)
+The method signature consists of:
+Method name
+Parameter types (order and number)
 
 
 9. You may be asked to demo and explain your answers/code in class.
 
 10. Use Java collection framework datastructures (e.g. Set, Map, List) to solve following Leetcode questions, you MUST use Java and you MUST use datastructures provided by Java Collection framwork:
-	1. Top K Frequent Elements（LeetCode 347）
+1. Top K Frequent Elements（LeetCode 347）
 
 ```
 class Solution {
@@ -168,7 +168,7 @@ class Solution {
 }
 ```
 
-	2. Two Sum（LeetCode 1）
+2. Two Sum（LeetCode 1）
 
 ```
 class Solution {
