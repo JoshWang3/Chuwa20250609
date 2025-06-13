@@ -80,7 +80,6 @@ ehthumbs_vista.db
 
 # Gradle
 .gradle
-**/build/
 !src/**/build/
 gradle-app.setting
 !gradle-wrapper.jar
