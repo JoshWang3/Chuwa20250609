@@ -338,14 +338,134 @@ class FinalReferenceExample {
 
 
  **7. Write code snippets to explain why Java is "pass-by-value", and why do some people think it might be "pass-by-reference"?**
+In Java, when you pass a variable to a method, what gets passed is a copy of the value of that variable. For primitive types, this is straightforward, but for objects, what gets passed is a copy of the reference to the object, not the actual object itself.
 
+```java
+public class Main {
+    public static void main(String[] args) {
+        int x = 5;
+        modifyPrimitive(x);
+        System.out.println("Value of x after method call: " + x); // Output: 5
+    }
+
+    public static void modifyPrimitive(int num) {
+        num = 10; // This changes the local copy of 'num', not the original 'x'
+    }
+}
+```
+
+For objects, Java passes a copy of the reference to the object. This means that while you cannot change the reference itself (because it's a copy), you can use it to modify the object it points to. This behavior can make it seem like Java is "pass-by-reference." Even though you can modify an object's state, you cannot reassign the reference itself within the method. This demonstrates that Java is not "pass-by-reference."
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person("Alice");
+        reassignReference(person);
+        System.out.println("Person's name after method call: " + person.name); // Output: Alice
+    }
+
+    public static void reassignReference(Person p) {
+        p = new Person("Charlie"); // This changes the local copy of the reference, not the original
+    }
+}
+/*the reassignReference method creates a new Person object and assigns it to the local copy of the reference. The original reference in the main method remains unchanged, proving that Java is "pass-by-value.*/
+```
 
  **8. Write code snippets to explain overloading in Java, explain how does Java define method signature.**
 
+Method overloading in Java allows multiple methods to have the same name but with different parameter lists. Java differentiates between these methods based on their method signature. A method signature in Java consists of method name and paramete
+r types (number, type, and order of parameters).
+
+```java
+public class OverloadingExample {
+
+    // Method 1: No parameters
+    public void display() {
+        System.out.println("Display method with no parameters");
+    }
+
+    // Method 2: One parameter (int)
+    public void display(int number) {
+        System.out.println("Display method with one integer parameter: " + number);
+    }
+
+    // Method 3: Two parameters (int, String)
+    public void display(int number, String text) {
+        System.out.println("Display method with two parameters: " + number + ", " + text);
+    }
+
+    // Method 4: One parameter (double)
+    public void display(double number) {
+        System.out.println("Display method with one double parameter: " + number);
+    }
+
+    public static void main(String[] args) {
+        OverloadingExample obj = new OverloadingExample();
+
+        // Calling different overloaded methods
+        obj.display(); // Calls Method 1
+        obj.display(10); // Calls Method 2
+        obj.display(20, "Hello"); // Calls Method 3
+        obj.display(5.5); // Calls Method 4
+    }
+}
+/*
+ * OUTPUT:
+ * Display method with no parameters
+ * Display method with one integer parameter: 10
+ * Display method with two parameters: 20, Hello
+ * Display method with one double parameter: 5.5
+ * 
+*/
+```
 
  **9.  Use Java collection framework datastructures (e.g. Set, Map, List) to solve following Leetcode questions, 
 you MUST use Java and you MUST use datastructures provided by Java Collection framwork:**
 
    **1. Top K Frequent Elements（LeetCode 347）**
+```java
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
 
+        for(int n : nums){
+            map.merge(n, 1, Integer::sum);
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> (a[1] - b[1]));
+
+        for(Map.Entry<Integer, Integer> e : map.entrySet()){
+            int num = e.getKey(), cnt = e.getValue();
+
+            if(pq.size() == k){
+                if(pq.peek()[1] < cnt){
+                    pq.poll();
+                    pq.offer(new int[]{num, cnt});
+                }
+            }else{
+                pq.offer(new int[]{num, cnt});
+            }
+        }
+        int[] res = new int[k];
+
+        for(int i = 0; i < k; i++){
+            res[i] = pq.poll()[0];
+        }
+        return res;
+    }
+}
+```
    **2. Two Sum（LeetCode 1）**
+```java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++){
+            if(map.containsKey(target - nums[i])) return new int[]{i, map.get(target - nums[i])};
+            map.put(nums[i], i);
+        }
+        return new int[2];
+    }
+}
+```
