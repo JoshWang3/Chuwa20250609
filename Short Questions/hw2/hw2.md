@@ -130,6 +130,56 @@ String s = "abc";
 s.concat("def"); // this returns a new String, doesn't change 's'
 ```
 
+Full Rules for Immutability:
+1. Make the class final
+    - Prevents subclassing, which could break immutability.
+2. Make all fields private final
+   - Prevents reassignment and direct access.
+3. No setters
+   - Only getters to expose data (read-only).
+4. Initialize all fields in the constructor
+   - No default constructor should allow "partially initialized" states.
+5. Deep copy mutable objects on input/output
+   - If a field is a mutable object (e.g. List, Date), clone or wrap it defensively:
+
+    ```java
+    private final List<String> tags;
+    
+    public Person(List<String> tags) {
+    this.tags = new ArrayList<>(tags); // defensive copy
+    }
+    
+    public List<String> getTags() {
+    return new ArrayList<>(tags); // return a copy
+    }
+    ```
+
+Example:
+```java
+// 1. The class is marked final  
+final class Person {
+
+    // 2. Fields are private and final  
+    private final String name;
+    private final int age;
+
+    // 4. All fields are initialized through the constructor 
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // 3. Only getters are provided — no setters, so fields cannot be changed after construction.
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+```
+
 
 ### 6. Write code snippets to explain what "Final" keyword does, and why we need it?
 - `final` means **no further modification is allowed** to variable, method, or class.
