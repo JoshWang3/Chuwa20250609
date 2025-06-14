@@ -1,3 +1,8 @@
+**3.Write static utilities in your Employee class, demostrate how static content differs from others during class instantiation.**
+Code in Employee.java  
+（1）Static members belong to the class itself, are shared by all instances, and run only when the class is loaded or when explicitly invoked.   
+（2）Instance members are allocated separately each time you call new and do not interfere with one another.  
+
 **4.Explain why global variables are NOT recommended,you may use code snippets.**  
 (1) Break Encapsulation -- If the variable is declared to be global, then the variable can be modified anywhere in the 
     program, makes it hard to keep track of who has this variable or to determine who depends on this variable.      
