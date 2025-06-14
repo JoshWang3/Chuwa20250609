@@ -1,4 +1,4 @@
-**1. Address.java, Department.java, Employee.java **  
+**1. Address.java, Department.java, Employee.java**  
 **2. Show how the Employee objects are allocated to JVM memory (EmployeeMemory.java)**  
 
 - **Metaspace**: Class metadata (like `Employee.class`, its methods, and static fields) lives here. This data is shared across all Employee instances — it only loads once when the class is first used.
@@ -45,10 +45,10 @@ public class GlobalExample {
     }
 ```
 
-- **Uncontrolled access from anywhere: ** Any class in the program can modify counter, even accidentally, making it hard to trace bugs or enforce logic.
-- **No encapsulation or protection: ** this would lose the ability to restrict how or when the variable is changed. It breaks the object-oriented principle of data hiding.
-- **Hidden dependencies: ** Methods or classes using the global variable don’t declare it. Thus, the dependency is implicit. This makes code harder to understand and maintain.
-- **Race conditions in multithreading: **  In concurrent programs, multiple threads may read/write the global variable at the same time, causing inconsistent or corrupted state.
+- **Uncontrolled access from anywhere:** Any class in the program can modify counter, even accidentally, making it hard to trace bugs or enforce logic.
+- **No encapsulation or protection:** this would lose the ability to restrict how or when the variable is changed. It breaks the object-oriented principle of data hiding.
+- **Hidden dependencies:** Methods or classes using the global variable don’t declare it. Thus, the dependency is implicit. This makes code harder to understand and maintain.
+- **Race conditions in multithreading:**  In concurrent programs, multiple threads may read/write the global variable at the same time, causing inconsistent or corrupted state.
 
 
 **5. Why is String immutable in Java?**  
@@ -73,7 +73,7 @@ public class StringEquality {
 
 ```
 
-** 6. What does 'Final' keyword do and what we need it?**  
+**6. What does 'Final' keyword do and what we need it?**  
 
 - In Java, the `final` keyword is used to indicate that something **cannot be changed** once assigned. It can be applied to **variables**, **methods**, and **classes**, each with its own purpose.
 - **final variables**: A `final` variable can only be assigned once. After its value is set, it cannot be changed.
@@ -133,7 +133,7 @@ final class FinalClass {
 }
 ```
 
-** 7. Why Java Is "Pass-by-Value", and why do some people think it might be "pass-by-reference"?**  
+**7. Why Java Is "Pass-by-Value", and why do some people think it might be "pass-by-reference"?**  
 
 Java is **strictly pass-by-value** — it always passes a *copy of the variable* into a method.  
 However, this behavior looks confusing when you're dealing with **objects**, because what's being copied is the **reference value**, not the object itself.
@@ -174,7 +174,7 @@ public class PassByValueDemo {
 ```
 - Java is pass-by-value. For primitives, the value is copied. For objects, the reference (address) is copied — not the object itself. That’s why we can mutate an object inside a method, but reassigning the reference has no effect outside the method.
 
-** 8. Explain overloading in Java, explain how does Java define method signature**  
+**8. Explain overloading in Java, explain how does Java define method signature**  
 
 ```java
 public class Overload {
@@ -206,7 +206,7 @@ public class Overload {
 }
 
 ```
-- **Method overloading: ** multiple methods with the **same name** but **different parameter lists** in the same class.
+- **Method overloading:** multiple methods with the **same name** but **different parameter lists** in the same class.
 
 Java uses **method signature** to differentiate overloaded methods.  
 The **method signature** includes: the method **name**, the **number**, **type**, and **order** of parameters.	
