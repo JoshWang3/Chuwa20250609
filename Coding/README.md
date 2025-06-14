@@ -45,10 +45,10 @@ public class GlobalExample {
     }
 ```
 
-- **Uncontrolled access from anywhere: ** Any class in the program can modify counter, even accidentally, making it hard to trace bugs or enforce logic.
-- **No encapsulation or protection: ** this would lose the ability to restrict how or when the variable is changed. It breaks the object-oriented principle of data hiding.
-- **Hidden dependencies: ** Methods or classes using the global variable don’t declare it. Thus, the dependency is implicit. This makes code harder to understand and maintain.
-- **Race conditions in multithreading: **  In concurrent programs, multiple threads may read/write the global variable at the same time, causing inconsistent or corrupted state.
+- **Uncontrolled access from anywhere:** Any class in the program can modify counter, even accidentally, making it hard to trace bugs or enforce logic.
+- **No encapsulation or protection:** this would lose the ability to restrict how or when the variable is changed. It breaks the object-oriented principle of data hiding.
+- **Hidden dependencies:** Methods or classes using the global variable don’t declare it. Thus, the dependency is implicit. This makes code harder to understand and maintain.
+- **Race conditions in multithreading:**  In concurrent programs, multiple threads may read/write the global variable at the same time, causing inconsistent or corrupted state.
 
 
 **5. Why is String immutable in Java?**  
@@ -206,7 +206,7 @@ public class Overload {
 }
 
 ```
-- **Method overloading: ** multiple methods with the **same name** but **different parameter lists** in the same class.
+- **Method overloading:** multiple methods with the **same name** but **different parameter lists** in the same class.
 
 Java uses **method signature** to differentiate overloaded methods.  
 The **method signature** includes: the method **name**, the **number**, **type**, and **order** of parameters.	
