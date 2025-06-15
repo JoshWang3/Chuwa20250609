@@ -110,7 +110,7 @@ public class Main {
 }
 ```
 
-
+---
 ### 2. What is wrapper data type classes (e.g. Integer, Double) in Java and why we need wrapper class?
 A **wrapper class** in Java is an object representation of a primitive data type.
 
@@ -152,7 +152,7 @@ Wrapper classes provide helpful methods.
     boolean parsed = Boolean.parseBoolean("true");
     ```
 
-
+---
 ### 3. What is the difference between HashMap and HashTable?
 
 | Feature            | `HashMap`                          | `Hashtable`                          |
@@ -173,9 +173,9 @@ Map<String, String> table = new Hashtable<>();
 table.put(null, "value"); // throws NullPointerException
 ```
 
-
+---
 ### 4. What is String pool in Java and why do we need String pool? Explain String immunity.
-**String Pool (String Interning)** is a special memory area in the Java heap that stores **unique string literals**.  
+> **String Pool (String Interning)** is a special memory area in the Java heap that stores **unique string literals**.  
 
 Example:
 ```java
@@ -186,10 +186,12 @@ System.out.println(a == b);  // true (same reference)
 - "hello" is stored once in the pool.
 - Reuses the same object for performance and memory efficiency.  
 
-#### Why do ee need String Pool?  
-- Memory Optimization – avoids storing duplicate strings.
+> Why do ee need String Pool?   
+> 
+Memory Optimization – avoids storing duplicate strings.
 
-#### String Immutability:
+> String Immutability
+> 
 String is immutable – once created, it cannot be changed.
 
 ```java
@@ -200,22 +202,22 @@ System.out.println(s);  // still "abc"
 - Enables string pooling (safe to share across code).
 - Ensures thread safety.
 
-#### Summary:
-- String Pool = shared memory for string literals
-- String is immutable = content cannot change
-- These work together to save memory and make strings faster and safer to use
+Summary:
+- String Pool = shared memory for string literals.
+- String is immutable = content cannot change.
+- These work together to save memory and make strings faster and safer to use.
 
-
+---
 ### 5. Explain garbage collection. Explain types of garbage collection.
-Garbage Collection (GC) is the **automatic memory management** in Java.  
-It removes unused objects from **heap** to free up memory.
+> Garbage Collection (GC) is the **automatic memory management** in Java.  
+> It removes unused objects from **heap** to free up memory.
 
 ```java
 MyObject obj = new MyObject();
 obj = null;  // eligible for GC
 ```
 
-#### Types of Garbage Collection:
+**Types of Garbage Collection:**
 
 | Garbage Collector | Description                            | Use Case / When to Use                 | Default?           |
 |-------------------|----------------------------------------|----------------------------------------|--------------------|
@@ -226,14 +228,12 @@ obj = null;  // eligible for GC
 | **ZGC**           | Low-latency, scalable, pause <10ms      | Large heap apps needing minimal pause  | ❌ (use with `-XX:+UseZGC`) |
 | **Shenandoah**    | Low-pause GC, concurrent compaction     | Large applications needing low latency | ❌ (Red Hat/OpenJDK variant) |
 
----
-
 Summary:
 - G1 GC is the default in modern Java.  
 - Use ZGC or Shenandoah for ultra-low-latency needs.  
 - Serial GC is good for small, simple apps.
 
-
+---
 ### 6. What are access modifiers and their scopes in Java?
 
 | Modifier    | Class | Package | Subclass | Outside Package |
@@ -258,7 +258,7 @@ public class Example {
 }
 ```
 
-
+---
 ### 7. Explain final key word? (Field, Method, Class)
 `final` = no change.  
 
@@ -279,7 +279,7 @@ final class Animal {
 }
 ```
 
-
+---
 ### 8. Explain static keyword (Field, Method, Class). When do we use it?
 `static` = **belongs to the class, not the instance**.
 
@@ -289,11 +289,10 @@ final class Animal {
 | **Method** | Can be called without creating an object          | `static void print()`                  |
 | **Class**  | Static nested class (no access to outer instance) | `static class Helper {}`              |
 
-#### When to Use:
+> When to Use:
 - Share data across all objects → use `static` field
 - Utility methods → use `static` method (e.g. `Math.max()`)
 - Nested helper classes that don’t need outer class instance → use `static class`
-
 
 Examples:
 ```java
@@ -327,11 +326,11 @@ public class Outer {
   without needing access to outer class variables.
 
 
-
+---
 ### 9. What is the differences between overriding and overloading?
-- **Overriding** = a **subclass provides a new version** of a method that is already defined in its superclass.  
+> **Overriding** = a **subclass provides a new version** of a method that is already defined in its superclass.  
 
-- **Overloading** = define **multiple methods with the same name**  
+>**Overloading** = define **multiple methods with the same name**  
   but **different parameter lists** in the same class.
 
 |                     | **Overriding**                         | **Overloading**             |
@@ -367,9 +366,9 @@ class Printer {
 }
 ```
 
-
+---
 ### 10. Explain how Java defines a method signature, and how it helps on overloading and overriding.
-**Method Signature** = Method Name + Parameter Types in order
+> **Method Signature** = Method Name + Parameter Types in order
 - Includes: **method name** and **parameter types (in order)**.
 - Does **not** include: return type.
 
@@ -389,7 +388,7 @@ void print(String msg, int n) // Signature: print(String, int)
 - Java uses method signature to match and override superclass method at runtime.
 
 
-
+---
 ### 11. What is the differences between super and this?
 > this = refers to current class  
 > super = refers to parent class  
@@ -459,6 +458,7 @@ Summary:
 - **this.field / super.method()** → help clarify which class you’re referencing.
 
 
+---
 ### 12. Explain how `equals()` and `hashCode()` work.
 > `equals()` checks if **two objects are logically equal**.
 - Default (in `Object` class): compares memory address (like `==`).
@@ -482,6 +482,7 @@ Summary:
 > Java uses `hashCode()` to **locate the bucket** where the object should be stored.
 
 
+---
 ### 13. What is the Java load sequence?
 > Java Load Sequence Order: 
 > 1. Static variables
@@ -545,7 +546,7 @@ Instance block executed
 Constructor executed
 ```
 
-
+---
 ### 14. What is Polymorphism ? And how Java implements it?
 > Polymorphism allows one interface, many forms — i.e. different classes can respond differently to the same method call.
  
@@ -553,6 +554,7 @@ Constructor executed
 see Q1.
 
 
+---
 ### 15. What is Encapsulation ? How Java implements it? And why we need encapsulation?
 > Encapsulation is hiding internal data and only exposing it via getters/setters or public methods.
 
@@ -565,6 +567,7 @@ see Q1.
 3. Enables abstraction – hides complex logic behind simple interfaces
 
 
+---
 ### 16. Compare interface and abstract class with use cases.
 
 |                          | **Interface**                                             | **Abstract Class**                          |
