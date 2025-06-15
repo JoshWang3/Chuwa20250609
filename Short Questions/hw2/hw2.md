@@ -10,7 +10,8 @@ Write a Java POJO (plain old java object) named "Employee", inside Employ class,
 * Override toString method, so that when an Employee object is being printed, the print out looks meaningful and readable.
 * Override equals method, so that only when two Employees have identical information, we consider they are the same employee.
 
-#### All code is located at: `Coding/hw2/01-employee`
+> All code is located at: `Coding/hw2/01-employee`  
+
 [Employee](../../Coding/hw2/01-employee/src/Employee.java)
 
 [Address](../../Coding/hw2/01-employee/src/Address.java)
@@ -64,7 +65,7 @@ Key Differences:
 
 
 ### 4. Explain why global variables are NOT recommended, you may use code snippets.
-- A global variable is accessible from anywhere in the code.
+> A global variable is accessible from anywhere in the code.
 
 Key Problems:
 - **Tight Coupling**: Increases dependency between classes/modules.
@@ -112,7 +113,7 @@ public class Counter {
 
 
 ### 5. Explain why Strings in Java are considered "Immutable"?
-- A String is immutable because **its value cannot be changed after it is created**.
+> A String is immutable because **its value cannot be changed after it is created**.
 
 Key Reasons:
 - **Stored in String Pool**: Allows reuse and memory optimization.
@@ -130,7 +131,7 @@ String s = "abc";
 s.concat("def"); // this returns a new String, doesn't change 's'
 ```
 
-Full Rules for Immutability:
+> Full Rules for Immutability:
 1. Make the class final
     - Prevents subclassing, which could break immutability.
 2. Make all fields private final
@@ -182,8 +183,7 @@ final class Person {
 
 
 ### 6. Write code snippets to explain what "Final" keyword does, and why we need it?
-- `final` means **no further modification is allowed** to variable, method, or class.
-
+> `final` means **no further modification is allowed** to variable, method, or class.
 
 - **Final Variable**: Value assigned once, cannot be changed.
 - **Final Method**: Cannot be overridden by subclasses.
@@ -214,7 +214,7 @@ class B extends A {} // ❌ Error: cannot subclass final class
 
 
 ### 7. Write code snippets to explain why Java is "pass-by-value", and why do some people think it might be "pass-by-reference"?
-- Java is always "pass-by-value".
+> Java is always "pass-by-value".
 
 
 - For **primitives**: the actual value is copied.
@@ -285,12 +285,12 @@ public class ProofExample {
 }
 ```
 
-Why People Get Confused:
+> Why People Get Confused:
 - Changing object **fields** works → looks like pass-by-reference.
 - But changing the **reference itself** does not affect the original → proves pass-by-value.
 
 
-In Summary:
+> In Summary:
 - Java always passes copies of values.
 - Copy of reference still points to same object.
 - Modifying object ✅ works (through reference copy).
@@ -298,7 +298,7 @@ In Summary:
 
 
 ### 8. Write code snippets to explain overloading in Java, explain how does Java define method signature.
-- Defining multiple methods with the same name but different **parameters** in the same class.
+> Overloading is multiple methods with the same name but different **parameters** in the same class.
 
 Method Signature:
 - **Definition**: Method name + parameter types (number, type, order).
@@ -333,7 +333,7 @@ double multiply(int a, int b) { return a * b; } // Same signature
 
 
 ### 10. Use Java collection framework data structures (e.g. Set, Map, List) to solve following Leetcode questions, you MUST use Java and you MUST use data structures provided by Java Collection framework:
-#### 10.1  LeetCode 347. Top K Frequent Elements
+> LeetCode 347. Top K Frequent Elements
 ```java
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
@@ -365,7 +365,7 @@ class Solution {
 }
 ```
 
-#### 10.2  LeetCode 1. Two Sum（ 
+> LeetCode 1. Two Sum（ 
 ```java
 class Solution {
     public int[] twoSum(int[] nums, int target) {
