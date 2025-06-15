@@ -1,0 +1,16 @@
+
+question4: Why Global Variables Are Not Recommended?
+1. Break Encapsulation
+Global variables violate the principle of encapsulation by exposing internal data to the entire program. This makes it harder to control who can access or modify the data.
+
+2. Difficult to Debug and Maintain
+Since global variables can be accessed and modified from anywhere, it's hard to trace bugs or unexpected changes. A small change in one part of the code may affect other parts unpredictably.
+
+3. Tight Coupling Between Components
+Global variables create hidden dependencies between different classes or methods, making your code tightly coupled and less modular. This reduces flexibility and reusability.
+
+4. Poor Support for Concurrency
+In multithreaded programs, global variables become shared mutable state. Without proper synchronization, this leads to race conditions, inconsistent state, or crashes.
+
+question5: why Strings in Java are considered "immutable"?
+in Java, immutable means that once a String object is created, its value cannot be changed. Any operation that seems to modify a string will actually create a new string object.
