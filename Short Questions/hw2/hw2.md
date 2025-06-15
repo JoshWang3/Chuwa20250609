@@ -17,13 +17,14 @@ Write a Java POJO (plain old java object) named "Employee", inside Employ class,
 [Address](../../Coding/hw2/01-employee/src/Address.java)
 
 
+---
 ### 2.
 Write code to instantiate at least two instances of above Employee class, use code snippets to explain how these Employee objects are allocated to JVM memory. 
 You may use java reflection utilities to demonstrate it.
 
 [Main](../../Coding/hw2/01-employee/src/Main.java)
 
-To summarize how Employee objects are allocated to JVM memory:
+> To summarize how Employee objects are allocated to JVM memory:
 1. **Heap Memory (Stores object instance data)**
 - `employee1` and `employee2` objects are stored in the heap, each with their own fields:
     - Instance fields like `name`, `dateOfBirth`, `department`, etc. are separate for each object.
@@ -41,29 +42,30 @@ To summarize how Employee objects are allocated to JVM memory:
 - Local variables like `employee1`, `employee2`, `address1`, `address2` are **references**, not objects.
 - These references point to the actual object instances in the heap.
 
-Key Points:
+> Key Points:
 - **Instance data → Heap**
 - **Class and static info → Method Area**
 - **Local variables → Stack**
 - **Same String literals → String Pool in Heap**
  
 
+---
 ### 3. 
 Write static utilities in your Employee class, demonstrate how static content differs from others during class instantiation.
 
 [Employee](../../Coding/hw2/01-employee/src/Employee.java)
 
-- **Static variables** belong to the **class**, not objects.
-- **Instance variables** belong to **each object**.
+> **Static variables** belong to the **class**, not objects.  
+> **Instance variables** belong to **each object**.
 
-Key Differences:
+> Key Differences:
 - **Memory**: Static content is stored once in memory; instance variables are stored per object.
 - **Access**: Static variables can be accessed via class name; instance variables require an object.
 - **Initialization**: Static variables are initialized when the class loads; instance variables are initialized during object creation.
 - **Sharing**: Static variables are shared across all instances; instance variables are not.
 
 
-
+---
 ### 4. Explain why global variables are NOT recommended, you may use code snippets.
 > A global variable is accessible from anywhere in the code.
 
@@ -111,7 +113,7 @@ public class Counter {
 // In this example, count is controlled and safer.
 ```
 
-
+---
 ### 5. Explain why Strings in Java are considered "Immutable"?
 > A String is immutable because **its value cannot be changed after it is created**.
 
@@ -181,7 +183,7 @@ final class Person {
 }
 ```
 
-
+---
 ### 6. Write code snippets to explain what "Final" keyword does, and why we need it?
 > `final` means **no further modification is allowed** to variable, method, or class.
 
@@ -212,7 +214,7 @@ final class A {}
 class B extends A {} // ❌ Error: cannot subclass final class
 ```
 
-
+---
 ### 7. Write code snippets to explain why Java is "pass-by-value", and why do some people think it might be "pass-by-reference"?
 > Java is always "pass-by-value".
 
@@ -297,6 +299,7 @@ public class ProofExample {
 - Reassigning reference ❌ fails (only affects copy).
 
 
+---
 ### 8. Write code snippets to explain overloading in Java, explain how does Java define method signature.
 > Overloading is multiple methods with the same name but different **parameters** in the same class.
 
@@ -328,10 +331,9 @@ class MathUtil {
 // ❌ Compilation Error
 int multiply(int a, int b) { return a * b; }
 double multiply(int a, int b) { return a * b; } // Same signature
-
 ```
 
-
+---
 ### 10. Use Java collection framework data structures (e.g. Set, Map, List) to solve following Leetcode questions, you MUST use Java and you MUST use data structures provided by Java Collection framework:
 > LeetCode 347. Top K Frequent Elements
 ```java
