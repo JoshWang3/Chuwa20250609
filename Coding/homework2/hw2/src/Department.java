@@ -3,20 +3,14 @@ import java.util.Objects;
 public class Department {
     private String name;
 
-    public Department() {
-    }
+    public Department() {}
 
     public Department(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getName()           { return name; }
+    public void   setName(String n)   { this.name = n; }
 
     @Override
     public String toString() {
@@ -27,10 +21,9 @@ public class Department {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (!(o instanceof Department)) return false;
-        Department dpt = (Department) o;
-        return Objects.equals(name, dpt.name);
+        Department d = (Department) o;
+        return Objects.equals(name, d.name);
     }
 
     @Override
