@@ -219,13 +219,13 @@ obj = null;  // eligible for GC
 
 **Types of Garbage Collection:**
 
-| Garbage Collector | Description                            | Use Case / When to Use                 | Default?           |
-|-------------------|----------------------------------------|----------------------------------------|--------------------|
-| **Serial GC**     | Single-threaded, simple, stop-the-world | Small apps or single-core systems      | ❌ (can use with `-XX:+UseSerialGC`) |
+| Garbage Collector | Description                            | Use Case                 | Default?           |
+|-------------------|----------------------------------------|--------------------------|--------------------|
+| **Serial GC**     | Single-threaded, simple, stop-the-world | Small apps or single-core systems | ❌ (can use with `-XX:+UseSerialGC`) |
 | **Parallel GC**   | Multi-threaded, high throughput         | CPU-heavy applications with long-running tasks | ❌ (use with `-XX:+UseParallelGC`) |
-| **CMS (Concurrent Mark-Sweep)** | Low pause time, concurrent collection | Interactive apps needing low pause     | ❌ Deprecated since Java 9 |
-| **G1 GC**         | Region-based, predictable pause times   | Default GC in Java 9+                  | ✅ (default from Java 9+) |
-| **ZGC**           | Low-latency, scalable, pause <10ms      | Large heap apps needing minimal pause  | ❌ (use with `-XX:+UseZGC`) |
+| **CMS (Concurrent Mark-Sweep)** | Low pause time, concurrent collection | Interactive apps needing low pause | ❌ Deprecated since Java 9 |
+| **G1 GC**         | Region-based, predictable pause times   | Default GC in Java 9+    | ✅ (default from Java 9+) |
+| **ZGC**           | Low-latency, scalable, pause <10ms      | Large heap apps needing minimal pause | ❌ (use with `-XX:+UseZGC`) |
 | **Shenandoah**    | Low-pause GC, concurrent compaction     | Large applications needing low latency | ❌ (Red Hat/OpenJDK variant) |
 
 Summary:
