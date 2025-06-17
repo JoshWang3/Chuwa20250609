@@ -99,11 +99,12 @@ System.out.println(s2);  // "meta"
 **5. What is Garbage Collection in Java?**
 
 **Garbage Collection** is an automatic memory management process where the JVM identifies and removes objects that are no longer in use in memory, freeing up space and prevent memory leaks.
+
 **Types of Garbage Collection in Java**
-1. **Serial GC**: Use a single thread for garbage collection; best suited for small applications.
-2. **Parallel GC**: Use multiple threads for minor collections; best for high throughput applications.
-3. **Concurrent Mark Sweep(CMS)**: minimize pause times by performing most GC work concurrently. It requires more CPU resources.
-4. **G1 (Garbage First)**: divides the heap into regions and collects garbage in the most efficient regions first. It aims to balance throughput and pause times, making it suitable for large applications. Java 11+ uses G1.
+- **Serial GC**: Use a single thread for garbage collection; best suited for small applications.
+- **Parallel GC**: Use multiple threads for minor collections; best for high throughput applications.
+- **Concurrent Mark Sweep(CMS)**: minimize pause times by performing most GC work concurrently. It requires more CPU resources.
+- **G1 (Garbage First)**: divides the heap into regions and collects garbage in the most efficient regions first. It aims to balance throughput and pause times, making it suitable for large applications. Java 11+ uses G1.
 
 **6. What are access modifiers and their scopes in Java?**
 
