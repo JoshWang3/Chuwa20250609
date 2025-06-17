@@ -83,7 +83,7 @@ System.out.println(a == c);      // false
 - **Memory efficiency**: reuses common string objects, significantly reducing memory usage in large applications 
 - **Performance**: Interned strings can be compared using `==` (reference comparison), which is faster than character-by-character comparison 
 
-- **String immunity**: Java Strings are **immutable**, meaning that the content cannot be changed after creation.
+**String immunity**: Java Strings are **immutable**, meaning that the content cannot be changed after creation.
 	-**Thread Safety**: Immutable objects can be safely shared across threads without synchronization since their state cannot change
 	-**Security**: Prevent accidental or malicious changes to sensitive values like username, password, or file path.
 	-**Caching**: Immutable string can be reused and cached without risk of modification.
