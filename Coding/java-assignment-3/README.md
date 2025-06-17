@@ -156,7 +156,7 @@ Access modifiers in Java define the visibility or accessibility of classes, meth
         }
     }
 ```
-**7.Explain final key word? (Field, Method, Class)**
+**7. Explain final key word? (Field, Method, Class)**
 
 The `final` keyword in Java is used to create constants, prevent method overriding, and stop class inheritance.
 - **Final variables(fields):**	When a variable is declared final, its value cannot be changed after initialization.
@@ -539,8 +539,9 @@ public class AnimalClass {
 **15. What is Encapsulation ? How Java implements it? And why we need encapsulation?**
 
 **Encapsulation**: bundle data(fields) and methods(functions) to operate data into a single unit(a class). It restricts direct access to some of the object's components using `private` access modifier.
-- Java implementation: 1. Declare fields as `private` (hides internal data from outside classes)
-		       2. Provide `public` getter/setters - controlled access to read or modify fields
+- Java implementation
+  	- Declare fields as `private` (hides internal data from outside classes)
+	- Provide `public` getter/setters - controlled access to read or modify fields
 ```java
 class Student {
     private int grade;  // field is hidden from outside
@@ -558,10 +559,10 @@ class Student {
 }
 ```
 - Why we need? 
-- Protect data integrity (restrict invalid values)
-- Data hiding and security 
-- Improve reusability and modularity (change internal logic without breaking external code)
-- Simplify usage for external code (hide internal complexity)
+	- Protect data integrity (restrict invalid values)
+	- Data hiding and security 
+	- Improve reusability and modularity (change internal logic without breaking external code)
+	- Simplify usage for external code (hide internal complexity)
 
 **16. Compare interface and abstract class with use cases.**
 
@@ -572,6 +573,7 @@ class Student {
 | Method Implementation |  Default/static methods only  |   Can have concrete methods    |   
 | Fields    |  Only `public static final`   |   Can have instance variables   |  
 | Example | `Comparable`,`Runnable` | `HttpServlet`,`AbstractList` |
+
 - Use **interface** when: you need to define **shared behavior** across unrelated classes.
 		         you want **multiple inheritance of types** (Java doesn't allow multiple class inheritance, but allows multiple interfaces).
 - Use **Abstract Class** when: class are **closely related** and share code.
