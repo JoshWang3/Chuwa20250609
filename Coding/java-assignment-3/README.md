@@ -159,7 +159,7 @@ Access modifiers in Java define the visibility or accessibility of classes, meth
 **7.Explain final key word? (Field, Method, Class)**
 
 The `final` keyword in Java is used to create constants, prevent method overriding, and stop class inheritance.
-- **Final variables(fields):**	When a variable is declared final, its value cannot be changed after initialization. This is useful for creating constants.
+- **Final variables(fields):**	When a variable is declared final, its value cannot be changed after initialization.
 - **Final Methods:** A final method cannot be overridden by subclasses
 - **Final class:** A final class cannot be extended(subclassed)
 ```java
