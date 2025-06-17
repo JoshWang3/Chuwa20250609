@@ -190,10 +190,11 @@ final class ImmutableClass {
 
 **8.Explan static keyword? (Field, Method, Class). When do we usually use it?**
 
---**Static Fields(Variables)**: Static variables are associated with the class, not with objects.
-			      Shared among all objects of the class.
-			      Accessed directly using the class name
-			      Useful for constants or data shared by all instances
+- **Static Fields(Variables)**
+  	- Static variables are associated with the class, not with objects.
+        - Shared among all objects of the class.
+  	- Accessed directly using the class name
+	- Useful for constants or data shared by all instances
 ```java
 public class Example {	
    static int count = 0; // Static field
@@ -209,9 +210,10 @@ public class Example {
    }
 }
 ```
--**Static Methods**: A static method belongs to the class and **can be called without creating an object**. 
-		    Cannot access non-static members of the class.
-		    Often used for utility methods that don't depend on instance state (e.g. Math.pow()).
+-**Static Methods**
+	- A static method belongs to the class and **can be called without creating an object**. 
+	- Cannot access non-static members of the class.
+	- Often used for utility methods that don't depend on instance state (e.g. Math.pow()).
 ```java
 class Utils {
     static int square(int x) {
@@ -222,10 +224,11 @@ class Utils {
 // Usage:
 int result = Utils.square(4);
 ```
--**Static Class**: Can be declared within another class.
-		   Do not require an instance of the outer class to be created.
-		   Can access static members of the outer class directly.
-        	   Useful for grouping related classes or providing utility classes
+-**Static Class**
+	- Can be declared within another class.
+	- Do not require an instance of the outer class to be created.
+	- Can access static members of the outer class directly.
+        - Useful for grouping related classes or providing utility classes
 ```java
 public class OuterClass {
     static class NestedClass { // static nested class
@@ -244,10 +247,11 @@ public class OuterClass {
 **9.What is the differences between overriding and overloading?**
 
 - Overriding and overloading are both forms of polymorphism in OOP, but they serve as different purposes:
--**Overloading**: Happens within the same class
-		  Same method name but different parameter list
-		  Happens at compile time
-		  Different method signature (name and parameters)
+-**Overloading**
+  	- Happens within the same class
+	- Same method name but different parameter list
+	- Happens at compile time
+	- Different method signature (name and parameters)
 ```java
 public class Printer {
 
@@ -269,10 +273,11 @@ public class Printer {
     }
 }
 ```
--**Overriding**: Happen between a superclass and subclass
-		 Same method name and same parameter list
-		 Redefines a method from the parent class
-		 Happens at runtime
+-**Overriding**
+	- Happen between a superclass and subclass
+	- Same method name and same parameter list
+	- Redefines a method from the parent class
+	- Happens at runtime
 ```java
 public class AnimalClass {
 
@@ -305,9 +310,9 @@ public class AnimalClass {
 **10. Explain how Java defines a method signature, and how it helps on overloading and overriding.**
 
 **Method Signature** is defined by method name + ordered list of parameter types (excluding return type, access modifiers, exceptions)
--In **overloading**, Java allows multiple methods with the same name if there parameter type list differs.
+- In **overloading**, Java allows multiple methods with the same name if there parameter type list differs.
 The return type can be the same or different, but it does not count in the signature.
--In **overriding**, when a subclass overrides a method, it must match the **exact same method signature** as in the parent class.
+- In **overriding**, when a subclass overrides a method, it must match the **exact same method signature** as in the parent class.
 ```java
 public class MethodSignature {
 
@@ -387,13 +392,13 @@ public class SuperThis {
 
 **12. Explain how equals and hashCode work.**
 
-In Java, `equals()` and `hashCode()` are closely linked methods used to compare objects and store them efficiently in collections like `HashMap`, `HashSet`, and `Hashtable`.
-`hashCode()` is used to generate an integer hash code for an object. It is used to determine which bucket an object belongs to in a hash-based collection.
+- In Java, `equals()` and `hashCode()` are closely linked methods used to compare objects and store them efficiently in collections like `HashMap`, `HashSet`, and `Hashtable`.
+- `hashCode()` is used to generate an integer hash code for an object. It is used to determine which bucket an object belongs to in a hash-based collection.
 
--Relationship: If two objects are equal according to `equals()`, they must return the same hash code from `hashCode()`.
+- Relationship: If two objects are equal according to `equals()`, they must return the same hash code from `hashCode()`.
 	       But if two objects have the same `hashCode()`, they may not necessarily be `equals()`.
 
-**equals()** : The `equals()` method determines whether two objects are considered "equal" based on their content or state, not just their memory addresses.
+**equals()**: The `equals()` method determines whether two objects are considered "equal" based on their content or state, not just their memory addresses.
 ```java
 public class EqualsHashCode {
     static class Person {
@@ -448,11 +453,11 @@ public class EqualsHashCode {
 **13. What is the Java load sequence?**
 
 When we run Java program, the JVM follows a specific **load and execution sequence** for classes:
--**Class loading (from .class files)** : The class loader loads the `.class` bytecode into memory. It then creates a binary stream of data from the class file, parses it, and creates an instance of `java.lang.Class`.
--**Linking**: Verification: checks bytecode format is valid or safe
+- **Class loading (from .class files)** : The class loader loads the `.class` bytecode into memory. It then creates a binary stream of data from the class file, parses it, and creates an instance of `java.lang.Class`.
+- **Linking**: Verification: checks bytecode format is valid or safe
 	      Preparation: allocates memory for static variables and initializes them into default values
 	      Resolution: converts symbolic references (like class names) into direct memory references 
--**Initialization**: Static blocks and static variables are initialized in the order they appear. 
+- **Initialization**: Static blocks and static variables are initialized in the order they appear. 
 		     This is where static variables are assigned their explicit values.
 ```java
 // The JVM loads Demo's bytecode the first time running java Demo
@@ -479,7 +484,7 @@ class Demo {
 **14. What is Polymorphism ? And how Java implements it ?**
 
 **Polymorphism** in Java means **"many forms"**, where the same method or objects behaves differently based on the context. 
--**Method Overloading(Compile-time Polymorphism)**: multiple methods with the same name but **different parameter lists.** 
+- **Method Overloading(Compile-time Polymorphism)**: multiple methods with the same name but **different parameter lists.** 
 ```java
 public class Printer {
 
@@ -501,7 +506,7 @@ public class Printer {
     }	
 }	
 ```
--**Method Overriding(Runtime Polymorphism)**: a subclass provides a **specific implementation** of a method defined in its superclass.
+- **Method Overriding(Runtime Polymorphism)**: a subclass provides a **specific implementation** of a method defined in its superclass.
 ```java
 public class AnimalClass {
 
@@ -567,9 +572,9 @@ class Student {
 | Method Implementation |  Default/static methods only  |   Can have concrete methods    |   
 | Fields    |  Only `public static final`   |   Can have instance variables   |  
 | Example | `Comparable`,`Runnable` | `HttpServlet`,`AbstractList` |
--Use **interface** when: you need to define **shared behavior** across unrelated classes.
+- Use **interface** when: you need to define **shared behavior** across unrelated classes.
 		         you want **multiple inheritance of types** (Java doesn't allow multiple class inheritance, but allows multiple interfaces).
--Use **Abstract Class** when: class are **closely related** and share code.
+- Use **Abstract Class** when: class are **closely related** and share code.
 			      you want to **provide default behavior** but allow overriding.
 			      you need to define **non-static** fields, constructor or access modifiers other than `public`
 
