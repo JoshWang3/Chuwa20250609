@@ -84,10 +84,10 @@ System.out.println(a == c);      // false
 - **Performance**: Interned strings can be compared using `==` (reference comparison), which is faster than character-by-character comparison 
 
 **String immunity**: Java Strings are **immutable**, meaning that the content cannot be changed after creation.
-	-**Thread Safety**: Immutable objects can be safely shared across threads without synchronization since their state cannot change
-	-**Security**: Prevent accidental or malicious changes to sensitive values like username, password, or file path.
-	-**Caching**: Immutable string can be reused and cached without risk of modification.
-	-**String Pool Support**: String immutability is essential for the String pool's functionality. Since multiple references can point to the same String object in the pool, it is crucial that the value of the String cannot be altered.
+- **Thread Safety**: Immutable objects can be safely shared across threads without synchronization since their state cannot change
+- **Security**: Prevent accidental or malicious changes to sensitive values like username, password, or file path.
+- **Caching**: Immutable string can be reused and cached without risk of modification.
+- **String Pool Support**: String immutability is essential for the String pool's functionality. Since multiple references can point to the same String object in the pool, it is crucial that the value of the String cannot be altered.
 
 ```java
 String s1 = "data";
