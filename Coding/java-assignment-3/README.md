@@ -465,7 +465,7 @@ class Demo {
     static int x = initX();	// Memory is reserved for static variables(x) and they get their default value (0 for int).
     static {
         System.out.println("Static block running");
-    }
+    } 
 
     static int initX() {
         System.out.println("Static method called");
