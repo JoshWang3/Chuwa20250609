@@ -157,6 +157,7 @@ Access modifiers in Java define the visibility or accessibility of classes, meth
     }
 ```
 **7.Explain final key word? (Field, Method, Class)**
+
 The `final` keyword in Java is used to create constants, prevent method overriding, and stop class inheritance.
 - **Final variables(fields):**	When a variable is declared final, its value cannot be changed after initialization. This is useful for creating constants.
 - **Final Methods:** A final method cannot be overridden by subclasses
@@ -188,6 +189,7 @@ final class ImmutableClass {
 ```
 
 **8.Explan static keyword? (Field, Method, Class). When do we usually use it?**
+
 --**Static Fields(Variables)**: Static variables are associated with the class, not with objects.
 			      Shared among all objects of the class.
 			      Accessed directly using the class name
@@ -240,6 +242,7 @@ public class OuterClass {
 ```
 
 **9.What is the differences between overriding and overloading?**
+
 - Overriding and overloading are both forms of polymorphism in OOP, but they serve as different purposes:
 -**Overloading**: Happens within the same class
 		  Same method name but different parameter list
@@ -300,6 +303,7 @@ public class AnimalClass {
 ```
 
 **10. Explain how Java defines a method signature, and how it helps on overloading and overriding.**
+
 **Method Signature** is defined by method name + ordered list of parameter types (excluding return type, access modifiers, exceptions)
 -In **overloading**, Java allows multiple methods with the same name if there parameter type list differs.
 The return type can be the same or different, but it does not count in the signature.
@@ -343,6 +347,7 @@ class Child extends Parent {
 ``` 
 
 **11. What is the differences between super and this?**
+
 In Java, `this` and `super` refer to different objects. `this` refers to the **current object** (the instance of the class where the code is executing). It is used to access current class's fields or methods and call another constructor in the same class. `super` refers to **the parent(superclass) object**. It is used to access superclass's fields or methods and call the superclass constructor.
 ```java
 public class SuperThis {
@@ -381,6 +386,7 @@ public class SuperThis {
 ```
 
 **12. Explain how equals and hashCode work.**
+
 In Java, `equals()` and `hashCode()` are closely linked methods used to compare objects and store them efficiently in collections like `HashMap`, `HashSet`, and `Hashtable`.
 `hashCode()` is used to generate an integer hash code for an object. It is used to determine which bucket an object belongs to in a hash-based collection.
 
@@ -440,6 +446,7 @@ public class EqualsHashCode {
 ```
 
 **13. What is the Java load sequence?**
+
 When we run Java program, the JVM follows a specific **load and execution sequence** for classes:
 -**Class loading (from .class files)** : The class loader loads the `.class` bytecode into memory. It then creates a binary stream of data from the class file, parses it, and creates an instance of `java.lang.Class`.
 -**Linking**: Verification: checks bytecode format is valid or safe
@@ -470,6 +477,7 @@ class Demo {
 ```
 					  
 **14. What is Polymorphism ? And how Java implements it ?**
+
 **Polymorphism** in Java means **"many forms"**, where the same method or objects behaves differently based on the context. 
 -**Method Overloading(Compile-time Polymorphism)**: multiple methods with the same name but **different parameter lists.** 
 ```java
@@ -524,6 +532,7 @@ public class AnimalClass {
 ```
 
 **15. What is Encapsulation ? How Java implements it? And why we need encapsulation?**
+
 **Encapsulation**: bundle data(fields) and methods(functions) to operate data into a single unit(a class). It restricts direct access to some of the object's components using `private` access modifier.
 - Java implementation: 1. Declare fields as `private` (hides internal data from outside classes)
 		       2. Provide `public` getter/setters - controlled access to read or modify fields
