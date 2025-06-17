@@ -575,6 +575,3 @@ Provide **common code, fields, or default behavior**.
 Define some methods but **leave others abstract for subclasses**.  
 Maintain state (fields) in the base class.
 DO NOT allow Multiple Inheritance. Only single class inheritance.
-
-```java
-```
