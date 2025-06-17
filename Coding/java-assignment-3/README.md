@@ -29,7 +29,7 @@ Wrapper classes (like `Integer`, `Double`) are needed because:
 **3. Difference Between HashMap and Hashtable in Java**
 | Feature        | HashMap                          | Hashtable                       |
 |----------------|----------------------------------|---------------------------------|
-| Thread Safety	 | **Not Synchronsized**, not thread safe | ** Synchronized**, thread-safe|
+| Thread Safety	 | **Not Synchronsized**, not thread safe | **Synchronized**, thread-safe|
 | Performance    | Faster in single-threaded apps   | Slower due to synchronization   |
 | Null Keys/Values | **Allows one null key** and multiple null values | **Does not allow** null keys or values |
 | Legacy Status  | Modern, preferred in new code    | Legacy class, rarely used now   |
