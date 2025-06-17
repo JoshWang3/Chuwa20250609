@@ -283,16 +283,16 @@ final class Animal {
 ### 8. Explain static keyword (Field, Method, Class). When do we use it?
 `static` = **belongs to the class, not the instance**.
 
-|            | Meaning                                           | Example                                |
-|------------|---------------------------------------------------|----------------------------------------|
-| **Field**  | Shared by all instances (class-level variable)    | `static int count;`                    |
-| **Method** | Can be called without creating an object          | `static void print()`                  |
-| **Class**  | Static nested class (no access to outer instance) | `static class Helper {}`              |
+|            | Meaning                                                                        | Example                                |
+|------------|--------------------------------------------------------------------------------|----------------------------------------|
+| **Field**  | Shared by all instances (class-level variable)                                 | `static int count;`                    |
+| **Method** | Can be called without creating an object                                       | `static void print()`                  |
+| **Class**  | Static nested class does not need an instance of the outer class to be created | `static class Helper {}`              |
 
 > When to Use:
 - Share data across all objects → use `static` field
 - Utility methods → use `static` method (e.g. `Math.max()`)
-- Nested helper classes that don’t need outer class instance → use `static class`
+- Nested helper classes that don’t need outer class instance to be created → use `static class`
 
 Examples:
 ```java
@@ -321,9 +321,21 @@ public class Outer {
     }
 }
 ```
-- A `static class` is a **nested class** that does **not need access** to an outer class instance.
-- A static class is useful for grouping helper logic inside another class
-  without needing access to outer class variables.
+> More words on `static class`:  
+- In Java, you cannot declare a top-level class as static.
+- But you can declare a nested class as static, like this:
+```java
+class Outer {
+  static class StaticNested {
+  // ...
+  }
+}
+```
+
+A static nested class:
+- Does not need an instance of the outer class to be created.
+- Can only access static members of the outer class.
+
 
 
 ---
