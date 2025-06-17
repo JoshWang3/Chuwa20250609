@@ -210,7 +210,7 @@ public class Example {
    }
 }
 ```
--**Static Methods**
+- **Static Methods**
 	- A static method belongs to the class and **can be called without creating an object**. 
 	- Cannot access non-static members of the class.
 	- Often used for utility methods that don't depend on instance state (e.g. Math.pow()).
@@ -224,7 +224,7 @@ class Utils {
 // Usage:
 int result = Utils.square(4);
 ```
--**Static Class**
+- **Static Class**
 	- Can be declared within another class.
 	- Do not require an instance of the outer class to be created.
 	- Can access static members of the outer class directly.
@@ -247,7 +247,7 @@ public class OuterClass {
 **9.What is the differences between overriding and overloading?**
 
 - Overriding and overloading are both forms of polymorphism in OOP, but they serve as different purposes:
--**Overloading**
+- **Overloading**
   	- Happens within the same class
 	- Same method name but different parameter list
 	- Happens at compile time
@@ -273,7 +273,7 @@ public class Printer {
     }
 }
 ```
--**Overriding**
+- **Overriding**
 	- Happen between a superclass and subclass
 	- Same method name and same parameter list
 	- Redefines a method from the parent class
