@@ -1,4 +1,4 @@
-**1. Write an example code to demonstrate three concepts of OOP: Encapsulation, Polymorphism, Inheritance (OOPConcept.java) **
+**1. Write an example code to demonstrate three concepts of OOP: Encapsulation, Polymorphism, Inheritance (OOPConcept.java)**
      1.1   Student.java
      1.2   Animal.java, Cat.java, Dog.java
      1.3   User.java, AdminUser.java
