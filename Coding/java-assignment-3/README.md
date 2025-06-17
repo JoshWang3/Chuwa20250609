@@ -2,6 +2,7 @@
      1.1   Student.java
      1.2   Animal.java, Cat.java, Dog.java
      1.3   User.java, AdminUser.java
+     
 **2. What is wrapper data type class (e.g. Integer, Double) in Java? Why we need wrapper class**
 
 In Java, **wrapper classes** are object representations of primitive data types. For example:
