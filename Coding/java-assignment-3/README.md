@@ -97,6 +97,7 @@ System.out.println(s2);  // "meta"
 ```
 
 **5. What is Garbage Collection in Java?**
+
 **Garbage Collection** is an automatic memory management process where the JVM identifies and removes objects that are no longer in use in memory, freeing up space and prevent memory leaks.
 **Types of Garbage Collection in Java**
 1. **Serial GC**: Use a single thread for garbage collection; best suited for small applications.
