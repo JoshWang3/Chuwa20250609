@@ -1,7 +1,7 @@
 # HW3: Java & OOP
 @ Jun 16, 2025 _Gloria Wang_
 
-## 1. Write up Example code to demonstrate the three foundmental concepts of OO
+## 1. Write up Example code to demonstrate the three fundamental concepts of OOP
 ### 1. Encapsulation
 - Encapsulation in OOP refers to binding the **data** and the **methods to manipulate** that data together in a single **unit** (class).
 - Typically achieved using private fields and public `getter/setter` methods.
