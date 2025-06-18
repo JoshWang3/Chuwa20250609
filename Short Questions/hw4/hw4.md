@@ -502,8 +502,97 @@ public class Main {
 ---
 ### 4. Write code to explain Lambda expression with your own functional interface.
 
+> `Lambda expressions` provide a concise way to write anonymous functions.
+>- Syntax:  `(parameters) -> { body }`
 
+> A `functional interface` is an interface that contains exactly one abstract method. It can have multiple default or static methods, but only one method that must be implemented.
+>- `@FunctionalInterface` annotation:  Optional but recommended for clarity and compile-time checking.
+
+> Lambda expression is a concise way to implement functional interface.
+
+
+**Example:**
+
+Step 1: Define a Functional Interface
+```java
+@FunctionalInterface
+interface MathOperation {
+    int operate(int a, int b);
+}
+```
+
+Step 2: Use Lambda to Implement the Interface
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Lambda: (a, b) -> a + b
+        MathOperation add = (a, b) -> a + b;
+
+        // Lambda: (a, b) -> a * b
+        MathOperation multiply = (a, b) -> a * b;
+
+        System.out.println("Sum: " + add.operate(3, 4));  // Output: Sum: 7
+        System.out.println("Product: " + multiply.operate(3, 4));  // Output: Product: 12
+    }
+}
+```
+ 
 
 
 ---
-### 5. Write a calculator with BiFunction<T,U,R> (an internal functional interface provided by JDK) and Lambda expression. Your calculator should support two-number addition, subtraction,multiplication,division operations.
+### 5. Write a calculator with `BiFunction<T,U,R>` (an internal functional interface provided by JDK) and Lambda expression. </br>Your calculator should support two-number addition, subtraction,multiplication,division operations.
+> `BiFunction<T, U, R>` is a built-in functional interface in Java:
+>
+>     R apply(T t, U u);
+> It takes two inputs `T` and `U`, then returns a result `R`.
+
+**Calculator Code:**
+```java
+import java.util.function.BiFunction;
+
+public class Calculator {
+    public static void main(String[] args) {
+        
+        // Define operations using lambda and BiFunction
+        BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
+        BiFunction<Integer, Integer, Integer> subtract = (a, b) -> a - b;
+        BiFunction<Integer, Integer, Integer> multiply = (a, b) -> a * b;
+        BiFunction<Integer, Integer, Integer> divide = (a, b) -> {
+            if (b == 0) {
+                throw new ArithmeticException("Cannot divide by zero");
+            }
+            return a / b;
+        };
+
+        // Use the operations
+        System.out.println("Add: " + add.apply(10, 5));            // 15
+        System.out.println("Subtract: " + subtract.apply(10, 5));  // 5
+        System.out.println("Multiply: " + multiply.apply(10, 5));  // 50
+        System.out.println("Divide: " + divide.apply(10, 5));      // 2
+    }
+}
+```
+
+- `BiFunction<>` makes code cleaner and functional.
+- Lambda improves readability by avoiding boilerplate anonymous class code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
