@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="524613e0-5703-4f02-af1b-494b25d0572c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/AbstractFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ConcreteFactory1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ConcreteFactory2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ConcreteProductA1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ConcreteProductA2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ConcreteProductB1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ConcreteProductB2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ProductA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/AbstractFactory/ProductB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Builder/Bike.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Factory/Circle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Factory/CircleFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Factory/Shape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Factory/ShapeFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Factory/Square.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Factory/SquareFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Singleton/EagerSingleton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/Designpatterns/Singleton/LazySingleton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/interfaces/Circle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/interfaces/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Coding/hw4/src/interfaces/Shape.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2yWa1zvrQq4n1durkHr5itgUBSH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "yangjiawen__xu/hw4",
+    "last_opened_file_path": "/Users/catherina119/Desktop/2025 找工/Chuwa/githubwork/Chuwa20250609/Short Questions"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Short Questions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Short Questions" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="524613e0-5703-4f02-af1b-494b25d0572c" name="Changes" comment="" />
+      <created>1749952571201</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749952571201</updated>
+    </task>
+    <servers />
+  </component>
+</project>
