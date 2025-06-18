@@ -305,7 +305,8 @@ public class Application {
 
 ---
 ### 1.4 Builder pattern
-> The `Builder Pattern` is used to construct complex objects step-by-step. It helps create immutable objects with many optional parameters.
+> The `Builder Pattern` is used to construct complex objects step-by-step.  
+> It helps create immutable objects with many optional parameters.
 
 **Example: Building a `User` object**
 1. Target Class (`User`)
@@ -444,7 +445,7 @@ public class Main {
 ### 3. Write code to demo Java anonymous class.  
 > An **anonymous class** is an unnamed inner class used to create an **instance of a class (usually an interface or abstract class)** on the fly with overridden methods.
 
-Example: Implementing an Interface
+**Example: Implementing an Interface**
 
 ```java
 interface Greeting {
@@ -469,7 +470,7 @@ public class Main {
 }
 ```
 
-Example: Extending an Abstract Class
+**Example: Extending an Abstract Class**
 ```java
 abstract class Animal {
     abstract void makeSound();
@@ -542,9 +543,9 @@ public class Main {
 }
 ```
  
-> A Side Note on Lambda:
+> **A Side Note on Lambda:**
 > 
-> In Java, a lambda expression can access variables from the outer scope (called captured variables) only if those variables are effectively final — meaning they are not modified after being assigned.
+> In Java, a lambda expression can **access variables from the outer scope** (called **captured variables**) **only if those variables are effectively final** — meaning they are not modified after being assigned.
 > 
 > This means:
 >- You can use a final variable.
@@ -619,10 +620,10 @@ d = new Data();  // ❌ compiler error because you're changing d's memory addres
 
 ---
 ### 5. Write a calculator with `BiFunction<T,U,R>` (an internal functional interface provided by JDK) and Lambda expression. </br>Your calculator should support two-number addition, subtraction,multiplication,division operations.
-> `BiFunction<T, U, R>` is a built-in functional interface in Java:
+> `BiFunction<T, U, R>` is a built-in functional interface in Java.
 >
 >     R apply(T t, U u);
-> It takes two inputs `T` and `U`, then returns a result `R`.
+> It takes two inputs `T` and `U`, and returns a result `R`.
 
 **Calculator Code:**
 ```java
