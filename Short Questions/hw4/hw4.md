@@ -3,9 +3,14 @@
 ### 1.1  Singleton pattern (both lazy loading and eager loading)
 ####  Explain how you guarantee it is thread-safe, meaning: there is truly only one instance in JVM.
 
-> The **Singleton Pattern** ensures that:
+> The `Singleton Pattern` ensures that:
 >- **Only one instance** is created during the lifetime of the application.
 >- That **single instance is globally accessible**.
+
+**Easy Mnemonic:**
+- `Eager loading`: The setter is called before the getter.
+- `Lazy loading`: The setter is called only during the first getter call.
+
 
 **Use Cases:**
 - Configuration managers
@@ -103,7 +108,7 @@ Why Thread-Safe?
 
 ---
 ### 1.2 Factory Method pattern
-> The **Factory Method Pattern** defines an interface for creating an object, but lets subclasses decide which class to instantiate.
+> The `Factory Method Pattern` defines an interface for creating an object, but lets subclasses decide which class to instantiate.
 
 **Example:**
 
@@ -178,7 +183,7 @@ public class Main {
 
 ---
 ### 1.3 Abstract Factory pattern
-> The **Abstract Factory Pattern** provides an interface for creating families of objects **without specifying their concrete classes**.
+> The `Abstract Factory Pattern` provides an interface for creating families of objects **without specifying their concrete classes**.
 
 **Example: GUI Toolkit**
 1. Abstract Product Interfaces
@@ -300,7 +305,7 @@ public class Application {
 
 ---
 ### 1.4 Builder pattern
-> The **Builder Pattern** is used to construct complex objects step-by-step. It helps create immutable objects with many optional parameters.
+> The `Builder Pattern` is used to construct complex objects step-by-step. It helps create immutable objects with many optional parameters.
 
 **Example: Building a `User` object**
 1. Target Class (`User`)
@@ -537,6 +542,79 @@ public class Main {
 }
 ```
  
+> A Side Note on Lambda:
+> 
+> In Java, a lambda expression can access variables from the outer scope (called captured variables) only if those variables are effectively final — meaning they are not modified after being assigned.
+> 
+> This means:
+>- You can use a final variable.
+>- You can use a non-final variable, only if you never modify it.
+>- You can use object references, but you must not reassign it to a new object.
+
+**Examples:**
+1. Final variable ✅
+```java
+final int x = 10;
+
+Runnable r = () -> {
+    System.out.println("x = " + x);  // OK
+};
+
+r.run();
+```
+
+2. Non-final, but not modified ✅
+```java
+int y = 20;
+
+Runnable r = () -> {
+    System.out.println("y = " + y);  // OK
+};
+
+r.run();
+
+// ❌ If you later try y = 30;, the compiler will complain.
+```
+
+3. Object variable (only internal state changes) ✅
+```java
+class Data {
+    int value = 5;
+}
+
+Data d = new Data();
+
+Runnable r = () -> {
+    System.out.println("d.value = " + d.value);  // OK
+};
+
+d.value = 10;  // still OK
+        
+r.run();
+
+// ✅ Allowed because d still points to the same memory address — only the internal value changed.
+```
+
+4. Reassigning object variable ❌
+```java
+Data d = new Data();
+
+Runnable r = () -> {
+    System.out.println(d.value);  // ❌ compile error if d is reassigned later
+};
+
+d = new Data();  // ❌ compiler error because you're changing d's memory address (i.e., d now points to a new object).
+```
+
+**Summary Table:**
+
+| Variable Type          | Allowed in Lambda? | Explanation                                        |
+| ---------------------- | ------------------ | -------------------------------------------------- |
+| `final int x = 10;`    | ✅ Yes              | `x` is `final`, so never changes                   |
+| `int y = 20;`          | ✅ Yes              | not `final`, but not changed = "effectively final" |
+| `Data d = new Data();` | ✅ Yes              | object not reassigned, still same memory address   |
+| `d = new Data();`      | ❌ No               | reassignment changes the reference                 |
+
 
 
 ---
