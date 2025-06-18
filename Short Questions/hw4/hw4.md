@@ -619,7 +619,8 @@ d = new Data();  // ❌ compiler error because you're changing d's memory addres
 
 
 ---
-### 5. Write a calculator with `BiFunction<T,U,R>` (an internal functional interface provided by JDK) and Lambda expression. </br>Your calculator should support two-number addition, subtraction,multiplication,division operations.
+### 5. Write a calculator with `BiFunction<T,U,R>` (an internal functional interface provided by JDK) and Lambda expression.
+#### Your calculator should support two-number addition, subtraction, multiplication, division operations.
 > `BiFunction<T, U, R>` is a built-in functional interface in Java.
 >
 >     R apply(T t, U u);
