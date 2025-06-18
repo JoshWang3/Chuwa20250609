@@ -6,6 +6,8 @@
 
 ### 1. Singleton Pattern 
 > Demo code can be checked in Singleton package
+
+> use `burgerMainSingleton` to run
 #### Burger POJO 🍔
 ```Java
 package Singleton;
@@ -37,7 +39,6 @@ public class Burger {
 - Use double-checked locking and volatile ensure thread safety
   - `volatile`: ensures all threads see the same value of instance and prevents certain JVM optimizations that could break double-checked locking
   - **synchronized block** guarantees that only one thread creates the instance if multiple threads call `getInstace()` at the same time
-  -
 
 ```Java
 package Singleton;
@@ -141,6 +142,16 @@ public class burgerMainSingleton {
   }
 }
 
+/*
+    output:
+        Eager: Cheese Beef Burger
+        Eager (after change):  Fish Burger
+        Lazy:  Chicken Burger
+        Lazy (after change): Cheese Veggie Burger
+        Eager singleton is unique: true
+        Lazy singleton is unique: true
+ */
+
 ```
 #### Summary
 - Eager: Singleton instance is created when the class loads, guaranteed to be only once; always thread-safe.
@@ -242,6 +253,13 @@ public class burgerMainFactory {
         System.out.println(b3.getBurgerType());
     }
 }
+
+/*
+        output:
+            Cheese Burger
+            Veggie Burger
+            Chicken Burger
+ */
 ```
 
 ### Abstract Factory Pattern 
@@ -399,6 +417,12 @@ public class burgerMainAbstractFactory {
         System.out.println("Veggie Meal: " + veggieBurger.getBurgerType() + " + " + juice.getDrinkType());
     }
 }
+
+/*
+        output:
+            Eager Meal: Cheese Burger + Cola
+            Veggie Meal: Veggie Burger + Juice
+ */
 ```
 ### Builder Pattern 
 > Demo code can be checked in Builder package
@@ -532,6 +556,13 @@ public class burgerMainBuilder {
         System.out.println(veggieBurger);
     }
 }
+
+/*
+        output:
+            Burger [bunType='Sesame', pattyType='Beef', cheese=true, lettuce=true, tomato=false, onions=false, bacon=true]
+            Burger [bunType='Wheat', pattyType='Veggie', cheese=false, lettuce=false, tomato=true, onions=true, bacon=false]
+
+ */
 ```
 ## 2. Write code to explain how do default and static keywords work in interfaces since Java 8
 > Demo code can be checked in DefaultAndStatic package
@@ -686,6 +717,12 @@ public class burgerMainAnonymous {
         System.out.println(customeBun.getBunType());
     }
 }
+/*
+        output:
+            Spicy Chicken Burger (from anonymous class)
+            Order complete: Double cheese burger with no pickles (from anonymous class)
+            Gluten free bun (overridden in anonymous class)
+ */
 ```
 
 ## 4. Write code to explain Lambda expression with functional interface
@@ -714,6 +751,12 @@ public class burgerMainLambda {
         System.out.println(veggieBurgerMaker.makeBurger("avocado"));
     }
 }
+
+/*
+        output:
+            Eager Burger with Bacon and cheese
+            Veggie burger with avocado
+ */
 ```
 
 ## 5. Write a calculator with BiFunction<T,U,R>
@@ -775,3 +818,12 @@ public class LambdaCalculator {
 
 and also we can check if it work here:
 > `CalculatorTester`
+```Java
+package LambdaCalculator;
+
+public class CalculatorTester {
+    public static void main(String[] args) {
+        LambdaCalculator.add(1, 2);
+    }
+}
+```
