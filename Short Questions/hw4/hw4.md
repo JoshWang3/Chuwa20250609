@@ -514,7 +514,7 @@ public class Main {
 > A `functional interface` is an interface that contains exactly one abstract method. It can have multiple default or static methods, but only one method that must be implemented.
 >- `@FunctionalInterface` annotation:  Optional but recommended for clarity and compile-time checking.
 
-> Lambda expression is a concise way to implement functional interface.
+> Lambda is the implementation of the abstract method in the functional interface.
 
 
 **Example:**
