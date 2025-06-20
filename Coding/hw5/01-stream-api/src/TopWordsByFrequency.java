@@ -3,12 +3,13 @@ import java.util.stream.Collectors;
 
 public class TopWordsByFrequency {
     public static void main(String[] args) {
-        String paragraph =
-                "Two roads diverged in a yellow wood,\n" +
-                        "And sorry I could not travel both\n" +
-                        "And be one traveler, long I stood\n" +
-                        "And looked down one as far as I could\n" +
-                        "To where it bent in the undergrowth;";
+        String paragraph = """
+        Two roads diverged in a yellow wood,
+        And sorry I could not travel both
+        And be one traveler, long I stood
+        And looked down one as far as I could
+        To where it bent in the undergrowth;
+        """;
 
         // Clean and split paragraph into words
         List<String> words = Arrays.stream(paragraph
