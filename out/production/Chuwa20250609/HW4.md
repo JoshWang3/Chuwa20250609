@@ -826,4 +826,6 @@ public class CalculatorTester {
         LambdaCalculator.add(1, 2);
     }
 }
+
+// output: 3.0
 ```
