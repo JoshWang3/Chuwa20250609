@@ -1,0 +1,3 @@
+**Why use Java Stream API? How does it help on data processing?**
+
+The Java Stream API simplifies data processing by allowing developers to perform operations like filtering, mapping, sorting, and grouping in a clear way. It reduces repetitive code, improves readability, and supports functional programming. In this assignment, it helps extracting tags, grouping products, and computing averages, making the code more efficient, and reducing error such as Null Pointer Exception.
