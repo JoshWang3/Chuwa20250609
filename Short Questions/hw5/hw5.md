@@ -1,7 +1,7 @@
 ### 1. Solve following questions using Stream API.
 **Write the necessary POJO classes and helper code rather than a single Stream API statement.**
 
-> I pasted all code below, but source code is in `Coding/hw5/01-stream-api/src`.
+> I pasted all code below, but question 1 source code is in `Coding/hw5/01-stream-api/src`.
 
 ---
 #### 1.1. Find top 3 longest strings that start with a vowel.
@@ -35,8 +35,10 @@ public class VowelStringFilter {
 }
 ```
 
-> Output:  
-> Top 3 longest vowel-starting words: [airplane, Umbrella, orange]
+Output:  
+```
+Top 3 longest vowel-starting words: [airplane, Umbrella, orange]
+```
 
 ---
 #### 1.2. Return names of departments where average employee salary > 100,000.
@@ -91,12 +93,16 @@ public class StreamDepartmentSalaryFilter {
     }
 }
 ```
-> Output:  
-> Departments with avg salary > 100,000: [Engineering, Finance]
+Output: 
+```
+Departments with avg salary > 100,000: [Engineering, Finance]
+```
 
-> Note:  
-> `entrySet().stream()`	converts map entries to stream.
 
+Note:  
+```
+`entrySet().stream()`	converts map entries to stream.
+```
 
 ---
 #### 1.3. Get a sorted list of all unique tags from a list of blog posts (Blog to Tags is 1-to-many relationship).
@@ -140,12 +146,10 @@ public class BlogTagProcessor {
     }
 }
 ```
-> Output:  
-> Sorted Unique Tags: [Backend, DevOps, Docker, Functional, Java, Spring, Streams]
- 
-
-
-
+Output: 
+```
+Sorted Unique Tags: [Backend, DevOps, Docker, Functional, Java, Spring, Streams]
+```
 
 
 ---
@@ -186,14 +190,14 @@ public class TopWordsByFrequency {
 }
 ```
 
-> Output:  
-    and: 3  
-    i: 3  
-    in: 2  
-    could: 2  
-    one: 2  
-
-
+Output:  
+```
+and: 3  
+i: 3  
+in: 2  
+could: 2  
+one: 2  
+```
 
 ---
 #### 1.5. Group products by category and sort each group by price descending.
@@ -259,17 +263,107 @@ public class GroupProductsSimple {
 }
 ```
 
+Output:  
+```
+Category: Fruits  
+Orange - $2.0  
+Apple - $1.5  
+Banana - $1.0  
+    
+Category: Vegetables  
+Broccoli - $2.5  
+Tomato - $1.8  
+Carrot - $1.2  
+```
 
 
 
 ---
-### Write code snippet to explain how Optional helps prevent null pointer exception.   
+### 2. Write code snippet to explain how Optional helps prevent null pointer exception.   
 **You may use blog-tags, and product-category POJOs to demo.**
-   
+> I pasted all code below, but question 2 source code is in `Coding/hw5/02-opetional/src`.
 
+```java
+import java.util.*;
 
+class BlogPost {
+    private String title;
+    private List<String> tags;
 
+    public BlogPost(String title, List<String> tags) {
+        this.title = title;
+        this.tags = tags;
+    }
+
+    public Optional<List<String>> getTags() {
+        return Optional.ofNullable(tags); // Prevents NPE
+    }
+
+    public String getTitle() {
+        return title;
+    }
+}
+
+class Product {
+    private String name;
+    private BlogPost blogPost;
+
+    public Product(String name, BlogPost blogPost) {
+        this.name = name;
+        this.blogPost = blogPost;
+    }
+
+    public Optional<BlogPost> getBlogPost() {
+        return Optional.ofNullable(blogPost); // Prevents NPE
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class OptionalExample {
+    public static void main(String[] args) {
+        // Simulate missing blogPost or missing tags
+        Product product = new Product("Laptop", null);
+
+        // Traditional way (unsafe, may throw NullPointerException)
+        // List<String> tags = product.getBlogPost().getTags(); ❌ NPE risk
+
+        // Safe way using Optional
+        List<String> tags = product.getBlogPost()
+            .flatMap(BlogPost::getTags) // unwraps Optional<BlogPost> → Optional<List<String>>
+            .orElse(Collections.emptyList()); // fallback to empty list
+
+        System.out.println("Tags: " + tags);
+    }
+}
+```
+Output:  
+```
+Tags: [ ]
+```
 
 
 ---
-### Explain why Java Stream API is required. How does it help on data processing?
+### 3. Explain why Java Stream API is required. How does it help on data processing?
+
+**Why Java Stream API is required?**  
+- **Declarative** - focuses on *what* to do, not *how*.
+- **Chain multiple operations** (e.g., `filter → map → collect`)
+- **Supports lazy eval & parallelism** (`parallelStream()`)
+- **Doesn’t modify original data**
+
+
+**How does it help on data processing?**
+
+| Operation      | Purpose                         |
+|----------------|----------------------------------|
+| `filter()`     | Select matching elements         |
+| `map()`        | Transform each element           |
+| `collect()`    | Aggregate results                |
+| `sorted()`     | Sort elements                    |
+| `distinct()`   | Remove duplicates                |
+| `groupingBy()` | Group by property                |
+
+ 
