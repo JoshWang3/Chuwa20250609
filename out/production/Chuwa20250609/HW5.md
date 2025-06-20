@@ -1,8 +1,8 @@
-# HW5: ava 8 Features
+# HW5: Java 8 Features
 @ Jun 19, 2025 _Gloria Wang_
 
-## 1. Stream API
-### 1. Find top 3 longest strings that start with a vowel
+## 1. Stream API Code Demo
+### 1. Find top 3 longest strings that start with a vowel 🔍
 > Demo code can be checked in Top3LongestVowelStrings package
 
 ```Java
@@ -11,7 +11,7 @@ package Top3LongestVowelStrings;
 import java.util.*;
 import java.util.stream.*;
 
-public class Top3LongestVowelStrings.Top3LongestVowelStrings {
+public class Top3LongestVowelStrings {
 
     // Method to find Vowel String
     private static boolean isVowel(String s) {
@@ -37,7 +37,7 @@ public class Top3LongestVowelStrings.Top3LongestVowelStrings {
 
 // output: [apple]
 ```
-### 2. Return names of departments where average employee salary > 100,000
+### 2. Return names of departments where average employee salary > 100,000 👩‍🍳
 > Demo code can be checked in DepartmentAverageEmployeeSalary package
 
 #### Department Class 
@@ -118,7 +118,7 @@ public class DepartmentAverageEmployeeSalary {
 // output: [Education, Science, Management, Cashier]
 ```
 
-### 3. Get a sorted list of all unique tags from a list of blog posts (Blog to Tags is 1-to-many relationship)
+### 3. Get a sorted list of all unique tags from a list of blog posts (Blog to Tags is 1-to-many relationship) 📰
 > Demo code can be checked in BlogPosts package
 #### Blog
 ```Java
@@ -179,7 +179,7 @@ public class UniqueTagBlogPosts {
 // output: [bikinibottom, burger, career, community, employee, food, funfacts, homes, jobs, krabbypatty, motivation, realestate, recipe, salary, spongebob, workethic]
 ```
 
-### 4. Return top 5 words by frequency from a paragraph
+### 4. Return top 5 words by frequency from a paragraph 📖
 > Demo code can be checked in Top5Words package
 
 ```Java
@@ -232,7 +232,7 @@ public class Top5Words {
 
 // output: [they, the, spongebob, jellyfish, and]
 ```
-### 5. Group products by category and sort each group by price descending
+### 5. Group products by category and sort each group by price descending 💰
 > Demo code can be checked in ProductGroupSortedByPrice package
 
 #### Product Class
@@ -311,11 +311,11 @@ output:
 ## 2. How Optional helps prevent null pointer exception
 > Demo code can be checked in Optional package
 
-#### Without Optional
+#### Without Optional ⚠️
 - have to manually check if tags is null before calling `tags.size()`
 - if we forget this check and just write `blog.getTags().size()` -> could get a `NullPointerException` if tags is `null`
 
-#### With Optional
+#### With Optional 🔐
 - `Optional.ofNullable(blog.getTags())` wraps the possibly-null tags list in an Optional
 - if tags is `null`, `.map(...)` is skipped and goes straight to `.orElse(0)`, providing a default value
 
@@ -347,6 +347,56 @@ public class BlogTagsDemo {
     }
 }
 ```
-#### More Example Use Product Category to Demo
+#### More Example Use Product Category to Demo ✏️
 ```Java
+package Optional;
+
+import ProductGroupedByPrice.Product;
+import java.util.*;
+import java.util.stream.*;
+
+public class ProductCategoryDemo {
+    public static void main(String[] args) {
+        Product product = new Product("Golden Spatula", null, 25.0);
+
+        // without optional:
+        int categoryLength = 0;
+        String category = product.getCategory();
+        if (category != null) {
+            categoryLength = category.length();
+        }
+        System.out.println("Length of categories without Optional: " + categoryLength); // output: Length of categories without Optional: 0
+
+        // with optional:
+        int categoryLengthWithOptionalL = Optional.ofNullable(product.getCategory())
+                .map(String::length)
+                .orElse(0);
+        System.out.println("Length of categories with Optional: " + categoryLengthWithOptionalL); // output: Length of categories with Optional: 0
+    }
+}
+```
+
+## 3. Why Java Stream API is required, how does it help on data processing?
+### Problem with Traditional Collection Processing 🚨
+- **Memory Waste**: each step, like copy to list, set, and map, creates new collections in memory -> inefficient, especially with large datasets
+- **Inconvenient code**: data processing requires multiple explicit loops and intermediate collections, making code verbose and error-prone
+- **Mutable side effects**: operations on collections can accidentally modify the original data, leading to bugs
+- **Not chainable**: traditional processing is hard to express as a chain of steps, lot steps are isolated
+
+```Java
+List<Integer> list = new ArrayList<>();
+Set<Integer> unique = new HashSet<>();
+// requires extra memory for list and set
+```
+
+### Stream API 🩵
+- **Non destructive**: steams don't modify their source -> original collection stays unchanged -> we can safely create multiple stream from the same data
+- **No extra memory**: stream operations process data without creating new intermediate collections
+- **Functional and chainable**: streams let you chain operations, like filter, map, sorted, for expressive, readable data processing
+- **Once-use**: each stream instance can only be consumed once, after terminal operation, it cannot be reused -> prevent side-effect bugs
+
+```Java
+Set<Integer> unique = map.values().stream()
+        .collect(Collectors.toSet());
+// no intermediate collections -> no memory waste
 ```

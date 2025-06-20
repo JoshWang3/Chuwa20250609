@@ -21,12 +21,12 @@ public class Top3LongestVowelStrings {
     }
 
     public static void main(String[] args) {
-        List<String> input = Arrays.asList("apple", "dog", "burger", "cat");
+        List<String> input = Arrays.asList("elephant", "apple", "orange", "umbrella", "banana", "iguana", "owl", "egg", "cat", "octopus");
 
         // Stream API to get top 3 longest strings with vowel
         List<String> result = input.stream()
                 .filter(Top3LongestVowelStrings::isVowel)
-                .sorted(Comparator.comparingInt(String::length).reversed())
+                .sorted(Comparator.comparingInt(String::length).reversed()) // naturally from short -> long, so need reversed
                 .limit(3)
                 .collect(Collectors.toList());
 
@@ -35,7 +35,7 @@ public class Top3LongestVowelStrings {
     }
 }
 
-// output: [apple]
+// output: [elephant, umbrella, octopus]
 ```
 ### 2. Return names of departments where average employee salary > 100,000 👩‍🍳
 > Demo code can be checked in DepartmentAverageEmployeeSalary package

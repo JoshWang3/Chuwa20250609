@@ -14,7 +14,7 @@ public class Top3LongestVowelStrings {
     }
 
     public static void main(String[] args) {
-        List<String> input = Arrays.asList("apple", "dog", "burger", "cat");
+        List<String> input = Arrays.asList("elephant", "apple", "orange", "umbrella", "banana", "iguana", "owl", "egg", "cat", "octopus");
 
         // Stream API to get top 3 longest strings with vowel
         List<String> result = input.stream()
@@ -28,4 +28,4 @@ public class Top3LongestVowelStrings {
     }
 }
 
-// output: [apple]
+// output: [elephant, umbrella, octopus]
