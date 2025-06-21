@@ -1,0 +1,1 @@
+Strings in java are immutable because once they are created, they cannot be changed, which helps to maintain thread-safe. All changes to the string will result in the creation of a new String object.
