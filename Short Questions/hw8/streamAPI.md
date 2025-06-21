@@ -1,3 +1,0 @@
-Stream API is needed in case of efficiently managing data processing in a stream manner (mimicking data pipelines).
-
-It not only saves memory by preventing creating copies of the original data (list, arrays, etc.) but also provides powerful and useful functions that enables chain of operations (serialized operations -- filter, map, etc. with terminal operation to output final result) without the need of using repetitive if-else statements or for loops which is not only hard to read but also adds redundant lines to the code base.
