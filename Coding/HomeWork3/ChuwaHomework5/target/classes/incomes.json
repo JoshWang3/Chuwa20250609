@@ -1,0 +1,31 @@
+[
+  {
+    "department": "Engineering",
+    "employees": [
+      { "name": "Alice", "salary": 120000 },
+      { "name": "Bob", "salary": 130000 },
+      { "name": "Charlie", "salary": 110000 }
+    ]
+  },
+  {
+    "department": "Marketing",
+    "employees": [
+      { "name": "Daisy", "salary": 90000 },
+      { "name": "Ethan", "salary": 95000 }
+    ]
+  },
+  {
+    "department": "Finance",
+    "employees": [
+      { "name": "Frank", "salary": 105000 },
+      { "name": "Grace", "salary": 115000 }
+    ]
+  },
+  {
+    "department": "Support",
+    "employees": [
+      { "name": "Hannah", "salary": 70000 },
+      { "name": "Ian", "salary": 80000 }
+    ]
+  }
+]

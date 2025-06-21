@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Intro to Java",
+    "tags": ["Java", "Programming", "Beginner"]
+  },
+  {
+    "id": 2,
+    "title": "Kotlin for Android",
+    "tags": ["Kotlin", "Android", "Mobile"]
+  },
+  {
+    "id": 3,
+    "title": "Spring Boot REST API",
+    "tags": ["Java", "Spring", "Backend", "API"]
+  },
+  {
+    "id": 4,
+    "title": "React vs Vue",
+    "tags": ["Frontend", "JavaScript", "Vue", "React"]
+  },
+  {
+    "id": 5,
+    "title": "Advanced Kotlin",
+    "tags": ["Kotlin", "Advanced", "Tips"]
+  }
+]
