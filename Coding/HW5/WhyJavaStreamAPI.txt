@@ -1,0 +1,7 @@
+3. Why java stream API is required, how does it help on data processing?
+
+Java has many functions and operations, and Stream API helps wrap them in a neater,
+more reusable way. It saves memory by avoiding repeated logic and makes the code cleaner
+and easier to manage.
+Java Stream API helps simplify data processing by turning complex for-loops into clean,
+readable, and reusable operations.
