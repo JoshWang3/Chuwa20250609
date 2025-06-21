@@ -1,0 +1,11 @@
+[
+  { "name": "iPhone 14", "category": "Electronics", "price": 999.99 },
+  { "name": "Samsung TV", "category": "Electronics", "price": 749.99 },
+  { "name": "Dell Laptop", "category": "Electronics", "price": 899.99 },
+  { "name": "Air Fryer", "category": "Home Appliances", "price": 129.99 },
+  { "name": "Blender", "category": "Home Appliances", "price": 79.99 },
+  { "name": "Toaster", "category": "Home Appliances", "price": 49.99 },
+  { "name": "Sneakers", "category": "Fashion", "price": 89.99 },
+  { "name": "Leather Jacket", "category": "Fashion", "price": 249.99 },
+  { "name": "Jeans", "category": "Fashion", "price": 59.99 }
+]
