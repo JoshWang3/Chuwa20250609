@@ -360,11 +360,3 @@ By decoupling data source from processing logic, can apply the same pipeline of 
 
 ##### How does it help on data processing?  
 A: By expressing data transformations as composable pipelines of declarative operations (filter, map, flatMap, sorted, collect, etc.), the Stream API lets you process collections, arrays, file lines, or even infinite sequences without boilerplate loops or mutable accumulators; its lazy evaluation and short-circuiting ensure you only do the minimal work needed, and with a simple switch to parallelStream() you can transparently leverage multiple CPU cores, making your data-processing logic both more concise and more performant.
-```java
-```
-
-```java
-```
-
-```java
-```
