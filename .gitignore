@@ -1,2 +1,7 @@
 # Ignore Intellij config
 .idea/
+out/
+
+# Ignore all class files
+*.class
+
