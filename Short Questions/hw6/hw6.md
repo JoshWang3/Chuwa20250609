@@ -154,36 +154,198 @@ t.run();   // Runs on main thread
 ---
 ### 6. Which way of creating threads is better: Thread class or Runnable interface?
 
-
-
+|              | `Thread` class                | `Runnable` interface        |
+|--------------|--------------------------------|-----------------------------|
+| Design       | Inherits `Thread`             | Implements `Runnable`       |
+| Flexibility  | Cannot extend another class   | Can still extend other classes |
+| Reusability  | Less reusable                 | More reusable               |
+ 
+✅ Use `Runnable`:
+- Follows best practice: **"favor composition over inheritance"**
+- Works well with Thread Pools (`ExecutorService`)
+- Easier to test and reuse
 
 
 ---
 ### 7. What are the thread statuses?
 
+| State           | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| **NEW**          | Thread created but `start()` not called yet                                 |
+| **RUNNABLE**     | Thread ready to run or currently running                                     |
+| **BLOCKED**      | Waiting to acquire a lock (another thread holds the monitor)                |
+| **WAITING**      | Waiting indefinitely for another thread to perform an action (`join()`, etc.) |
+| **TIMED_WAITING**| Waiting for a specified time (`sleep()`, `join(timeout)`, `wait(timeout)`)  |
+| **TERMINATED**   | Thread finished execution (normally or via exception)                       |
+
+
 
 ---
 ### 8. Demonstrate deadlock and how to resolve it in Java code.
+> A deadlock occurs when two or more threads are permanently blocked, each waiting for a resource the other holds.
+
+Example:  
+Two threads hold locks in reverse order, causing both to wait forever.
+
+```java
+public class DeadlockExample {
+    static final Object LockA = new Object();
+    static final Object LockB = new Object();
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(() -> {
+            synchronized (LockA) {
+                System.out.println("Thread 1: locked LockA");
+                try { Thread.sleep(100); } catch (InterruptedException ignored) {}
+                synchronized (LockB) {
+                    System.out.println("Thread 1: locked LockB");
+                }
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            synchronized (LockB) {
+                System.out.println("Thread 2: locked LockB");
+                try { Thread.sleep(100); } catch (InterruptedException ignored) {}
+                synchronized (LockA) {
+                    System.out.println("Thread 2: locked LockA");
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
+    }
+}
+```
+**Solution to Resolve Deadlock:**  
+Always acquire multiple locks in a fixed global order to avoid deadlocks.
+
+```java
+public class DeadlockResolved {
+    static final Object LockA = new Object();
+    static final Object LockB = new Object();
+
+    public static void main(String[] args) {
+        Runnable task = () -> {
+            synchronized (LockA) {
+                System.out.println(Thread.currentThread().getName() + " locked LockA");
+                try { Thread.sleep(100); } catch (InterruptedException ignored) {}
+                synchronized (LockB) {
+                    System.out.println(Thread.currentThread().getName() + " locked LockB");
+                }
+            }
+        };
+
+        new Thread(task).start();
+        new Thread(task).start();
+    }
+}
+```
 
 
 ---
-### 9. How do threads communicate each other?
+### 9. How do threads communicate with each other?
+> Threads communicate with each other primarily using **shared objects** and **synchronization mechanisms**.
+
 
 
 ---
 ### 10. What’s the difference between class lock and object lock?
 
+|          | Lock Scope   | Applied On                                                          | Use Case                         |
+|----------|--------------|---------------------------------------------------------------------|----------------------------------|
+| **Object Lock** | Instance-level | `synchronized` on instance methods **or** `synchronized(this)`      | Controls access to a **single object** |
+| **Class Lock** | Class-level  | `synchronized` on static methods **or** `synchronized(ClassName.class)` | Controls access to **all instances** of the class |
+
+
 
 ---
 ### 11. What is join() method?
+> The `join()` method makes the calling thread wait until the target thread finishes.
+
+```java
+Thread t = new Thread(() -> {
+    System.out.println("Child thread running");
+});
+
+t.start();
+t.join();  // Main thread waits for t to finish
+
+System.out.println("Main thread resumes");
+```
+
 
 
 ---
-### 12. what is yield() method
+### 12. What is yield() method?
+> The `yield()` method tells the thread scheduler:  
+  " I'm willing to give other threads of **equal priority** a chance to run. "
+>
+> ⚠️ It's a **hint**, not a command. The scheduler **may ignore it**.
+
+```java
+public class YieldExample {
+    public static void main(String[] args) {
+        
+        Runnable task = () -> {
+            String threadName = Thread.currentThread().getName();
+            
+            for (int i = 1; i <= 5; i++) {
+                System.out.println(threadName + " - iteration " + i);
+
+                // Yield control to allow other threads of equal priority to run
+                Thread.yield();
+            }
+        };
+
+        Thread t1 = new Thread(task, "Thread-A");
+        Thread t2 = new Thread(task, "Thread-B");
+
+        t1.start();
+        t2.start();
+    }
+}
+```
+**What Happens?**
+- Both threads `t1` and `t2` run the same task.
+- After each print, they call `Thread.yield()`, asking the CPU: 
+" Let other threads run if they’re ready. "
+- This can result in threads taking turns more fairly.
+- But no guarantee—sometimes one thread may still run multiple times in a row.
+
 
 
 ---
 ### 13. What is ThreadPool? How many types of ThreadPool? What is the TaskQueue in ThreadPool?
+
+> **ThreadPool** is a pool of threads. 
+> 
+> Instead of creating a new thread for each task (which is expensive), tasks are submitted to the pool and assigned to **reusable worker threads**.
+
+> **Types of ThreadPool:** Fixed, Cached, Single, Scheduled.
+
+| Method                                | Description |
+|---------------------------------------|-------------|
+| `Executors.newFixedThreadPool(n)`     | Fixed number of threads |
+| `Executors.newCachedThreadPool()`     | Creates new threads as needed, reuses idle ones |
+| `Executors.newSingleThreadExecutor()` | Single worker thread (sequential tasks) |
+| `Executors.newScheduledThreadPool(n)` | Executes tasks after delay or periodically |
+
+> A **TaskQueue** is an internal **blocking queue**.
+> 
+> 1. You submit a task.
+> 2. If all threads are busy, the task goes into the **TaskQueue**.
+> 3. When a thread becomes free, it **takes a task from the queue** and runs it.
+
+
+| Common Queue Type     | Behavior                                                                      |
+|-----------------------|-------------------------------------------------------------------------------|
+| `LinkedBlockingQueue` | Unbounded, used by `FixedThreadPool`                                          |
+| `SynchronousQueue`    | No capacity, used by `CachedThreadPool` (task must be handed off immediately) |
+| `DelayedWorkQueue`    | Used by `ScheduledThreadPool` for delayed / periodic tasks                    |
+
+
 
 
 ---
