@@ -959,8 +959,267 @@ Even if threads **start in any order**, the use of `ReentrantLock`, `Condition`,
 
 
 
-
-
-
 ----
-### 25. completable future:
+### 25. CompletableFuture:
+
+#### 1. Write a simple program that uses `CompletableFuture` to asynchronously get the sum and product of two integers, and print the results.
+
+```java
+import java.util.concurrent.CompletableFuture;
+
+public class AsyncSumProduct {
+
+    public static void main(String[] args) {
+        int a = 5;
+        int b = 3;
+
+        // Asynchronously compute sum
+        CompletableFuture<Integer> sumFuture = CompletableFuture.supplyAsync(() -> {
+            return a + b;
+        });
+
+        // Asynchronously compute product
+        CompletableFuture<Integer> productFuture = CompletableFuture.supplyAsync(() -> {
+            return a * b;
+        });
+
+        // Combine results after both tasks complete
+        sumFuture.thenAccept(sum -> {
+            System.out.println("Sum: " + sum);
+        });
+
+        productFuture.thenAccept(product -> {
+            System.out.println("Product: " + product);
+        });
+
+        // Wait for both to complete (optional if running in a short-lived program)
+        CompletableFuture.allOf(sumFuture, productFuture).join();
+    }
+}
+```
+>Output (for `a = 5`, `b = 3`):  
+>Sum: 8  
+>Product: 15  
+
+**Notes:**
+- **`supplyAsync()`**: Runs tasks asynchronously using the default ForkJoinPool.
+- **`thenAccept()`**: Consumes and prints the result once computation is complete.
+- **`CompletableFuture.allOf(...).join()`**: Ensures the main thread waits for all asynchronous tasks to finish. This is necessary in short-lived programs to prevent premature termination.
+- **Thread-safe**: Each `CompletableFuture` runs independently; there is no shared mutable state.
+
+
+
+---
+#### 2. Assume there is an online store that needs to fetch data from three APIs: products, reviews, and inventory. Use `CompletableFuture` to implement this scenario and merge the fetched data for further processing. 
+**Assumptions:**  
+Simulate the following API endpoints using `https://jsonplaceholder.typicode.com`:
+
+|           | Endpoint URL                                      |                    
+|-----------|----------------------------------------------------| 
+| Products  | `https://jsonplaceholder.typicode.com/posts`       |  
+| Reviews   | `https://jsonplaceholder.typicode.com/comments`    |  
+| Inventory | `https://jsonplaceholder.typicode.com/users`       |  
+
+
+
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
+public class OnlineStoreDataFetcher {
+
+    private static final HttpClient httpClient = HttpClient.newHttpClient();
+
+    // Fetch Products
+    public static CompletableFuture<String> fetchProducts() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/posts"))
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                         .thenApply(HttpResponse::body);
+    }
+
+    // Fetch Reviews
+    public static CompletableFuture<String> fetchReviews() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/comments"))
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                         .thenApply(HttpResponse::body);
+    }
+
+    // Fetch Inventory
+    public static CompletableFuture<String> fetchInventory() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/users"))
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                         .thenApply(HttpResponse::body);
+    }
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        CompletableFuture<String> productsFuture = fetchProducts();
+        CompletableFuture<String> reviewsFuture = fetchReviews();
+        CompletableFuture<String> inventoryFuture = fetchInventory();
+
+        // Combine all results
+        CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+                productsFuture, reviewsFuture, inventoryFuture
+        );
+
+        // When all done, merge and print
+        CompletableFuture<String> mergedResult = allFutures.thenApply(v -> {
+            String products = productsFuture.join();
+            String reviews = reviewsFuture.join();
+            String inventory = inventoryFuture.join();
+
+            return "=== Products ===\n" + products.substring(0, 300) + "...\n\n" +
+                   "=== Reviews ===\n" + reviews.substring(0, 300) + "...\n\n" +
+                   "=== Inventory ===\n" + inventory.substring(0, 300) + "...";
+        });
+
+        // Print final result
+        System.out.println(mergedResult.get());
+    }
+}
+```
+**Notes:**
+- `HttpClient.sendAsync()` is **non-blocking** and returns a `CompletableFuture<HttpResponse<T>>`.
+- `CompletableFuture.allOf(f1, f2, f3)` is used to **wait until all futures complete**.
+- Inside `.thenApply()`, we safely use `.join()` on each future because they are guaranteed to have completed.
+- This example only prints the **first 300 characters** of each response to keep the output concise.
+- This is suitable for **asynchronous aggregation of API calls** with `CompletableFuture` for I/O-bound operations.
+
+
+
+---
+#### 3. For question 2, implement exception handling. If an exception occurs during any API call, return a default value and log the exception information.
+
+An enhanced version of the previous code with exception handling:
+- If an exception occurs during any API call, a default fallback value is returned.
+- Exceptions are logged using `System.err.println()`.
+
+
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
+public class OnlineStoreDataFetcher {
+
+    private static final HttpClient httpClient = HttpClient.newHttpClient();
+
+    // Fetch Products
+    public static CompletableFuture<String> fetchProducts() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/posts"))
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Failed to fetch products: " + ex.getMessage());
+                    return "[]";  // default empty JSON array
+                });
+    }
+
+    // Fetch Reviews
+    public static CompletableFuture<String> fetchReviews() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/comments"))
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Failed to fetch reviews: " + ex.getMessage());
+                    return "[]";
+                });
+    }
+
+    // Fetch Inventory
+    public static CompletableFuture<String> fetchInventory() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/users"))
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .exceptionally(ex -> {
+                    System.err.println("Failed to fetch inventory: " + ex.getMessage());
+                    return "[]";
+                });
+    }
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        CompletableFuture<String> productsFuture = fetchProducts();
+        CompletableFuture<String> reviewsFuture = fetchReviews();
+        CompletableFuture<String> inventoryFuture = fetchInventory();
+
+        // Combine all results
+        CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+                productsFuture, reviewsFuture, inventoryFuture
+        );
+
+        // When all done, merge and print
+        CompletableFuture<String> mergedResult = allFutures.thenApply(v -> {
+            String products = productsFuture.join();
+            String reviews = reviewsFuture.join();
+            String inventory = inventoryFuture.join();
+
+            return "=== Products ===\n" + preview(products) + "\n\n" +
+                   "=== Reviews ===\n" + preview(reviews) + "\n\n" +
+                   "=== Inventory ===\n" + preview(inventory);
+        });
+
+        // Print final result
+        System.out.println(mergedResult.get());
+    }
+
+    private static String preview(String json) {
+        return json.length() > 300 ? json.substring(0, 300) + "..." : json;
+    }
+}
+```
+**Notes:**  
+- `exceptionally(...)` catches and handles exceptions in the `CompletableFuture` chain.
+- `System.err.println` logs error messages to standard error.
+- `"[]"` is	the default JSON fallback for failed API responses.
+- `.join()` is safe to use here because `.exceptionally()` ensures futures complete.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
