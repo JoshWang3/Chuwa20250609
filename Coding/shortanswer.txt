@@ -1,0 +1,183 @@
+// question3
+//1. Extending Thread class
+//2. Implementing Runnable
+//3. sing ExecutorService (Thread Pool – Recommended for production)
+
+// question 4
+// Difference Between Runnable and Callable
+//       Feature	       Runnable	         Callable<T>
+//       Return value	❌ void (run())	✅ returns value of type T
+//       Can throw 
+//     checked exceptions	❌ No	    ✅ Yes (call() can throw)
+//       Method name	    run()	         call()
+//       Used with	       Thread,         ExecutorService.submit(Callable)
+//                   ExecutorService.submit(Runnable)	
+
+
+// question 5
+
+//  Difference Between t.start() and t.run()
+// t.start() : Starts a new thread, JVM invokes run() in a new thread, executes in Separate new thread
+// t.run() : Just a normal method call, no new thread. executes in current thread
+//Always use start() to create a new thread. Calling run() directly just executes it in the current thread like a regular method.
+
+// question 6
+// Implementing Runnable is better in almost all cases because:
+//It promotes loose coupling, Allows multiple inheritance and Works well with ExecutorService and thread pools
+
+// question 7
+//Java defines thread states in the Thread.State enum. There are 6 main states:
+
+//NEW:	Thread is created but start() not yet called
+//RUNNABLE:	Thread is ready and waiting for CPU time (includes "running")
+//BLOCKED:	Thread is waiting to acquire a monitor lock (e.g. locked by another thread)
+//WAITING:	Thread is waiting indefinitely for another thread to perform a specific action (wait(), join() without timeout)
+//TIMED_WAITING:	Thread is waiting for a specified time (sleep(), join(timeout), wait(timeout))
+//TERMINATED:	Thread has completed execution (either normally or via exception)
+
+question 9:
+In Java, threads communicate using shared memory and synchronization mechanisms, most commonly through:
+wait(), notify(), and notifyAll() (classic approach)
+Defined in Object class
+Used to coordinate thread execution when sharing the same monitor lock
+Threads take turns calling produce() and consume() and communicate via wait/notify on the shared object.
+
+
+other communicate way: 
+1. BlockingQueue: Thread-safe queue that handles waiting/notification internally (best practice)
+2. PipedInputStream/PipedOutputStream:	For sending data between threads (rare)
+3. Shared variables + synchronized/volatile:	Threads read/write to shared fields, coordination done via synchronization or volatile
+
+question 10:
+
+Object Lock: lock target: this	 keyword: synchronized instance method/block
+Class Lock: lock target:	ClassName.class   keyword:	static synchronized method or synchronized(ClassName.class)
+
+question 11:
+The join() method allows one thread to wait for the completion of another thread.Ensures a specific thread finishes before others proceed
+
+question 12:
+yield() is a static method of Thread that hints to the thread scheduler. It’s just a hint, not a guarantee
+
+The current thread may be rescheduled immediately
+
+question 13:
+1. A ThreadPool is a pool (group) of reusable threads for executing tasks.
+Instead of creating a new thread for each task, Java reuses a limited number of threads from a pool, improving performance, resource usage, and scalability.
+Java provides thread pools via the ExecutorService interface and Executors utility class.
+2.Benefits of Using ThreadPool
+Avoids thread creation overhead
+Controls concurrency level
+Allows task queuing and scheduling
+Prevents resource exhaustion in high-load environments
+
+3. Types of ThreadPool
+1. Executors.newFixedThreadPool(int n)
+Pool with a fixed number of threads
+Extra tasks are queued
+2. Executors.newCachedThreadPool()
+3. Executors.newSingleThreadExecutor()
+4. Executors.newScheduledThreadPool(int n)
+
+The TaskQueue is an internal blocking queue used to store submitted tasks waiting to be executed.
+It allows:
+Task buffering (when all threads are busy)
+
+Controlled execution rate
+Java’s default implementation:
+Usually LinkedBlockingQueue<Runnable> in ThreadPoolExecutor.
+
+question 14：
+Which Library Is Used to Create ThreadPool?
+Java provides the java.util.concurrent package to handle multithreading and concurrency.
+Which Interface Provides the Main Functions of ThreadPool?
+The ExecutorService interface provides the main thread pool operations.
+question 15：
+How to Submit a Task to ThreadPool?
+🔹 Using submit() with Runnable:
+Using submit() with Callable (returns value):
+
+question 16：
+benefit：
+1. Performance	Reuses threads instead of creating new ones for each task
+2. Resource efficiency	Controls the number of active threads to avoid memory leaks or CPU overuse
+3. Scalability	Handles many concurrent tasks efficiently
+4. Responsiveness	Useful for servers or GUI apps where responsiveness is critical
+5. Task management	Supports queuing, scheduling, and future result tracking
+6. Cleaner code	Centralized thread management with ExecutorService simplifies logic
+
+question 17:
+shutdown()
+Initiates graceful shutdown:
+No new tasks are accepted
+Previously submitted tasks continue until complete
+Best for normal application exit
+
+shutdownNow()
+Attempts to stop everything immediately:
+Interrupts all running threads
+Cancels queued tasks
+Best for error conditions or forceful shutdown
+
+question 19： Concurrent collections are Java-provided data structures that allow safe access and modification by multiple threads without external synchronization.
+
+They use advanced techniques like lock striping, CAS (Compare-And-Swap), or non-blocking algorithms to maximize performance.
+ConcurrentHashMap<K, V>	Map	Thread-safe, high-performance hash map
+ConcurrentLinkedQueue<E>	Queue	Non-blocking, FIFO queue
+ConcurrentLinkedDeque<E>	Deque	Double-ended version of the above
+CopyOnWriteArrayList<E>	List	Thread-safe list using copy-on-write
+CopyOnWriteArraySet<E>	Set	Set backed by CopyOnWriteArrayList
+BlockingQueue<E> (interface)	Queue	For producer-consumer; includes ArrayBlockingQueue, LinkedBlockingQueue, etc.
+ConcurrentSkipListMap<K,V>	SortedMap	Thread-safe sorted map (like TreeMap)
+ConcurrentSkipListSet<E>	SortedSet	Thread-safe sorted set (like TreeSet)
+DelayQueue<E>	Queue	Tasks that become available after a delay
+SynchronousQueue<E>	Queue	No internal storage; one-to-one handoff
+
+question20：
+1. synchronized Lock (Intrinsic Lock / Monitor Lock)
+Simple and easy to use
+
+Automatically released (no need to unlock explicitly)
+
+Works well for basic synchronization
+
+2. ReentrantLock (Explicit Lock)
+Reentrant: A thread can acquire the lock multiple times
+
+Fine-grained control: supports tryLock(), lockInterruptibly(), fair mode
+
+Supports multiple Condition objects for more advanced wait/notify patterns
+
+3. ReadWriteLock
+Improves concurrency when reads are frequent
+Write lock blocks all, but multiple reads can happen simultaneously
+
+4. StampedLock
+Optimistic read allows fast non-blocking reads if no write is occurring
+Better performance in high-read-low-write environments
+
+5. Object.wait() / notify() / notifyAll()
+Lightweight and simple for condition waiting
+Can be used for classic producer-consumer problems
+
+question21:
+Future:
+Interface: java.util.concurrent.Future<T>
+A Future represents the result of an asynchronous computation.
+
+CompletableFuture
+Class: java.util.concurrent.CompletableFuture<T> (Java 8+)
+A CompletableFuture is a powerful Future implementation that allows:
+Non-blocking async programming
+Task chaining (thenApply, thenCompose)
+Parallel execution (thenCombine, allOf)
+Exception handling
+
+main method of CompletableFuture
+supplyAsync(Supplier<T>) :	Runs a task asynchronously and returns a result
+runAsync(Runnable) :	Runs a task without returning a result
+thenApply(Function<T, R>) :	Transforms the result
+thenAccept(Consumer<T>)	: Consumes the result without returning
+thenRun(Runnable) :	Runs after previous completes (no input/output)
+
+.......
