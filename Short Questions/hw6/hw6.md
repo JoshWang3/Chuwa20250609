@@ -1,6 +1,6 @@
 ### hw6
 ### 2. Write a thread-safe singleton class.
-Double-Checked Locking Singleton - Lazy + Efficient:
+> Double-Checked Locking Singleton - Lazy + Efficient:
 ```java
 public class DoubleCheckedSingleton {
 
@@ -25,15 +25,17 @@ public class DoubleCheckedSingleton {
     }
 }
 ```
-Why Thread-Safe?
+> Why Thread-Safe?
 1. `volatile` keyword:
     - Prevents instruction reordering during object creation.
     - Ensures all threads see a fully constructed object.
     - Without it, a thread might see a partially initialized object.
 
+
 2. Double-checking:
     - Avoids locking once the instance is initialized.
     - Locking only happens once per JVM.
+
 
 3. JVM Guarantee:
     - Class-level lock on `DoubleCheckedSingleton.class` ensures only one thread can enter the critical section during initialization.
@@ -248,6 +250,103 @@ public class DeadlockResolved {
 ### 9. How do threads communicate with each other?
 > Threads communicate with each other primarily using **shared objects** and **synchronization mechanisms**.
 
+Example 1: Use `synchronized`:
+```java
+class Counter {
+    private int count = 0;
+
+    public void increment() {
+        synchronized (this) {
+            count++;
+        }
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+public class SyncExample {
+    public static void main(String[] args) throws InterruptedException {
+        
+        Counter counter = new Counter();
+
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) counter.increment();
+        });
+
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) counter.increment();
+        });
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println("Final Count: " + counter.getCount());
+    }
+}
+```
+
+Example 2: Use a lock, `wait()`, and `notifyAll()`:
+```java
+public class WaitNotifyExample {
+    private final Object lock = new Object();
+    private boolean ready = false;
+
+    // Thread A waits for "ready" to become true
+    public void waitForReady() throws InterruptedException {
+        synchronized (lock) {
+            while (!ready) {
+                lock.wait();  // Releases the lock and waits
+            }
+            System.out.println("Thread A: Ready to proceed!");
+        }
+    }
+
+    // Thread B sets "ready" and notifies waiting threads
+    public void markReady() {
+        synchronized (lock) {
+            ready = true;
+            lock.notifyAll();  // Wakes up all waiting threads
+            System.out.println("Thread B: Notified all waiting threads.");
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        WaitNotifyExample example = new WaitNotifyExample();
+
+        Thread t1 = new Thread(() -> {
+            try {
+                example.waitForReady();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            try {
+                Thread.sleep(1000);  // Simulate some work
+                example.markReady();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+    }
+}
+```
+
+- `synchronized(lock)` ensures proper coordination on the shared object.
+- `wait()` pauses the thread until `notifyAll()` is called.
+
 
 
 ---
@@ -347,54 +446,519 @@ public class YieldExample {
 
 
 
-
 ---
-### 14. Which Library is used to create ThreadPool? Which Interface provide main functions of thread-pool?
+### 14. Which Library is used to create ThreadPool? Which Interface provide main functions of ThreadPool?
+> Library: `java.util.concurrent` 
+> 
+> Interface:  `ExecutorService`
+
+Key Methods from `ExecutorService`:
+
+| Method            | Description                                      |
+|-------------------|--------------------------------------------------|
+| `submit()`        | Submits a `Runnable` or `Callable` for execution |
+| `shutdown()`      | Initiates an orderly shutdown                    |
+| `shutdownNow()`   | Attempts to stop all actively executing tasks    |
+| `invokeAll()`     | Executes all given `Callable` tasks              |
+| `invokeAny()`     | Executes the fastest `Callable` and returns result |
+
 
 
 ---
 ### 15. How to submit a task to ThreadPool?
 
+> 1. **Create a ThreadPool** using `Executors` (e.g., `newFixedThreadPool`)
+> 2. **Submit a task** using `executor.submit(Runnable)` or `executor.submit(Callable)`
+> 3. **Shutdown the ThreadPool** after task submission
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Main {
+    public static void main(String[] args) {
+        // Step 1: Create ThreadPool with 2 threads
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        // Step 2: Submit a Runnable task
+        executor.submit(() -> {
+            System.out.println("Running task in: " + Thread.currentThread().getName());
+        });
+
+        // Step 3: Shutdown the ThreadPool
+        executor.shutdown();
+    }
+}
+```
+
 
 ---
 ### 16. What is the advantage of ThreadPool?
 
+1. **Improve Performance**
+    - Reuses existing threads instead of creating new ones for each task.
+
+
+2. **Better Thread Management**
+    - Manages task queue and thread lifecycle efficiently.
+
+
+3. **Scalability**
+    - Supports growing workloads by handling tasks asynchronously.
+
+
+4. **Support Scheduling**
+    - Use `ScheduledThreadPoolExecutor` for delayed or periodic tasks.
+
+
 
 ---
-### 17. Difference between shutdown() and shutdownNow() methods of executor
+### 17. Difference between shutdown() and shutdownNow() methods of executor?
+
+| Method         | Behavior                                                                 |
+|----------------|--------------------------------------------------------------------------|
+| `shutdown()`   | - Gracefully shuts down the executor. <br> - No new tasks accepted. <br> - Already submitted tasks continue to run. |
+| `shutdownNow()`| - Forces shutdown immediately. <br> - Attempts to stop all running tasks. <br> - Returns a list of pending tasks.    |
+
+**Use `shutdown()`** when you want a clean exit.  
+**Use `shutdownNow()`** only if you need to stop everything immediately.
+
 
 
 ---
-### 18. What is Atomic classes? How many types of Atomic classes? Give me some code example of Atomic classes and its main methods. when to use it?
+### 18. What is Atomic classes? When to use it? How many types of Atomic classes? 
+#### Give me some code example of Atomic classes and its main methods. 
+>Atomic classes are part of `java.util.concurrent.atomic` package.
+> 
+>They support **lock-free, thread-safe** operations on single variables.
+> 
+>Use **CAS (Compare-And-Swap)** internally to ensure atomicity.
+
+
+> When to Use?  
+>- When multiple threads update a **single variable concurrently**.
+>- Useful for **counter**, **flag**, or **accumulator** without using `synchronized`.
+
+> Common Types of Atomic Classes:  
+
+| Class                     | Description                              |
+|---------------------------|------------------------------------------|
+| `AtomicInteger`           | Atomic operations on `int` values        |
+| `AtomicLong`              | Atomic operations on `long` values       |
+| `AtomicBoolean`           | Atomic operations on `boolean` values    |
+| `AtomicReference<V>`      | Atomic operations on object references   |
+| `AtomicIntegerArray`      | Atomic operations on `int[]`             |
+| `AtomicLongArray`         | Atomic operations on `long[]`            |
+| `AtomicReferenceArray<V>` | Atomic operations on object arrays       |
+
+>Code Example:
+```java
+import java.util.concurrent.atomic.*;
+
+public class AtomicExamples {
+   public static void main(String[] args) {
+      //---- AtomicInteger example (used for counters) ----
+      AtomicInteger atomicInt = new AtomicInteger(0);
+
+      // Thread-safe increment: no need for synchronized block
+      atomicInt.incrementAndGet(); // ++value, returns new value
+      atomicInt.getAndIncrement(); // value++, returns old value
+
+      // Thread-safe addition
+      atomicInt.addAndGet(5);      // value += 5, returns new value
+      atomicInt.getAndAdd(3);      // returns old value, then adds 3
+
+      // Thread-safe conditional update (CAS operation)
+      atomicInt.compareAndSet(9, 100); // if value == 9, then set to 100
+
+      System.out.println("AtomicInteger: " + atomicInt.get());
+
+      //---- AtomicBoolean example (used for flags) ----
+      AtomicBoolean atomicBool = new AtomicBoolean(false);
+
+      // Thread-safe write
+      atomicBool.set(true);
+
+      // Thread-safe conditional update
+      boolean updated = atomicBool.compareAndSet(true, false); // true → false if current is true
+
+      System.out.println("AtomicBoolean: " + atomicBool.get());
+
+      //---- AtomicReference example (used for reference objects) ----
+      AtomicReference<String> atomicRef = new AtomicReference<>("A");
+
+      // Thread-safe write
+      atomicRef.set("B");
+
+      // Thread-safe conditional update
+      atomicRef.compareAndSet("B", "C"); // if current is "B", change to "C"
+
+      System.out.println("AtomicReference: " + atomicRef.get());
+   }
+}
+```
+
+> Key Methods in Atomic Classes:
+
+| Method                  | Description                                      |
+|-------------------------|--------------------------------------------------|
+| `get()`                 | Returns current value                            |
+| `set(value)`            | Sets value                                       |
+| `incrementAndGet()`     | Increments and returns new value                 |
+| `getAndIncrement()`     | Returns current, then increments                 |
+| `addAndGet(n)`          | Adds n, returns new value                        |
+| `getAndAdd(n)`          | Returns current, then adds n                     |
+| `compareAndSet(x, y)`   | If current == x, sets to y and returns true      |
+
 
 
 ---
-### 19. What is the concurrent collections? Can you list some concurrent data structure (Thread-safe)
+### 19. What is the concurrent collections? List some concurrent (thread-safe) data structures.
+> **Concurrent Collections** are thread-safe data structures designed for use in multithreaded environments.   
+>
+> They handle synchronization internally to avoid race conditions.
+
+**Common Concurrent (Thread-Safe) Data Structures:**
+
+| Data Structure                     | Description |
+|----------------------------------|-------------|
+| `ConcurrentHashMap`              | Thread-safe hash map. Allows concurrent reads and segmented writes. |
+| `ConcurrentLinkedQueue`         | Non-blocking FIFO queue. Suitable for high-concurrency scenarios. |
+| `ConcurrentLinkedDeque`         | Non-blocking double-ended queue. Supports FIFO and LIFO. |
+| `CopyOnWriteArrayList`          | Thread-safe variant of `ArrayList`. Good for many reads, few writes. |
+| `CopyOnWriteArraySet`           | Thread-safe set using copy-on-write. Backed by `CopyOnWriteArrayList`. |
+| `BlockingQueue` (Interface)     | Supports thread-safe `put()` and `take()` operations (e.g., in producer-consumer). |
+| └── `LinkedBlockingQueue`       | Linked nodes; optionally bounded. |
+| └── `ArrayBlockingQueue`        | Bounded, backed by array. |
+| └── `PriorityBlockingQueue`     | Priority-based blocking queue. |
+| └── `DelayQueue`                | Elements become available after a delay. |
+| └── `SynchronousQueue`          | No capacity; each insert waits for a remove. |
+| `ConcurrentSkipListMap`         | Thread-safe sorted map (like `TreeMap`). |
+| `ConcurrentSkipListSet`         | Thread-safe sorted set (like `TreeSet`). |
+
+**Notes:**
+- These collections are in `java.util.concurrent` package.
+- Prefer them over synchronizing regular collections.
+- Use the right one based on your use case: read-heavy, write-heavy, ordered, bounded, etc.
 
 
 ---
 ### 20. What kind of locks do you know? What is the advantage of each lock?
+>Java provides several locking mechanisms for thread synchronization in `java.util.concurrent.locks`.
+
+1. `ReentrantLock`
+- **Advantage**: Explicit lock with more control than `synchronized`.
+- **Features**: Try-lock, timed-lock, interruptible lock, fairness policy.
+- **Use case**: When you need fine-grained locking control.
+
+2. `ReentrantReadWriteLock`
+- **Advantage**: Improves concurrency for read-heavy workloads.
+- **Features**: Multiple readers allowed, exclusive write lock.
+- **Use case**: Many threads reading, few writing (e.g., cache).
+
+3. `StampedLock`
+- **Advantage**: Higher throughput with optimistic reads.
+- **Features**: Supports optimistic locking, read/write stamps.
+- **Use case**: High-performance read-dominated scenarios.
+
+4. `Semaphore`
+- **Advantage**: Controls number of threads accessing a resource.
+- **Features**: Permits-based locking, fair/non-fair modes.
+- **Use case**: Limit concurrent access (e.g., DB connections).
+
+5. `CountDownLatch`
+- **Advantage**: Allows threads to wait until others finish.
+- **Features**: One-time countdown, cannot be reset.
+- **Use case**: Wait for N threads/tasks to complete.
+
+6. `CyclicBarrier`
+- **Advantage**: Allows multiple threads to wait for each other.
+- **Features**: Reusable barrier, executes a barrier action.
+- **Use case**: Coordinating phases in parallel computation.
+
+7. `ReadWriteLock` (Interface)
+- **Advantage**: Defines locking semantics for read/write.
+- **Features**: Used to create custom read-write locks.
+- **Use case**: Used by `ReentrantReadWriteLock`.
+
+**Summary Table:**
+
+| Lock Type              | Advantage                             | Best For                        |
+|------------------------|----------------------------------------|---------------------------------|
+| `ReentrantLock`        | More flexible than `synchronized`      | General locking with control    |
+| `ReentrantReadWriteLock` | Concurrent reads, exclusive write     | Read-heavy workloads            |
+| `StampedLock`          | Optimistic reads for better performance| High-read throughput scenarios  |
+| `Semaphore`            | Limit concurrent access                | Resource pool management        |
+| `CountDownLatch`       | Wait until all tasks complete          | One-time task coordination      |
+| `CyclicBarrier`        | Wait for group of threads              | Parallel processing phases      |
 
 
 ---
-### 21. What is future and completableFuture? List some main methods of ComplertableFuture.
+### 21. What is future and completableFuture? List some main methods of CompletableFuture.
+
+>1. `Future`
+- Represents a result of an async computation.  
+- Returned by `ExecutorService.submit()`.
+
+>2. `CompletableFuture`
+- Enhanced version of `Future` (introduced in Java 8).
+
+
+> `Future` vs `CompletableFuture`:
+
+|                    | `Future`              | `CompletableFuture`           |
+|--------------------|-----------------------|-------------------------------|
+| Async Execution    | ✅                     | ✅                             |
+| Result Chaining    | ❌                     | ✅ (`thenApply`, etc.)         |
+| Non-blocking       | ❌                     | ✅                             |
+| Combine Futures    | ❌                     | ✅ (`thenCombine`, `allOf`)    |
+| Exception Handling | ❌                     | ✅ (`exceptionally`, `handle`) |
+
+
+> Key Methods of `CompletableFuture`:
+
+| Method                        | Description                                      |
+|------------------------------|--------------------------------------------------|
+| `supplyAsync(Supplier)`      | Run task asynchronously and return a result.     |
+| `runAsync(Runnable)`         | Run task asynchronously without a result.        |
+| `thenApply(Function)`        | Transform result of previous stage.              |
+| `thenAccept(Consumer)`       | Consume result without returning a new value.    |
+| `thenRun(Runnable)`          | Run action after completion, no result passed.   |
+| `thenCombine(future, fn)`    | Combine results of two futures.                  |
+| `thenCompose(fn)`            | Flat-maps future (async chaining).               |
+| `exceptionally(fn)`          | Handle exception and return fallback value.      |
+| `handle(fn)`                 | Handle result or exception.                      |
+| `whenComplete(fn)`           | Observe result/exception without changing result.|
+| `join()`                     | Get result (throws unchecked exception).         |
+| `get()`                      | Get result (throws checked exception).           |
+| `complete(value)`            | Manually complete with a value.                  |
+| `completeExceptionally(ex)`  | Manually complete with an exception.             |
+
+
 
 
 ---
-### 22. Type the code by your self and try to understand it. (package com.chuwa.tutorial.t08_multithreading)
+### 23. Write code to create 2 threads, one thread print `1,3,5,7,9`, another thread print `2,4,6,8,10`. 
+
+>1. Solution with `synchronized` and `wait()`, `notify()`.
+```java
+public class OddEvenPrinter {
+    private final Object lock = new Object();
+    private boolean isOddTurn = true; // Shared flag to indicate which thread should print
+
+    public static void main(String[] args) {
+        OddEvenPrinter printer = new OddEvenPrinter();
+
+        Thread oddThread = new Thread(() -> printer.printOdd());
+        Thread evenThread = new Thread(() -> printer.printEven());
+
+        oddThread.start();
+        evenThread.start();
+    }
+
+    // Print odd numbers 1, 3, 5, 7, 9
+    public void printOdd() {
+        for (int i = 1; i <= 9; i += 2) {
+            synchronized (lock) {
+                while (!isOddTurn) {
+                    try {
+                        lock.wait(); // Wait if it's not the odd thread's turn
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+                System.out.println(i); // Safe to print odd number
+                isOddTurn = false;     // Now it's even thread's turn
+                lock.notify();         // Wake up even thread
+            }
+        }
+    }
+
+    // Print even numbers 2, 4, 6, 8, 10
+    public void printEven() {
+        for (int i = 2; i <= 10; i += 2) {
+            synchronized (lock) {
+                while (isOddTurn) {
+                    try {
+                        lock.wait(); // Wait if it's not the even thread's turn
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+                System.out.println(i); // Safe to print even number
+                isOddTurn = true;      // Now it's odd thread's turn
+                lock.notify();         // Wake up odd thread
+            }
+        }
+    }
+}
+```
+> Key Thread-Safety Concepts:
+
+ | Concept                          | Description |
+ |----------------------------------|-------------|
+ | **Shared `lock` object**         | Ensures mutual exclusion. Only one thread can enter the `synchronized` block at a time, preventing race conditions. |
+ | **Shared flag `isOddTurn`**      | Coordinates turn-taking between threads. `true` means odd thread's turn; `false` means even thread's turn. |
+ | **`wait()` and `notify()`**      | `wait()` suspends a thread and releases the lock if it's not its turn. `notify()` wakes the other thread to continue execution. |
+ | **`while` loop around `wait()`** | Guards against spurious wakeups. Ensures thread only proceeds when it's truly its turn. |
+ | **Synchronized blocks**          | All access to shared state (`isOddTurn`, `wait`, `notify`) is within `synchronized(lock)` blocks, ensuring thread-safe visibility and atomicity. |
+
+
+>2. Solution with `ReentrantLock` and `await()`, `signal()`.
+```java
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class OddEvenPrinterWithLock {
+    private final Lock lock = new ReentrantLock();
+    private final Condition oddTurn = lock.newCondition();   // Condition for odd thread
+    private final Condition evenTurn = lock.newCondition();  // Condition for even thread
+    private boolean isOddTurn = true;  // Shared flag to control turn
+
+    public static void main(String[] args) {
+        OddEvenPrinterWithLock printer = new OddEvenPrinterWithLock();
+
+        Thread oddThread = new Thread(() -> printer.printOdd());
+        Thread evenThread = new Thread(() -> printer.printEven());
+
+        oddThread.start();
+        evenThread.start();
+    }
+
+    // Prints 1, 3, 5, 7, 9
+    public void printOdd() {
+        for (int i = 1; i <= 9; i += 2) {
+            lock.lock();  // Acquire lock before entering critical section
+            try {
+                while (!isOddTurn) {
+                    // Wait until it's the odd thread's turn
+                    oddTurn.await();
+                }
+                System.out.println(i); // Safe to print
+                isOddTurn = false;     // Toggle turn
+                evenTurn.signal();     // Signal even thread to continue
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Handle interruption
+            } finally {
+                lock.unlock(); // Always release the lock in finally block
+            }
+        }
+    }
+
+    // Prints 2, 4, 6, 8, 10
+    public void printEven() {
+        for (int i = 2; i <= 10; i += 2) {
+            lock.lock();  // Acquire lock before entering critical section
+            try {
+                while (isOddTurn) {
+                    // Wait until it's the even thread's turn
+                    evenTurn.await();
+                }
+                System.out.println(i); // Safe to print
+                isOddTurn = true;      // Toggle turn
+                oddTurn.signal();      // Signal odd thread to continue
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Handle interruption
+            } finally {
+                lock.unlock(); // Always release the lock in finally block
+            }
+        }
+    }
+}
+```
+
+>Key Thread-Safety Concepts (with `ReentrantLock` and `Condition`)
+
+| Concept                         | Description |
+|----------------------------------|-------------|
+| **`ReentrantLock`**              | Provides explicit locking. Ensures only one thread can enter the critical section at a time. |
+| **`Condition` objects**          | Separate wait queues (`oddTurn`, `evenTurn`) that allow threads to wait and be notified precisely. |
+| **`await()`**                    | Causes the current thread to wait and releases the lock until it is signaled. |
+| **`signal()`**                   | Wakes up a thread waiting on the associated condition (e.g., signals the other thread to proceed). |
+| **Shared flag `isOddTurn`**      | Boolean flag to determine which thread should run. Enforces correct alternation between threads. |
+| **`lock.lock()` / `unlock()`**   | Enters and exits the critical section. Always use `unlock()` in a `finally` block to avoid deadlocks. |
+
 
 
 ---
-### 23. Write a code to create 2 threads, one thread print 1,3,5,7,9, another thread print 2,4,6,8,10. 
-#### (solution is in com.chuwa.tutorial.t08_multithreading.c05_waitNotify.OddEventPrinter)
-#### 1. One solution use synchronized and wait notify
-#### 2. One solution use ReentrantLock and await, signal
+### 24. Write code to create 3 threads, one thread outputs `1-10`, one thread outputs `11-20`, one thread outputs `21-22`. Threads' run sequence is random.
+
+Use `ReentrantLock` and `Condition` to strictly enforce execution order:   
+Thread-0 → Thread-2 → Thread-1, regardless of which thread starts first.
+
+```java
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class ThreadSequenceLock {
+
+   public static void main(String[] args) {
+      OrderedPrinter printer = new OrderedPrinter();
+
+      // Assign ranges in logical order
+      Thread t0 = new Thread(() -> printer.printNumbers(1, 10, 0), "Thread-0");
+      Thread t1 = new Thread(() -> printer.printNumbers(11, 20, 1), "Thread-1");
+      Thread t2 = new Thread(() -> printer.printNumbers(21, 30, 2), "Thread-2");
+
+      // Start in random order — scheduler decides execution
+      t2.start(); // Random start
+      t1.start(); // Random start
+      t0.start(); // Random start
+   }
+}
+
+class OrderedPrinter {
+   private final ReentrantLock lock = new ReentrantLock();
+   private final Condition condition = lock.newCondition();
+   private int step = 0; // Controls which thread prints next
+
+   public void printNumbers(int start, int end, int threadStep) {
+      lock.lock();
+      try {
+         // Wait until it’s this thread’s turn
+         while (step != threadStep) {
+            condition.await();
+         }
+
+         // Print numbers in assigned range
+         for (int i = start; i <= end; i++) {
+            System.out.println(Thread.currentThread().getName() + ": " + i);
+         }
+
+         // Move to the next thread step
+         step++;
+         condition.signalAll(); // Wake up all waiting threads
+
+      } catch (InterruptedException e) {
+         Thread.currentThread().interrupt();
+      } finally {
+         lock.unlock();
+      }
+   }
+}
+```
+
+**Summary:**
+
+| Thread Name | Number Range | Step |
+|-------------|---------------|------|
+| Thread-0    | 1–10          | 0    |
+| Thread-1    | 11–20         | 1    |
+| Thread-2    | 21–30         | 2    |
+
+Even if threads **start in any order**, the use of `ReentrantLock`, `Condition`, and a shared `step` counter ensures that the output is always in the correct sequence.
+
+
+**How Thread-Safety and Order Are Guaranteed:**
+- `ReentrantLock`: Ensures only one thread can access the critical section at a time.
+- `Condition.await()`: Causes threads to wait if it’s not their turn (i.e., step mismatch).
+- **`step` variable**: Controls which thread gets to print next.
+- `condition.signalAll()`: Wakes up all threads so they can re-check the step.
+- `System.out.println()`: Internally synchronized — no interleaved lines.
 
 
 
----
-### 24. create 3 threads, one thread ouput 1-10, one thread output 11-20, one thread output 21-22. threads run sequence is random. 
-#### (solution is in com.chuwa.exercise.t08_multithreading.PrintNumber1)
 
 
 
