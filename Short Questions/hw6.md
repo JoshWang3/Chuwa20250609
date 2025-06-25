@@ -115,7 +115,7 @@ public class App4 {
 
 #### 4. Difference between Runnable and Callable?
 [reference1](https://medium.com/@reetesh043/javas-multithreading-a-deep-dive-into-runnable-and-callable-interfaces-9a6f842b183f)
-[reference2](https://juejin.cn/post/6844904086832152590)
+[reference2](https://juejin.cn/post/6844904086832152590)  
 (1) Method Signature
 - Runnable: has a single method called run() that does not take any arguments and **returns no value (void return type)**.
 - Callable: has a single method called call() that does not take any arguments but **RETURNS a value of a specified type**.
