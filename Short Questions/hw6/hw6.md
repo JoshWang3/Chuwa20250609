@@ -717,25 +717,24 @@ public class AtomicExamples {
 
 > Key Methods of `CompletableFuture`:
 
-| Method                        | Description                                      |
-|------------------------------|--------------------------------------------------|
-| `supplyAsync(Supplier)`      | Run task asynchronously and return a result.     |
-| `runAsync(Runnable)`         | Run task asynchronously without a result.        |
-| `thenApply(Function)`        | Transform result of previous stage.              |
-| `thenAccept(Consumer)`       | Consume result without returning a new value.    |
-| `thenRun(Runnable)`          | Run action after completion, no result passed.   |
-| `thenCombine(future, fn)`    | Combine results of two futures.                  |
-| `thenCompose(fn)`            | Flat-maps future (async chaining).               |
-| `exceptionally(fn)`          | Handle exception and return fallback value.      |
-| `handle(fn)`                 | Handle result or exception.                      |
-| `whenComplete(fn)`           | Observe result/exception without changing result.|
-| `join()`                     | Get result (throws unchecked exception).         |
-| `get()`                      | Get result (throws checked exception).           |
-| `complete(value)`            | Manually complete with a value.                  |
-| `completeExceptionally(ex)`  | Manually complete with an exception.             |
-
-
-
+| Operation Signature                                                                 | Description                                                                                   | Example                                                                 |
+|-------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `supplyAsync(Supplier<T>) → CompletableFuture<T>`                                  | Runs a task asynchronously and returns a future with the result                              | `supplyAsync(() -> 5)` → `CompletableFuture[5]`                         |
+| `runAsync(Runnable) → CompletableFuture<Void>`                                     | Runs a task asynchronously without returning a result                                        | `runAsync(() -> println("Run"))` → `CompletableFuture[Void]`           |
+| `thenApply(Function<T, U>) → CompletableFuture<U>`                                 | Transforms result of previous stage                                                           | `cf.thenApply(x -> x * 2)` → `CompletableFuture[10]` if `cf = 5`        |
+| `thenAccept(Consumer<T>) → CompletableFuture<Void>`                                | Consumes the result of previous stage                                                         | `cf.thenAccept(x -> println(x))` → prints `5`, returns `Void`          |
+| `thenRun(Runnable) → CompletableFuture<Void>`                                      | Runs a task after completion, ignoring result                                                 | `cf.thenRun(() -> println("Done"))` → `Void`                           |
+| `thenCombine(CompletableFuture<U>, BiFunction<T, U, R>) → CompletableFuture<R>`    | Combines two futures and applies function to their results                                    | `cf1.thenCombine(cf2, (a,b) -> a + b)` → `CompletableFuture[a+b]`      |
+| `thenCompose(Function<T, CompletableFuture<U>>) → CompletableFuture<U>`            | Flattens chained futures                                                                      | `cf.thenCompose(x -> getFuture(x))` → single future result             |
+| `exceptionally(Function<Throwable, T>) → CompletableFuture<T>`                     | Handles exception and provides fallback value                                                 | `cf.exceptionally(e -> -1)` → returns `-1` if exception occurs          |
+| `handle(BiFunction<T, Throwable, U>) → CompletableFuture<U>`                       | Processes result or exception                                                                 | `cf.handle((res, ex) -> ex == null ? res : -1)`                        |
+| `whenComplete(BiConsumer<T, Throwable>) → CompletableFuture<T>`                    | Like `handle`, but returns original result instead of transformed result                      | `cf.whenComplete((res, ex) -> log(res))`                               |
+| `allOf(CompletableFuture<?>...) → CompletableFuture<Void>`                         | Returns when all futures complete                                                             | `CompletableFuture.allOf(cf1, cf2)` → when all complete                |
+| `anyOf(CompletableFuture<?>...) → CompletableFuture<Object>`                       | Returns when any one of the futures completes                                                 | `CompletableFuture.anyOf(cf1, cf2)` → result of first completed future |
+| `join() → T`                                                                        | Waits and returns result, throws unchecked exception on failure                               | `cf.join()` → `5`                                                      |
+| `get() → T`                                                                         | Waits and returns result, throws checked exceptions                                           | `cf.get()` → `5`                                                       |
+| `complete(T value) → boolean`                                                      | Manually completes the future                                                                 | `cf.complete(10)` → `true`                                             |
+| `isDone() → boolean`                                                               | Checks if task is completed                                                                   | `cf.isDone()` → `true` or `false`                                     |
 
 ---
 ### 23. Write code to create 2 threads, one thread print `1,3,5,7,9`, another thread print `2,4,6,8,10`. 
