@@ -91,4 +91,114 @@ INTER-THREAD COMMUNICATION
 
 ## 10. What's the difference between class lock and object lock?
 
+what you are locking on — the class itself or a specific instance (object).
+
+* Object Lock (Instance Lock)
+
+    Applies to a specific object (this).
+
+* Class Lock (Static Lock)
+
+    Applies to the Class object, which is shared by all instances.
+## 11. What is join() method?
+
+It will put the current thread on wait until the thread on which it is called is dead or wait for the specified time
+
+## 12. what is yield() method
+
+The yield() basically means that the thread is not doing anything particularly important and if any other threads or processes need to be run, they should run. Otherwise, the current thread will continue to run.
+
+
+
+## 13. What is ThreadPool? How many types of ThreadPool? What is the TaskQueue in ThreadPool?
+
+* ThreadPool: A thread pool reuses previously created threads to execute current tasks and offers a solution to the problem of thread cycle overhead and resource thrashing.
+
+* Types: 
+    * Fixed Size Thread Pool Executor
+    * Cached Thread Pool Executor
+    * Scheduled Thread Pool Executor
+    * Single Thread Pool Executor
+    * Work Stealing Thread Pool Executor
+
+* TaskQueue: When you submit a task, if all threads are busy, the task is stored in the queue until a thread becomes free.
+
+
+## 14. Which Library is used to create ThreadPool? Which Interface provide main functions of thread-pool?
+* library: java.util.concurrent
+
+* Interface:  Executor, ExecutorService
+ 
+## 15. How to submit a task to ThreadPool?
+
+execute(), submit()
+
+
+## 16. What is the advantage of ThreadPool?
+Thread pools save resources and time by reusing existing threads instead of creating and destroying them repeatedly
+
+## 17. Difference between shutdown() and shutdownNow() methods of executor
+* shutdown(): Waits for running tasks to finish, no new tasks allowed.
+
+* shutdownNow(): Tries to interrupt running tasks and cancels tasks that haven't started.
+
+## 18. What is Atomic classes? How many types of Atomic classes? Give me some code example of Atomic classes and its main methods. when to use it?
+* Atomic Class: These classes encapsulate primitive types or references and enable thread-safe, atomic operations
+* Java provides atomic classes such as AtomicInteger, AtomicLong, AtomicBoolean and AtomicReference. 
+* AtomicInteger Example:
+    
+
+        import java.util.concurrent.atomic.AtomicInteger;
+
+        public class AtomicIntegerExample {
+
+        public static void main(String[] args) {
+        AtomicInteger count = new AtomicInteger(0);
+
+        // Increment
+        count.incrementAndGet(); // 1
+
+        // Add and Get
+        count.addAndGet(5);      // 6
+
+        // Get and Increment
+        count.getAndIncrement(); // 6 (then becomes 7)
+
+        // Compare and Set
+        boolean success = count.compareAndSet(7, 10);true
+        count.get();             // 10
+        }
+        }
+        
+    When to use it: 
+    * Counting requests, tasks, or events in multithreaded environments.
+
+    * Thread-safe counters without locks.
+    
+
+
+
+
+## 19. What is the concurrent collections? Can you list some concurrent data structure (Thread-safe)
+* Concurrent Collections provides improved performance and scalability in multi-threaded environments and are always thread-safe. 
+* ConcurrentHashMap, CopyOnWriteArrayList, CopyOnWriteArraySet
+
+
+## 20. What kind of locks do you know? What is the advantage of each lock?
+* ReentrantLock: Same thread can acquire multiple time
+* ReadWriteLock: read heavy task, read more, write less
+* StampedLock: Do not allow writing when reading
+
+
+
+## 21. What is future and completableFuture? List some main methods of ComplertableFuture
+* Future: Represents the result of an asynchronous computation.
+* ComplertableFuture: 
+    * An enhancement over Future.
+    * Supports non-blocking, asynchronous programming, and functional-style callbacks.
+    * Can combine, chain, and handle multiple tasks.
+
+
+
+
 
