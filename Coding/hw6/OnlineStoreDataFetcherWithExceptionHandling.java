@@ -10,19 +10,19 @@ public class OnlineStoreDataFetcherWithExceptionHandling {
 
     public static void main(String[] args) {
 
-        CompletableFuture<String> productFuture = fetchPartialBody(client, "https://fakestoreapi.com/products")
+        CompletableFuture<String> productFuture = fetchPartialBody("https://fakestoreapi.com/products")
                 .exceptionally(ex -> {
                     System.err.println("Failed to fetch products: " + ex.getMessage());
                     return "[Default Product Data]";
                 });
 
-        CompletableFuture<String> reviewFuture = fetchPartialBody(client, "https://jsonplaceholder.typicode.com/comments")
+        CompletableFuture<String> reviewFuture = fetchPartialBody("https://jsonplaceholder.typicode.com/comments")
                 .exceptionally(ex -> {
                     System.err.println("Failed to fetch reviews: " + ex.getMessage());
                     return "[Default Review Data]";
                 });
 
-        CompletableFuture<String> inventoryFuture = fetchPartialBody(client, "https://jsonplaceholder.typicode.com/todos")
+        CompletableFuture<String> inventoryFuture = fetchPartialBody("https://jsonplaceholder.typicode.com/todos")
                 .exceptionally(ex -> {
                     System.err.println("Failed to fetch inventory: " + ex.getMessage());
                     return "[Default Inventory Data]";
@@ -47,7 +47,7 @@ public class OnlineStoreDataFetcherWithExceptionHandling {
         }).join();
     }
 
-    private static CompletableFuture<String> fetchPartialBody(HttpClient client, String url) {
+    private static CompletableFuture<String> fetchPartialBody(String url) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
