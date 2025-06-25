@@ -1,3 +1,5 @@
+// Q23. Write code to create two threads: one thread prints 1,3,5,7,9; the other prints 2,4,6,8,10.  
+// 23.1 One solution uses synchronized and wait/notify 
 public class SynchronizedNumberPrinter {
     private static final Object lock = new Object();
     private static boolean oddTurn = true; // Start with odd numbers
