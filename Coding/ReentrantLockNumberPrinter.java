@@ -1,3 +1,5 @@
+// Q23. Write code to create two threads: one thread prints 1,3,5,7,9; the other prints 2,4,6,8,10.  
+// 23.2 One solution uses ReentrantLock and await/signal  
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
 
