@@ -12,9 +12,9 @@ public class OnlineStoreDataFetcher {
 
     public static void main(String[] args) {
 
-        CompletableFuture<String> productFuture = fetchPartialBody(client, "https://fakestoreapi.com/products");
-        CompletableFuture<String> reviewFuture = fetchPartialBody(client, "https://jsonplaceholder.typicode.com/comments");
-        CompletableFuture<String> inventoryFuture = fetchPartialBody(client, "https://jsonplaceholder.typicode.com/todos");
+        CompletableFuture<String> productFuture = fetchPartialBody("https://fakestoreapi.com/products");
+        CompletableFuture<String> reviewFuture = fetchPartialBody("https://jsonplaceholder.typicode.com/comments");
+        CompletableFuture<String> inventoryFuture = fetchPartialBody("https://jsonplaceholder.typicode.com/todos");
 
         CompletableFuture<Void> allDone = CompletableFuture.allOf(productFuture, reviewFuture, inventoryFuture);
 
@@ -35,7 +35,7 @@ public class OnlineStoreDataFetcher {
         }).join(); // until all done
     }
 
-    private static CompletableFuture<String> fetchPartialBody(HttpClient client, String url) {
+    private static CompletableFuture<String> fetchPartialBody(String url) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .build();
