@@ -1,8 +1,3 @@
-### Codings Assignments
-
-## 1. Write a thread-safe singleton class 
-
-```java
 public class Singleton {
     private static volatile Singleton instance;
     private Singleton(){
@@ -18,5 +13,3 @@ public class Singleton {
         }
     }
 }
-```
-
