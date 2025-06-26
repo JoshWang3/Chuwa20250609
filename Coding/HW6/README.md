@@ -1,7 +1,7 @@
 **1. Read: [Link Text](https://www.interviewbit.com/multithreading-interview-questions/#class-level-lock-vs-object-level-lock)**
 
 **2. Write a thread-safe singleton class**
--Double-Checked Locking
+--Double-Checked Locking
 ```java
    public class Singleton {
     public static volatile Singleton instance;
