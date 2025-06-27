@@ -123,20 +123,21 @@ se **Postman** or other **API testing tools** to:
 ## 1. deckofcardsapi.com – Shuffle New Deck
 
  **URL:** `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`  
-	- **Method:** GET  
-	- **RESTful:** Yes  
-	- **Request Headers Example:**
- 		- `Accept: application/json`
-	- **Response Headers Example:**
-  		- `Content-Type: application/json`
-  		- `Cache-Control: no-cache`
-	- **Best Practices Followed:**
-  		- Resource-oriented path (`/deck/new/shuffle`)
-		- Supports query parameters for category filtering (`deck_count`)
-		- JSON-based response
-	- **Improvement Suggestions:**
-  		- Include API versioning (`/v1/deck/...`)
-  		- Support pagination or bulk shuffle if the data grows large
+- **Method:** GET  
+- **RESTful:** Yes  
+- **Request Headers Example:**
+ - `Accept: application/json`
+- **Response Headers Example:**
+  - `Content-Type: application/json`
+  - `Cache-Control: no-cache`
+- **Best Practices Followed:**
+  - Resource-oriented path (`/deck/new/shuffle`) 
+  - Supports query parameters for category filtering (`deck_count`)
+  - JSON-based response
+- **Improvement Suggestions:**
+  - Include API versioning (`/v1/deck/...`)
+  - Support pagination or bulk shuffle if the data grows large
+
 
 ---
 
