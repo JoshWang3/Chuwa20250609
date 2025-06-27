@@ -1,4 +1,5 @@
 ### hw7
+
 ### 1. Explain the concept of API (Application Programming Interface). Why do we need APIs?
 > An API is a set of rules that allows different software systems to communicate with each other.
 
@@ -184,7 +185,7 @@ curl -X GET "https://api.example.com/users/123"
 - Use custom headers (not sent cross-origin)
 
 
-
+---
 ## API Practices:
 ### 1. What defines a `REST API`?
 A `REST API` (`Representational State Transfer`) is defined by:
