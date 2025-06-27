@@ -133,7 +133,6 @@ the server does not store any client session or context between request.
 - Reduce Auth Overhead
   - Use lightweight, stateless tokens instead of session-heavy approaches.
   - keep token validation fast.
-- Monitor and Profile your API
 
 ## 11. Explain the concept of XSS (Cross-Site Scripting) and CSRF (Cross Site Request Forgery) and how to avoid them.
 - XSS is an attack where malicious scripts are injected into trusted websites. 
