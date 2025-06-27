@@ -123,6 +123,13 @@ https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin
     RestCountries API:
 https://restcountries.com/v3.1/name/canada
 
+    Github API: https://api.github.com/users/zl504 
+
+    Open-Meteo API: https://api.open-meteo.com/v1/forecast?latitude=38.8951&longitude=-77.0364&hourly=temperature_2m,precipitation,weathercode
+
+    Notify API: http://api.open-notify.org
+    
+
 
 
 What defines a REST API:
@@ -146,12 +153,51 @@ Clean resource-oriented URLs.
 Query params are clear (vs_currency, ids).
 JSON response.
 * RestCountries: Yes
+* Github: Yes
+* Open-Meteo: Yes
+* Notify: Yes
 3. curl -X GET "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin"
 ![CoinGecko](CoinGecko.png)
 curl -X GET "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin"
 ![RestCountries](RestCountries.png)
-
+curl -X GET "https://api.github.com/users/zl504"
 ![Github](Github.png)
-4. 
+curl -X GET "https://api.open-meteo.com/v1/forecast?latitude=38.8951&longitude=-77.0364&hourly=temperature_2m,precipitation,weathercode"
+![weather](Weather.png)
+curl -X GET "http://api.open-notify.org"
+![notify](notify.png)
+4.  Notify: 
+* Request Headers (From Client to Server)
+
+Key	Value	Explanation
+
+Postman-Token	`<calculated when request is sent>`	Postman-generated token to uniquely identify each request (used internally by Postman).
+
+Host	`<calculated when request is sent>`	The domain of the server you're sending the request to (api.open-notify.org).
+
+User-Agent	`PostmanRuntime/7.44.1`	Identifies the client making the request (Postman).
+
+Accept	`*/*`	Tells the server that the client can accept any content type (*/* means any media type).
+
+Accept-Encoding	`gzip, deflate, br`	Indicates compression algorithms that the client can accept to reduce the response size (gzip, etc.).
+
+Connection	`keep-alive`	Keeps the TCP connection open for potential future requests, improving efficiency.
+
+* Response Headers (From Server to Client)
+
+Key	Value	Explanation
+
+Server	`nginx/1.10.3`	Indicates the server software handling the request (Nginx version 1.10.3).
+
+Date	`Fri, 27 Jun 2025 20:04:15 GMT`	The timestamp when the server generated the response.
+
+Content-Type	`application/json`	Specifies that the response body is in JSON format.
+
+Content-Length	`111`	The size of the response body in bytes (111 bytes).
+
+Connection	`keep-alive`	The server is keeping the connection open for further potential requests.
+
+access-control-allow-origin	`*`	CORS header: allows any origin (*) to access this resource (open for public API usage in browsers).
+
 
 
