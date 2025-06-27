@@ -186,3 +186,197 @@ curl -X GET "https://api.example.com/users/123"
 
 
 ## API Practices:
+### 1. What defines a `REST API`?
+A `REST API` (`Representational State Transfer`) is defined by:
+
+- **Statelessness**: Each request contains all info needed; no session stored on server.
+- **Client-Server Separation**: Client and server operate independently.
+- **Uniform Interface**: Consistent structure using standard HTTP methods:
+    - `GET` (read), `POST` (create), `PUT` (update/replace), `PATCH` (partial update), `DELETE` (remove)
+- **Resource-Based**: Operates on resources identified by URLs.
+- **Representations**: Resources are returned in formats like JSON or XML.
+- **Cacheable**: Responses can be cached to improve performance.
+
+
+---
+### 2. API Design Best Practices & Suggestions:
+
+> 1. GET https://pokeapi.co/api/v2/pokemon/ditto
+
+**Critique:**
+- Response is huge. No option to narrow data fields or specify format (e.g. names only).
+- Allows clients to request only necessary attributes, improving efficiency.
+
+**Better Design:**
+```text
+GET /pokemon/ditto
+Host: pokeapi.co
+Accept: application/json
+
+Query params:
+• fields=name,base_experience,types
+```
+
+
+------
+> 2. POST https://jsonplaceholder.typicode.com/posts
+
+**Critique:**
+- POST to `/posts` is fine, but response always includes a fake id=101.  
+
+**Better Design:**
+```text
+POST /v1/posts
+Host: jsonplaceholder.typicode.com
+Content-Type: application/json
+
+Body:
+{
+"title": "...",
+"body": "...",
+"userId": 1
+}
+
+Query params:
+?fields=id
+```
+
+------
+> 3. PUT https://postman-echo.com/put
+
+**Critique:**
+- Have the word `put` as part of the URL.
+
+**Better Design:**
+```text
+PUT /v1/echo
+Host: postman-echo.com
+Accept: application/json
+Content-Type: application/json
+
+Query: ?echo=body,headers
+```
+
+
+------
+> 4. PATCH https://dummyjson.com/todos/2
+
+**Critique:**
+- No path versioning (/v1/).
+- No ability to select response fields.
+
+**Better Design:**
+```text
+PATCH /v1/todos/1
+Host: dummyjson.com
+Content-Type: application/json
+Accept: application/json
+
+Query:
+  ?fields=id,completed
+```
+
+
+------
+> 5. DELETE https://jsonplaceholder.typicode.com/posts/1
+
+Critique:
+- Returns an empty object ({}) regardless of existence—no status detail.
+
+**Better Design:**
+```text
+DELETE /v1/posts/1
+Host: jsonplaceholder.typicode.com
+Accept: application/json
+
+Query:
+  ?fields=id,deletedAt,status
+```
+
+
+
+---
+### 3. `cURL` Commands and Postman Screenshots:
+```bash
+curl -X GET \
+'https://pokeapi.co/api/v2/pokemon/ditto'
+````
+![GET_pokemon.png](images/GET_pokemon.png)
+
+```bash
+curl -X POST \
+'https://jsonplaceholder.typicode.com/posts' \
+-H 'Content-Type: application/json; charset=UTF-8' \
+-d '{"title":"foo","body":"bar","userId":1}'
+```
+![POST_jsonplaceholder.png](images/POST_jsonplaceholder.png)
+
+```bash
+curl -X PUT https://postman-echo.com/put \
+  -H 'Content-Type: application/json' \
+  -d '{"foo1":"bar1","foo2":"bar2"}'
+```
+![PUT_postman_echo.png](images/PUT_postman_echo.png)
+
+```bash
+curl -X PATCH https://dummyjson.com/todos/2 \
+-H 'Content-Type: application/json' \
+-d '{"completed": false}'
+```
+![PATCH_dummyjson.png](images/PATCH_dummyjson.png)
+
+```bash
+curl -X DELETE \
+'https://jsonplaceholder.typicode.com/posts/1'
+```
+![DELETE_jsonplaceholder.png](images/DELETE_jsonplaceholder.png)
+
+
+
+------
+### 4. Request/Response Headers:
+**HTTP Request Headers:**
+
+| Header            | Description                                           |
+|-------------------|-------------------------------------------------------|
+| `Accept`          | Media types client can handle (e.g., `application/json`) |
+| `Content-Type`    | Media type of request body (e.g., `application/json`)  |
+| `User-Agent`      | Info about the client (browser, tool, etc.)            |
+| `Authorization`   | Credentials (e.g., `Bearer <token>`)                   |
+| `Host`            | Domain name of the server                              |
+| `Accept-Encoding` | Compression types the client supports (e.g., `gzip`)   |
+| `Cache-Control`   | Caching behavior request prefers                       |
+| `If-None-Match`   | ETag to validate cache freshness                       |
+| `Referer`         | URL of the page that made the request                  |
+| `Origin`          | Origin of the request (used in CORS)                   |
+
+
+**HTTP Response Headers:**
+
+| Header            | Description                                           |
+|-------------------|-------------------------------------------------------|
+| `Content-Type`    | Media type of the response body                        |
+| `Content-Length`  | Size of the response body in bytes                     |
+| `Cache-Control`   | Caching rules for the response                         |
+| `ETag`            | Identifier for a specific version of a resource        |
+| `Set-Cookie`      | Stores a cookie on the client                          |
+| `Location`        | Redirect or resource location (used with 3xx/201)      |
+| `Access-Control-Allow-Origin` | Controls cross-origin access (CORS)       |
+| `Date`            | Timestamp when response was generated                  |
+| `Server`          | Info about the server handling the request             |
+| `Retry-After`     | When the client can retry the request (used with 429/503) |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
