@@ -1,0 +1,3 @@
+interface DFactory {
+    Drink createDrink();
+}
