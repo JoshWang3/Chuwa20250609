@@ -259,15 +259,15 @@ curl "https://api.open-meteo.com/v1/forecast?latitude=35&longitude=139&current_w
 curl https://deckofcardsapi.com/api/deck/new/draw/?count=1
 ```
 
-![Image 1](./Cards.jpeg)
+![Image 1](./Cards.jpg)
 
-![Image 2](./CatFacts.jpeg)
+![Image 2](./CatFacts.jpg)
 
-![Image 3](./Weather.jpeg)
+![Image 3](./Weather.jpg)
 
-![Image 4](./RestCountry.jpeg)
+![Image 4](./RestCountry.jpg)
 
-![Image 5](./openmeteo.jpeg)
+![Image 5](./openmeteo.jpg)
 
 ## Q4
 
