@@ -124,15 +124,15 @@ curl -X GET "https://api.example.com/users/123"
 ---
 ### 8. List `HTTP methods` and their meanings, and their expected `HTTP status codes`.
 
-| Method | Meaning         | Typical Success Codes        |
-|--------|-----------------|-------------------------------|
-| GET    | Retrieve data   | `200 OK`                     |
-| POST   | Create new resource | `201 Created`, `200 OK`      |
-| PUT    | Update resource | `200 OK`, `204 No Content`   |
-| PATCH  | Partial update  | `200 OK`, `204 No Content`   |
-| DELETE | Delete resource | `200 OK`, `204 No Content`   |
-| HEAD   | Headers only (no body) | `200 OK`                     |
-| OPTIONS| Allowed methods info | `204 No Content`             |
+| Method  | Meaning                 | Success Codes                                                  | Failure Codes                                                    |
+|---------|-------------------------|------------------------------------------------------------------|------------------------------------------------------------------|
+| GET     | Retrieve data           | 200 OK  <br> 206 Partial Content                                 | 400 Bad Request  <br> 401 Unauthorized  <br> 403 Forbidden  <br> 404 Not Found |
+| POST    | Create new resource     | 200 OK  <br> 201 Created  <br> 202 Accepted                      | 400 Bad Request  <br> 401 Unauthorized  <br> 403 Forbidden  <br> 409 Conflict  <br> 415 Unsupported Media Type |
+| PUT     | Replace entire resource | 200 OK  <br> 204 No Content                                      | 400 Bad Request  <br> 401 Unauthorized  <br> 403 Forbidden  <br> 404 Not Found  <br> 409 Conflict  <br> 415 Unsupported Media Type |
+| PATCH   | Partial update          | 200 OK  <br> 204 No Content                                      | 400 Bad Request  <br> 401 Unauthorized  <br> 403 Forbidden  <br> 404 Not Found  <br> 409 Conflict  <br> 415 Unsupported Media Type |
+| DELETE  | Remove resource         | 200 OK  <br> 202 Accepted  <br> 204 No Content                   | 400 Bad Request  <br> 401 Unauthorized  <br> 403 Forbidden  <br> 404 Not Found |
+| HEAD    | Fetch headers only      | 200 OK                                                          | 400 Bad Request  <br> 401 Unauthorized  <br> 403 Forbidden  <br> 404 Not Found |
+| OPTIONS | List supported methods  | 200 OK  <br> 204 No Content                                      | 400 Bad Request  <br> 401 Unauthorized  <br> 403 Forbidden  <br> 405 Method Not Allowed |
 
 
 
