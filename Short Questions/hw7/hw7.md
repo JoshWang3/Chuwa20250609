@@ -214,7 +214,7 @@ Host: pokeapi.co
 Accept: application/json
 
 Query params:
-• fields=name,base_experience,types
+fields=name,base_experience,types
 ```
 
 
@@ -254,7 +254,8 @@ Host: postman-echo.com
 Accept: application/json
 Content-Type: application/json
 
-Query: ?echo=body,headers
+Query params: 
+?echo=body,headers
 ```
 
 
@@ -272,8 +273,8 @@ Host: dummyjson.com
 Content-Type: application/json
 Accept: application/json
 
-Query:
-  ?fields=id,completed
+Query params:
+?fields=id,completed
 ```
 
 
@@ -289,8 +290,8 @@ DELETE /v1/posts/1
 Host: jsonplaceholder.typicode.com
 Accept: application/json
 
-Query:
-  ?fields=id,deletedAt,status
+Query params:
+?fields=id,deletedAt,status
 ```
 
 
