@@ -138,9 +138,6 @@ Use **Postman** or other **API testing tools** to:
   - Include API versioning (`/v1/deck/...`)
   - Support pagination or bulk shuffle if the data grows large
 
-
----
-
 ## 2. adviceslip.com – Random Advice
 
 - **URL:** `https://api.adviceslip.com/advice`  
@@ -158,8 +155,6 @@ Use **Postman** or other **API testing tools** to:
   - Support category filtering: `/advice?topic=life`
   - Add API versioning prefix (`/v1/advice`)
 
----
-
 ## 3. jsonplaceholder.typicode.com – Get Post by ID
 
 - **URL:** `https://jsonplaceholder.typicode.com/posts/1`  
@@ -176,8 +171,6 @@ Use **Postman** or other **API testing tools** to:
   - Add versioning (`/v1/posts/1`)
   - Add `ETag` or `Cache-Control` headers
 
----
-
 ## 4. jokeapi.dev – Get Random Joke
 
 - **URL:** `https://v2.jokeapi.dev/joke/Any`  
@@ -193,8 +186,6 @@ Use **Postman** or other **API testing tools** to:
 - **Improvement Suggestions:**
   - Add query params (`type=twopart`)
   - Use consistent version headers (`X-API-Version`)
-
---
 
 ## 5. GitHub API – Get User Info
 - **URL:** `https://api.github.com/users/octocat`  
