@@ -103,7 +103,7 @@ Prevent it by: using CSRF tokens and setting **SameSite on cookies**.
 
 # API Practices
 
-se **Postman** or other **API testing tools** to:
+Use **Postman** or other **API testing tools** to:
 
 1. **Find at least 5 different public APIs**  
    (e.g., GitHub APIs, Google Cloud APIs, GeoInfo APIs, Weather APIs)
@@ -143,75 +143,75 @@ se **Postman** or other **API testing tools** to:
 
 ## 2. adviceslip.com – Random Advice
 
-	- **URL:** `https://api.adviceslip.com/advice`  
-	- **Method:** GET  
-	- **RESTful:** Yes  
-	- **Request Headers Example:**
-  		- `Accept: application/json`
-	- **Response Headers Example:**
-  		- `Content-Type: application/json`
-  		- `Cache-Control: max-age=600`
-	- **Best Practices Followed:**
- 		- Simple and descriptive endpoint
-  		- Stateless and readable JSON output
-	- **Improvement Suggestions:**
-  		- Support category filtering: `/advice?topic=life`
-		- Add API versioning prefix (`/v1/advice`)
+- **URL:** `https://api.adviceslip.com/advice`  
+  - **Method:** GET  
+  - **RESTful:** Yes  
+- **Request Headers Example:**
+  - `Accept: application/json`
+- **Response Headers Example:**
+  - `Content-Type: application/json`
+  - `Cache-Control: max-age=600`
+- **Best Practices Followed:**
+  - Simple and descriptive endpoint
+  - Stateless and readable JSON output
+- **Improvement Suggestions:**
+  - Support category filtering: `/advice?topic=life`
+  - Add API versioning prefix (`/v1/advice`)
 
 ---
 
 ## 3. jsonplaceholder.typicode.com – Get Post by ID
 
-	- **URL:** `https://jsonplaceholder.typicode.com/posts/1`  
-	- **Method:** GET  
-	- **RESTful:** Yes  
-	- **Request Headers Example:**
- 		- `Accept: application/json`
-	- **Response Headers Example:**
-		- `Content-Type: application/json; charset=utf-8`
-	- **Best Practices Followed:**
-  		- Clear hierarchical resource path
-  		- Descriptive and version-neutral
-	- **Improvement Suggestions:**
-  		- Add versioning (`/v1/posts/1`)
-  		- Add `ETag` or `Cache-Control` headers
+- **URL:** `https://jsonplaceholder.typicode.com/posts/1`  
+- **Method:** GET  
+- **RESTful:** Yes  
+- **Request Headers Example:**
+  - `Accept: application/json`
+- **Response Headers Example:**
+  - `Content-Type: application/json; charset=utf-8`
+- **Best Practices Followed:**
+  - Clear hierarchical resource path
+  - Descriptive and version-neutral
+- **Improvement Suggestions:**
+  - Add versioning (`/v1/posts/1`)
+  - Add `ETag` or `Cache-Control` headers
 
 ---
 
 ## 4. jokeapi.dev – Get Random Joke
 
-	- **URL:** `https://v2.jokeapi.dev/joke/Any`  
-	- **Method:** GET  
-	- **RESTful:** Yes  
-	- **Request Headers Example:**
- 		- `Accept: application/json`
-	- **Response Headers Example:**
-  		- `Content-Type: application/json`
-	- **Best Practices Followed:**
-  		- Category-based routing in path
-  		- Stateless and consistent JSON
-	- **Improvement Suggestions:**
-  		- Add query params (`type=twopart`)
-  		- Use consistent version headers (`X-API-Version`)
+- **URL:** `https://v2.jokeapi.dev/joke/Any`  
+- **Method:** GET  
+- **RESTful:** Yes  
+- **Request Headers Example:**
+  - `Accept: application/json`
+- **Response Headers Example:**
+  - `Content-Type: application/json`
+- **Best Practices Followed:**
+  - Category-based routing in path
+  - Stateless and consistent JSON
+- **Improvement Suggestions:**
+  - Add query params (`type=twopart`)
+  - Use consistent version headers (`X-API-Version`)
 
 --
 
 ## 5. GitHub API – Get User Info
-	- **URL:** `https://api.github.com/users/octocat`  
-	- **Method:** GET  
-	- **RESTful:** Yes  
-	- **Request Headers Example:**
-  		- `Accept: application/vnd.github.v3+json`
-	- **Response Headers Example:**
- 	 	- `ETag: "abc123"`
-  		- `X-RateLimit-Limit: 60`
-  		- `Content-Type: application/json`
-	- **Best Practices Followed:**
-  		- Strong RESTful structure
-  		- Uses versioned media types in headers
-  		- Pagination support and caching
-	- **Improvement Suggestions:**
-  		- Optionally allow verbosity toggling: `?details=summary`
+- **URL:** `https://api.github.com/users/octocat`  
+- **Method:** GET  
+- **RESTful:** Yes  
+- **Request Headers Example:**
+  - `Accept: application/vnd.github.v3+json`
+- **Response Headers Example:**
+  - `ETag: "abc123"`
+  - `X-RateLimit-Limit: 60`
+  - `Content-Type: application/json`
+- **Best Practices Followed:**
+  - Strong RESTful structure
+  - Uses versioned media types in headers
+  - Pagination support and caching
+- **Improvement Suggestions:**
+  - Optionally allow verbosity toggling: `?details=summary`
 
 
 3. **List the above APIs in form of cURL commands**,  
