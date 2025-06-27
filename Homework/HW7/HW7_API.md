@@ -301,15 +301,15 @@ Example:
 curl -X GET "https://api.github.com/users/octocat" -H "Accept: application/vnd.github+json"
 ```
 
-![hw7-1](/Users/yj/Chuwa/Chuwa20250609/Homework/HW7/hw7-1.jpg)
+![hw7-1](./Homework/HW7/hw7-1.jpg)
 
-![hw7-2](/Users/yj/Chuwa/Chuwa20250609/Homework/HW7/hw7-2.jpg)
+![hw7-2](./Homework/HW7/hw7-2.jpg)
 
-![hw7-3](/Users/yj/Chuwa/Chuwa20250609/Homework/HW7/hw7-3.jpg)
+![hw7-3](./Homework/HW7/hw7-3.jpg)
 
-![hw7-4](/Users/yj/Chuwa/Chuwa20250609/Homework/HW7/hw7-4.jpg)
+![hw7-4](./Homework/HW7/hw7-4.jpg)
 
-![hw7-5](/Users/yj/Chuwa/Chuwa20250609/Homework/HW7/hw7-5.jpg)
+![hw7-5](./Homework/HW7/hw7-5.jpg)
 
 ## 4. List the request headers and response headers of the APIs mentioned above and explain them
 
