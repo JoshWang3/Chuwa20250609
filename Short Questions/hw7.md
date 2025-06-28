@@ -1,7 +1,7 @@
 
 ## API Practices
 ### Question 1
-REST API is defined by six architectural constraints:
+REST API is defined by architectural constraints:
 - Client-Server Architecture: client and server are separate, independent
 - Stateless: the server stores no client context between requests
 - Cacheable: e.g. Response Header, Cache-Control: public, max-age=60, s-maxage=60
