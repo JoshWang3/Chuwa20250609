@@ -22,8 +22,7 @@ public class Example {
 ```
 
 Application API: An Application API (or “Service API”) is a collection of **network-accessible endpoints** you **call over HTTP (or another protocol)** to interact with a remote service. Clients send requests (e.g., https://www.google.com/) and receive **serialized responses (JSON, XML), handling status codes, headers, and potential latency**.
-```java
-```
+
 
 ### 3. Name some different **types of APIs**.
 1. WEB APIs: A Web API also called Web Services is an extensively used API over the web and can be easily **accessed using the HTTP protocols**. A Web application programming interface is an **open-source interface** and can be used by a **large number of clients** through their phones, tablets, or PCs.
@@ -153,10 +152,12 @@ A REST API **IS stateless** because each HTTP request from a client to the serve
 ## Use **Postman** or other API testing tools to:
 
 ### 1. Find at least 5 different **public APIs** (e.g., GitHub APIs, Google Cloud APIs, GeoInfo APIs, Weather APIs) and use them to explain what defines a **REST API**. These APIs can use any HTTP methods and may also include **non-REST APIs** (e.g., GraphQL). Some public APIs may require API keys (user registration required);
-GitHub API: https://docs.travis-ci.com/api/ 
-Google Cloud API: https://developers.google.com/zero-touch/reference/customer/rest/
-GeoInfo API: https://ipfind.io/
-Weather API: https://publicapi.dev/us-weather-api  
+
+
+GitHub API: https://docs.travis-ci.com/api/   
+Google Cloud API: https://developers.google.com/zero-touch/reference/customer/rest/  
+GeoInfo API: https://ipfind.io/  
+Weather API: https://publicapi.dev/us-weather-api    
 
 
 ## (1) GitHub APIs:    
@@ -406,30 +407,27 @@ Below are the key request and response headers for each public API we discussed,
 
 ---
 
-## 1. GitHub REST API
+## 1. Travis CI API V2.1
 
 ### Request Headers
 
-| Header         | Example Value                           | Description                                                                                              |
-|----------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `Accept`       | `application/vnd.github+json`           | Informs GitHub which media type (version) of the API you expect. :contentReference[oaicite:0]{index=0}                     |
-| `Authorization`| `token YOUR_PERSONAL_ACCESS_TOKEN`      | Your personal access token for higher rate limits and private‐repo access.                                 |
-| `User-Agent`   | `MyApp/1.0`                             | Identifies your client application; required by GitHub to track usage.                                     |
-| `Content-Type` | `application/json`                      | Required on requests with a JSON body (e.g. POST, PATCH).                                                 |
+| Header            | Example Value                                | Description                                                                            |
+|-------------------|----------------------------------------------|----------------------------------------------------------------------------------------|
+| `Accept`          | `application/vnd.travis-ci.2.1+json`         | Specifies the Travis API version 2.1 media type. :contentReference[oaicite:9]{index=9}                       |
+| `Authorization`   | `token YOUR_TRAVIS_ACCESS_TOKEN`             | Your Travis CI API access token for authentication.                                    |
+| `User-Agent`      | `MyClient/1.0`                               | Identifies your application to Travis.                                                 |
+| `Content-Type`    | `application/json`                           | Required when sending a JSON body (e.g. POST to trigger a build). :contentReference[oaicite:10]{index=10} |
 
 ### Response Headers
 
-| Header                 | Example Value                                                  | Description                                                                                       |
-|------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `Content-Type`         | `application/json; charset=utf-8`                              | Indicates the response body is JSON UTF-8.                                                       |
-| `X-RateLimit-Limit`    | `60`                                                           | Total number of requests permitted in this window.                                               |
-| `X-RateLimit-Remaining`| `59`                                                           | Number of requests remaining in the current window.                                              |
-| `X-RateLimit-Reset`    | `1372700873`                                                   | UNIX timestamp when the rate limit resets.                                                       |
-| `ETag`                 | `"W/\"abc12345\""`                                             | Value used for conditional requests (If-None-Match).                                              |
-| `Link`                 | `</repos?page=2>; rel="next", </repos?page=34>; rel="last"`    | Pagination links to fetch additional pages. :contentReference[oaicite:1]{index=1}                                   |
-| `Cache-Control`        | `public, max-age=60, s-maxage=60`                              | Instructs clients/CDNs to cache responses for up to 60 seconds.                                   |
-| `Vary`                 | `Accept, Authorization`                                        | Indicates which request headers affect the response.                                              |
-| `Date`                 | `Wed, 01 Jan 2025 12:00:00 GMT`                                | Timestamp when the response was generated.                                                        |
+| Header                    | Example Value                        | Description                                                                                            |
+|---------------------------|--------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `Content-Type`            | `application/json; charset=utf-8`    | Indicates the response body is JSON.                                                                   |
+| `Travis-API-Version`      | `2.1`                                | Echoes the API version serving your request.                                                           |
+| `Cache-Control`           | `no-store`                            | Instructs clients not to cache build-trigger responses.                                                |
+| `Access-Control-Allow-Origin` | `*`                              | Allows browser-based clients to call Travis API.                                                       |
+| `Date`                    | `Fri, 27 Jun 2025 19:00:00 GMT`      | Timestamp of the response.                                                                             |
+| `Server`                  | `Apache`                             | Underlying HTTP server software.  
 
 ---
 
@@ -502,26 +500,5 @@ Below are the key request and response headers for each public API we discussed,
 | `Date`                   | `Fri, 27 Jun 2025 19:00:00 GMT`             | Timestamp when the response was generated.                                                              |
 
 ---
-
-## 5. Travis CI API V2.1
-
-### Request Headers
-
-| Header            | Example Value                                | Description                                                                            |
-|-------------------|----------------------------------------------|----------------------------------------------------------------------------------------|
-| `Accept`          | `application/vnd.travis-ci.2.1+json`         | Specifies the Travis API version 2.1 media type. :contentReference[oaicite:9]{index=9}                       |
-| `Authorization`   | `token YOUR_TRAVIS_ACCESS_TOKEN`             | Your Travis CI API access token for authentication.                                    |
-| `User-Agent`      | `MyClient/1.0`                               | Identifies your application to Travis.                                                 |
-| `Content-Type`    | `application/json`                           | Required when sending a JSON body (e.g. POST to trigger a build). :contentReference[oaicite:10]{index=10} |
-
-### Response Headers
-
-| Header                    | Example Value                        | Description                                                                                            |
-|---------------------------|--------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `Content-Type`            | `application/json; charset=utf-8`    | Indicates the response body is JSON.                                                                   |
-| `Travis-API-Version`      | `2.1`                                | Echoes the API version serving your request.                                                           |
-| `Cache-Control`           | `no-store`                            | Instructs clients not to cache build-trigger responses.                                                |
-| `Access-Control-Allow-Origin` | `*`                              | Allows browser-based clients to call Travis API.                                                       |
-| `Date`                    | `Fri, 27 Jun 2025 19:00:00 GMT`      | Timestamp of the response.                                                                             |
-| `Server`                  | `Apache`                             | Underlying HTTP server software.                                                                       |
+                                                                     |
 
