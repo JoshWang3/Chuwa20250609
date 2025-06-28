@@ -76,14 +76,49 @@ Require re-authentication for critical actions
    and use them to explain what defines a REST API. These APIs can use any HTTP methods and may also
    include non-REST APIs (e.g., GraphQL). Some public APIs may require API keys (user registration
    required); </p>
-<p> a. https://dog.ceo/api/breeds/list/all </p>
+<p> a. http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json</p>
+<p> b. https://coronavirus.m.pipedream.net/</p>
+<p> c. https://world.openfoodfacts.net/api/v2/product/3274080005003.json</p>
+<p> d. https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos</p>
+<p> e. https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json</p>
 
 <p> 2. Justify whether these APIs follow API design best practices, and provide your better design for them.</p>
-For API a, it fetches all data. The best practice is passing the page number and page size in the url. 
-https://dog.ceo/api/breeds?pageSize=25&pageNumber=1
+<p>For api a, it follows best practices.</p>
+<p>For api b, it gives the summary as a whole, and should use specific nouns in endpoints.</p>
+<p>For api c, it follows best practices.</p>
+<p>For api d, it should end up with carros. The following is included in carros.</p>
+<p>For api e, it follows best practices.</p>
 
-3. List the above APIs in form of cURL commands, and attach Postman screenshots in your markdown
-   submission.
+<p> 3. List the above APIs in form of cURL commands, and attach Postman screenshots in your markdown
+   submission. </p>
+a. curl -X GET "http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json"
+![weather](images/weather.png)
+b. curl -X GET "https://coronavirus.m.pipedream.net/"
+![covid](images/covid.png)
+c. curl -X GET "https://world.openfoodfacts.net/api/v2/product/3274080005003.json"
+![products](images/products.png)
+d. curl -X GET "https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos"
+![vehicles](images/vehicles.png)
+e. curl -X GET "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json"
+![currencies](images/currencies.png)
 
-4. List the request headers and response headers of the APIs mentioned above, and explain what each
-   key-value pair in the headers section does.
+<p> 4. List the request headers and response headers of the APIs mentioned above, and explain what each
+   key-value pair in the headers section does. </p>
+<p> request headers </p>
+<p> Postman-Token: calculated when request is sent </p>
+<p> Host: calculated when request is sent</p>
+<p> User-Agent: PostmanRuntime/7.44.1</p>
+<p> Accept: */* </p>
+<p> Accept-Encoding: gzip, deflate, br</p>
+<p> Connection: keep-alive</p>
+
+<p> response headers </p>
+<p> Date </p>
+<p> Server: Apache/2.4.38 (Debian) </p>
+<p> Vary: Accept-Encoding</p>
+<p> Content-Encoding: gzip</p>
+<p> access-control-allow-origin: *</p>
+<p> Content-Length</p>
+<p> Keep-alive: timeout=5, max=100</p>
+<p> Connection keep-alive</p>
+<p> Content-Type: text/html; charset=UTF-8</p>
