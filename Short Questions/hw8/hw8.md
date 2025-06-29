@@ -1,6 +1,6 @@
 ### hw 8
 
-### Part 1
+### Part 1: SQL Referential Integrity
 ```sql
 -- [1] Create School Schema FIRST (no dependencies) --
 CREATE TABLE school (
@@ -126,7 +126,27 @@ FROM student s
 
 
 ---
-### Part 2
+### Part 2: SQL JOINs
+
+Explain why we need the `join` keyword.  
+Compare `inner join`, `left join`, `right join`, and `full join`.
+
+- The `JOIN` keyword makes relationships **explicit** and **readable** by clearly defining how tables are connected.  
+- It prevents unintended **Cartesian products** (all combinations of rows) that occur with comma-separated table lists.
+
+
+**JOIN Types Comparison:**
+
+| Join Type     | Description                                                                 | Includes Rows From                |  
+|---------------|-----------------------------------------------------------------------------|------------------------------------| 
+| **INNER JOIN** | Returns matching rows in both tables based on the join condition.           | Both tables only if match exists   |  
+| **LEFT JOIN**  | Returns all rows from the left table + matched rows from right table.       | All from **left**, matched from right |  
+| **RIGHT JOIN** | Returns all rows from the right table + matched rows from left table.       | All from **right**, matched from left |  
+| **FULL JOIN**  | Returns all rows from both tables, matched where possible.                  | All from both sides                |  
+
+
+**Example:**  
+
 school:
 ![school.png](images/part2/school.png)
 
@@ -247,30 +267,10 @@ RIGHT JOIN department d ON s.dept_id = d.dept_id;
 ![9_full_join.png](images/part2/9_full_join.png)
 
 
-> Explain why we need the `join` keyword. 
-> 
-> Compare `inner join`, `left join`, `right join`, and `full join`.
-
-The `JOIN` keyword makes relationships **explicit** and **readable** by clearly defining how tables are connected.  
-It prevents unintended Cartesian products (all combinations of rows) that occur with comma-separated table lists.
-
-
-**Join Types Comparison:**
-
-| Join Type     | Description                                                                 | Includes Rows From                |  
-|---------------|-----------------------------------------------------------------------------|------------------------------------| 
-| **INNER JOIN** | Returns matching rows in both tables based on the join condition.           | Both tables only if match exists   |  
-| **LEFT JOIN**  | Returns all rows from the left table + matched rows from right table.       | All from **left**, matched from right |  
-| **RIGHT JOIN** | Returns all rows from the right table + matched rows from left table.       | All from **right**, matched from left |  
-| **FULL JOIN**  | Returns all rows from both tables, matched where possible.                  | All from both sides                |  
-
-
-
-
 
 
 ----
-### Part 3
+### Part 3: Sprint Boot
 
 Create a postman request to generate a record in database:  
 ![Postman.png](images/part3/Postman.png)
