@@ -138,7 +138,7 @@ student:
 
 
 ```sql
--- Manual 'JOIN' (NO join keyword)
+-- Manual Join (NO JOIN keyword)
 SELECT 
     s.student_name,
     d.dept_name,
@@ -153,7 +153,7 @@ WHERE
 
 
 ```sql
--- Join
+-- with JOIN keyword
 SELECT 
     s.student_name,
     d.dept_name,
@@ -191,7 +191,7 @@ FROM student s, department d, school sc;
 
 
 ```sql
--- With Join: compare results with above manual join
+-- With JOIN keyword: compare results with above Manual Join
 SELECT 
     s.student_name,
     d.dept_name,
@@ -225,7 +225,7 @@ LEFT JOIN department d ON s.dept_id = d.dept_id;
 
 
 ```sql
--- Right join
+-- Right Join
 SELECT s.student_name, d.dept_name
 FROM student s
 RIGHT JOIN department d ON s.dept_id = d.dept_id;
@@ -245,6 +245,27 @@ FROM student s
 RIGHT JOIN department d ON s.dept_id = d.dept_id;
 ```
 ![9_full_join.png](images/part2/9_full_join.png)
+
+
+> Explain why we need the `join` keyword. 
+> 
+> Compare `inner join`, `left join`, `right join`, and `full join`.
+
+The `JOIN` keyword makes relationships **explicit** and **readable** by clearly defining how tables are connected.  
+It prevents unintended Cartesian products (all combinations of rows) that occur with comma-separated table lists.
+
+
+**Join Types Comparison:**
+
+| Join Type     | Description                                                                 | Includes Rows From                |  
+|---------------|-----------------------------------------------------------------------------|------------------------------------| 
+| **INNER JOIN** | Returns matching rows in both tables based on the join condition.           | Both tables only if match exists   |  
+| **LEFT JOIN**  | Returns all rows from the left table + matched rows from right table.       | All from **left**, matched from right |  
+| **RIGHT JOIN** | Returns all rows from the right table + matched rows from left table.       | All from **right**, matched from left |  
+| **FULL JOIN**  | Returns all rows from both tables, matched where possible.                  | All from both sides                |  
+
+
+
 
 
 
