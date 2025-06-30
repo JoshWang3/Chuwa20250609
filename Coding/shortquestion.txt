@@ -1,0 +1,84 @@
+question 1:
+The concept of api:
+An API is a set of rules and protocols that allows one software application to interact with another.
+APIs are essential because they:
+
+1. Enable communication between systems
+
+2. Promote reusability
+
+3. Encapsulate complexity
+
+4. Enable scalability and modularity
+
+5. Support third-party integration
+
+
+question2 :
+developer API:	APIs exposed to third-party developers, allowing them to build on or integrate with your platform
+Application API:	Internal APIs used by your own application, typically between frontend and backend or microservices
+
+question3: 
+Web API	Accessed over HTTP/HTTPS, usually REST or GraphQL	
+Library/API (SDK)	Function/method calls in a software library	
+Operating System API	Interfaces to interact with OS-level features	
+Hardware API	Allows software to communicate with physical devices	
+Database API	For querying and managing databases
+
+quesiton4:
+
+ Path variables identify a resource, while request parameters filter or modify how the resource is returned.
+
+question5:
+1. HTTP Method :	Defines the type of operation	GET, POST, PUT, DELETE, PATCH	Specifies whether you're reading, creating, updating, or deleting a resource
+2. URI (Uniform Resource Identifier):	Identifies the resource path	/api/users/123	Indicates which resource you're operating on
+3. Path Variables:	Dynamic parts of the URI	/users/{id} → /users/123	Used to access a specific instance of a resource
+4. Query Parameters:	Optional filters/configs in the URL	/users?page=1&sort=name	Used to filter, sort, or paginate a resource collection
+5. Request Headers:	Metadata sent with the request	Authorization: Bearer token, Content-Type: application/json	Used for authentication, content negotiation, caching, etc.
+6. Request Body:	Data sent with POST, PUT, or PATCH requests	{ "name": "Alice" }	Carries the actual data to be stored or updated
+7. Response Status: Code	Indicates the outcome of the request	200 OK, 201 Created, 404 Not Found	Tells the client whether the request was successful or not
+8. Response Headers:	Metadata in the response	Content-Type: application/json, Cache-Control	Provides additional info about the response
+9. Response Body: Data returned from the server	{ "id": 123, "name": "Alice" }	Contains the actual requested data or confirmation message
+
+question6:
+URL (Client URL) is a command-line tool used to send HTTP requests and interact with web services like APIs.
+ It allows you to: 1.Test APIs 
+2.Send GET, POST, PUT, DELETE, etc.
+3.Add headers, body, query params, authentication, and more
+
+Postman is more user-friendly and better suited for debugging, organizing, and collaborating on complex API testing tasks.
+
+question7：
+1xx – Informational
+2xx – Success
+3xx – Redirection
+4xx – Client Errors
+ 5xx – Server Errors
+
+question 8：
+Method            Purpose                           tyical use                  expected status codes
+GET	              Retrieve data from server	        Fetch a list or item	    200 OK, 304 Not Modified, 404 Not Found
+POST	          Create a new resource	            Add a user, product, etc.	201 Created, 400 Bad Request, 409 Conflict
+PUT	              Replace a resource completely	    Update full user profile	200 OK, 204 No Content, 400 Bad Request
+PATCH	          Update part of a resource	        Update user email only	    200 OK, 204 No Content, 400 Bad Request
+DELETE	          Remove a resource	                Delete a user/product	    200 OK, 204 No Content, 404 Not Found
+HEAD	          returns headers only	            Check if resource exists	200 OK, 404 Not Found
+OPTIONS	          Describe available                CORS preflight checks	    204 No Content, 200 OK
+                  methods for a resource	
+
+question 9:
+A stateless REST API means that each request from the client must contain all the information the server needs to fulfill that request.
+The server does not store any context or session state about the client between requests.
+
+question 10:
+1. Use Proper HTTP Methods
+2. Enable HTTP Caching
+3. Use Pagination for Large Data Sets
+4. Compress Responses
+5. Return Only Necessary Data (Partial Response)
+6. Avoid N+1 Problem
+.....
+
+question 11:
+XSS injects malicious code into trusted content (user → other users), while CSRF tricks a trusted user into sending unwanted requests (user → server). 
+Prevent both with proper input handling, token-based security, and cookie protection.
