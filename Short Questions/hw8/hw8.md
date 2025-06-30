@@ -270,7 +270,7 @@ RIGHT JOIN department d ON s.dept_id = d.dept_id;
 
 
 ----
-### Part 3: Sprint Boot
+### Part 3: Spring Boot
 
 Create a postman request to generate a record in database:  
 ![Postman.png](images/part3/Postman.png)
