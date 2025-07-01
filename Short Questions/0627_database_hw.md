@@ -1,4 +1,6 @@
-# Part 1: Please try attached SQL queries, if the query doesn't work, explain why in your mark down file.
+# Part 1: Referential Integrity
+
+Please try attached SQL queries, if the query doesn't work, explain why in your mark down file.
 
 ## 1. Create tables before insert
 In the SQL_Referential_Integrity.sql, before we start, we should select a Database use a query like:
@@ -191,7 +193,7 @@ Or we can change the foreign key setting of student table to automatically manag
 In MySQL, the `ON DELETE` clause in a foreign key constraint determines what happens to child rows when the corresponding parent row is deleted.<br>在 MySQL 中，外键约束中的 `ON DELETE`子句确定删除相应的父行时子行会发生什么情况。
 
 1. `CASCADE`: When a row in the parent table is deleted, all related rows in the child table are also automatically deleted.
-<br>`CASCADE`：删除父表中的一行时，子表中的所有相关行也会自动删除。
+`CASCADE`：删除父表中的一行时，子表中的所有相关行也会自动删除。
 
 
 2. `SET NULL`: When a row in the parent table is deleted, the foreign key column(s) in the child table referencing the parent row are set to NULL.
@@ -199,7 +201,7 @@ In MySQL, the `ON DELETE` clause in a foreign key constraint determines what hap
 
 
 3. `RESTRICT`: Prevents the deletion of a parent row if there are any related rows in the child table that reference it.
-<br>`RESTRICT`：如果子表中有任何引用父行的相关行，则阻止删除父行。
+`RESTRICT`：如果子表中有任何引用父行的相关行，则阻止删除父行。
 
 We can drop and recreate the student table with: 
 
@@ -212,83 +214,89 @@ The last select statement is executed successfully:
 ![join](./img/join_execution.png)
 
 
-# Pare 2. Please try attached SQL queries (with same data and schema setup as above), explain why we need join keyword, and compare inner join, left join, right join, and full join. Write your answers with screenshots in your markdown file. 
+# Pare 2. Try different JOIN query
+
+Please try attached SQL queries (with same data and schema setup as above), explain why we need join keyword, and compare inner join, left join, right join, and full join. Write your answers with screenshots in your markdown file. 
 
 
 In SQL, joins are used to combine rows from two or more tables based on a related column between them.
 在 SQL 中，联接用于根据两个或多个表之间的相关列来合并它们中的行。
  
 Here's a breakdown of the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN:
-<br>以下是 INNER JOIN、LEFT JOIN、RIGHT JOIN 和 FULL JOIN 之间差异的细分：
-1. **INNER JOIN**: Returns only rows with matching values in both tables. This is the default join type.<br>INNER JOIN：仅返回两个表中具有匹配值的行。这是默认的联接类型。
+以下是 INNER JOIN、LEFT JOIN、RIGHT JOIN 和 FULL JOIN 之间差异的细分：
+### 1. INNER JOIN
+Returns only rows with matching values in both tables. This is the default join type.
+仅返回两个表中具有匹配值的行。这是默认的联接类型。
 
-    For the first 2 statements, they are inner joins and have same output:
+For the first 2 statements, they are inner joins and have same output:
 
-    ```sql
-    -- Manual 'JOIN' (NO join keyword)
-    SELECT 
-        s.student_name,
-        d.dept_name,
-        sc.school_name
-    FROM student s, department d, school sc
-    WHERE 
-        s.dept_id = d.dept_id
-        AND d.school_id = sc.school_id;
+```sql
+-- Manual 'JOIN' (NO join keyword)
+SELECT 
+    s.student_name,
+    d.dept_name,
+    sc.school_name
+FROM student s, department d, school sc
+WHERE 
+    s.dept_id = d.dept_id
+    AND d.school_id = sc.school_id;
+-- Join
+SELECT 
+    s.student_name,
+    d.dept_name,
+    sc.school_name
+FROM student s
+JOIN department d ON s.dept_id = d.dept_id
+JOIN school sc ON d.school_id = sc.school_id;
+```
 
+Output:
 
-    -- Join
-    SELECT 
-        s.student_name,
-        d.dept_name,
-        sc.school_name
-    FROM student s
-    JOIN department d ON s.dept_id = d.dept_id
-    JOIN school sc ON d.school_id = sc.school_id;
-    ```
-    Output:
-
-    ![join](./img/join_execution.png)
-
-    ```sql
-    -- Inner Join
-    SELECT *
-    FROM student s
-    JOIN department d ON s.dept_id = d.dept_id;
-    ```
-    Output:
-
-    ![join](./img/inner_join_all.png)
-
-    But if we use implicit joins (comma syntax) with no WHERE conditions, we would get a lot repeated result.
-
-    ```sql
-    SELECT 
-        s.student_name,
-        d.dept_name,
-        sc.school_name
-    FROM student s, department d, school sc;
-    ```
-
-    ![without_where](./img/without_where.png)
-
-    The number of samples is Cartesian product.
-
-    What is Cartesian product (笛卡尔乘积):
-
-    If:
-
-    `student` has m rows,
-
-    `department` has n rows,
-
-    `school` has p rows,
-
-    then: `Total rows returned = m * n * p`
-    because each row in `student` is paired with every row in `department` and every row in `school`.
+![join](./img/join_execution.png)
 
 
-2. **LEFT JOIN (LEFT OUTER JOIN)**: Returns all rows from the left table and matching rows from the right table. If no match exists in the right table, NULLs are returned for right table columns.
-<br>LEFT JOIN （LEFT OUTER JOIN）：返回左表中的所有行和右表中的匹配行。如果右表中不存在匹配项，则为右表列返回 NULL。
+```sql
+-- Inner Join
+SELECT *
+FROM student s
+JOIN department d ON s.dept_id = d.dept_id;
+```
+Output:
+
+![join](./img/inner_join_all.png)
+
+But if we use implicit joins (comma syntax) with no WHERE conditions, we would get a lot repeated result.
+
+```sql
+SELECT 
+    s.student_name,
+    d.dept_name,
+    sc.school_name
+FROM student s, department d, school sc;
+```
+
+![without_where](./img/without_where.png)
+
+The number of samples is Cartesian product.
+
+What is Cartesian product (笛卡尔乘积):
+
+If:
+
+`student` has m rows,
+
+`department` has n rows,
+
+`school` has p rows,
+
+then: `Total rows returned = m * n * p`
+because each row in `student` is paired with every row in `department` and every row in `school`.
+
+
+### 2. LEFT JOIN (LEFT OUTER JOIN)
+
+Returns all rows from the left table and matching rows from the right table. If no match exists in the right table, NULLs are returned for right table columns.
+返回左表中的所有行和右表中的匹配行。如果右表中不存在匹配项，则为右表列返回 NULL。
 
     ```sql
     -- Left Join
@@ -299,7 +307,9 @@ Here's a breakdown of the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN,
 
     ![left_join](./img/left_join_student.png)
 
-3. **RIGHT JOIN (RIGHT OUTER JOIN)**: Returns all rows from the right table and matching rows from the left table. If no match exists in the left table, NULLs are returned for left table columns.<br>RIGHT JOIN （RIGHT OUTER JOIN）：返回右表中的所有行和左表中的匹配行。如果左表中不存在匹配项，则为左表列返回 NULL。
+### 3. RIGHT JOIN (RIGHT OUTER JOIN)
+Returns all rows from the right table and matching rows from the left table. If no match exists in the left table, NULLs are returned for left table columns.
+返回右表中的所有行和左表中的匹配行。如果左表中不存在匹配项，则为左表列返回 NULL。
 
     ```sql
     -- Right join
@@ -309,7 +319,10 @@ Here's a breakdown of the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN,
     ```
     ![right_join](./img/right_join_department.png)
 
-4. **FULL JOIN (FULL OUTER JOIN)**: Returns all rows when there is a match in either table. It combines the results of LEFT and RIGHT joins. If there is no match, NULLs are used for columns from the table without a match.<br>FULL JOIN （FULL OUTER JOIN）：当任一表中存在匹配项时，返回所有行。它结合了 LEFT 和 RIGHT 联接的结果。如果没有匹配项，则 NULL 将用于表中没有匹配项的列。
+### 4. FULL JOIN (FULL OUTER JOIN)
+
+Returns all rows when there is a match in either table. It combines the results of LEFT and RIGHT joins. If there is no match, NULLs are used for columns from the table without a match.
+当任一表中存在匹配项时，返回所有行。它结合了 LEFT 和 RIGHT 联接的结果。如果没有匹配项，则 NULL 将用于表中没有匹配项的列。
  
     ```sql
     -- Full Join (needs UNION keyword)
@@ -326,10 +339,10 @@ Here's a breakdown of the differences between INNER JOIN, LEFT JOIN, RIGHT JOIN,
 
 
 These joins can be visualized using Venn diagrams: INNER JOIN shows the intersection, LEFT JOIN shows the left circle and intersection, RIGHT JOIN shows the right circle and intersection, and FULL JOIN shows both circles completely.
-<br>这些连接可以使用维恩图进行可视化：INNER JOIN 显示交点，LEFT JOIN 显示左圆和交点，RIGHT JOIN 显示右圆和交点，FULL JOIN 完整显示两个圆。
+这些连接可以使用维恩图进行可视化：INNER JOIN 显示交点，LEFT JOIN 显示左圆和交点，RIGHT JOIN 显示右圆和交点，FULL JOIN 完整显示两个圆。
  
 The choice of join depends on the desired outcome: INNER JOIN for shared data, LEFT/RIGHT JOIN for all data from one table plus matching data from the other, and FULL JOIN to see all data from both tables.
-<br>联接的选择取决于所需的结果：INNER JOIN 用于共享数据，LEFT/RIGHT JOIN 用于一个表中的所有数据以及另一个表中的匹配数据，以及 FULL JOIN 用于查看两个表中的所有数据。
+联接的选择取决于所需的结果：INNER JOIN 用于共享数据，LEFT/RIGHT JOIN 用于一个表中的所有数据以及另一个表中的匹配数据，以及 FULL JOIN 用于查看两个表中的所有数据。
 
 
 # Part 3. Hands on:
