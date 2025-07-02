@@ -381,7 +381,7 @@ Then the SpringBoot will automatically create / update database tables based on 
 ## 2. Is your id in the database same as what you set in your request? why does this happen?
 > NO, not the same. I didn't set any id, it generated automatically.  
 
-This happen because there is an annotation in `Post.java`: 
+This happen because there is an annotation in `SpongeBobBurgerPost.Post.java`: 
 ```Java
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
