@@ -134,7 +134,7 @@ public ResponseEntity<List<PostDto>> searchPostsByTitle(@RequestParam("keyword")
 Client (Postman):
 ![postman.png](images/postman.png)
 
-If no title matches the query parameter, then return an empty list.
+_If no title matches the query parameter, then return an empty list:_
 ![postman_no_match.png](images/postman_no_match.png)
 
 
