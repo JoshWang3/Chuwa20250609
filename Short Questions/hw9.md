@@ -95,7 +95,7 @@ Filtering, pagination, optional parameters (/users?sort=name&page=1)
 Code in Coding repository.
 
 (1) POST request: POST http://localhost:8080/animals  
-Body (JSON): { "name": "Kitten", "description": "One and only King of the jungle" }  
+
 ![1](postHello.png)
 ![2](postPuppy.png)
 
