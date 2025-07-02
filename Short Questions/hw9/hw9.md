@@ -102,6 +102,8 @@ Note: you can give explicit name by using:
 ---
 ### 7. Hands On:
 #### Write a method in a repository to find all posts with the title containing a certain keyword.  
+{For my myself:} code is in springboot-redbook/`lang_wang_hw9` branch
+
 
 PostRepository:
 ```java
