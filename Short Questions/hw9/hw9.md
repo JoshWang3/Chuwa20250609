@@ -107,15 +107,15 @@ PostRepository:
 ```java
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-List<Post> findByTitleContainingIgnoreCase(String keyword);
+    List<Post> findByTitleContainingIgnoreCase(String title);
 }
 ```
 
 PostServiceImpl:
 ```java
 @Override
-public List<PostDto> searchPostsByTitle(String keyword) {
-    List<Post> posts = postRepository.findByTitleContainingIgnoreCase(keyword);
+public List<PostDto> getPostsByTitle(String title) {
+    List<Post> posts = postRepository.findByTitleContainingIgnoreCase(title);
     return posts.stream()
             .map(this::mapToDTO)
             .collect(Collectors.toList());
@@ -124,10 +124,13 @@ public List<PostDto> searchPostsByTitle(String keyword) {
 
 PostController:
 ```java
-@GetMapping("/search")
-public ResponseEntity<List<PostDto>> searchPostsByTitle(@RequestParam("keyword") String keyword) {
-    List<PostDto> results = postService.searchPostsByTitle(keyword);
-    return new ResponseEntity<>(results,  HttpStatus.OK);
+@GetMapping
+public ResponseEntity<List<PostDto>> getAllPosts(@RequestParam(value = "title", required = false) String title) {
+    if (title == null || title.isBlank()) {
+        return ResponseEntity.ok(postService.getAllPosts());
+    } else {
+        return ResponseEntity.ok(postService.getPostsByTitle(title));
+    }
 }
 ```
 
