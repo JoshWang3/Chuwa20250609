@@ -60,10 +60,10 @@ By default, JPA uses a **naming strategy** that maps:
 Write a method in a repository to find all posts with the title containing a certain keyword. (Create some
 test posts if necessary)
 
-![controller](../images/hw9_controller)
-![repository](../images/hw9_repository)
-![service](../images/hw9_service)
-![serviceImpl](../images/hw9_serviceImpl)
-![data](../images/data)
-![result](../images/result)
+![controller](./images/hw9_controller)
+![repository](./images/hw9_repository)
+![service](./images/hw9_service)
+![serviceImpl](./images/hw9_serviceImpl)
+![data](./images/data)
+![result](./images/result)
 
