@@ -43,3 +43,187 @@ Note: This strategy may vary depending on the JPA implementation or configuratio
 **@RequestParam**: Extracts parameters from query strings (e.g., `/users?name=john&age=25`). These are required by default but can be made optional with `required=false`.
 
 In short: PathVariable for URL path parameters, RequestParam for query string parameters.
+
+---
+
+## Repository Search Implementation
+
+### Task: Write a method in a repository to find all posts with the title containing a certain keyword
+
+### 1. Repository Methods Added
+
+**PostRepository.java:**
+```java
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+
+    // Method using Spring Data JPA naming convention
+    // This will automatically generate: SELECT * FROM posts WHERE title LIKE '%keyword%'
+    List<Post> findByTitleContaining(String keyword);
+    
+    // Alternative method using custom query (more control)
+    @Query("SELECT p FROM Post p WHERE p.title LIKE %:keyword%")
+    List<Post> findByTitleContainingKeyword(@Param("keyword") String keyword);
+    
+    // Case-insensitive search method
+    List<Post> findByTitleContainingIgnoreCase(String keyword);
+    
+    // Method to find posts where title OR description contains keyword
+    List<Post> findByTitleContainingOrDescriptionContaining(String titleKeyword, String descriptionKeyword);
+}
+```
+
+### 2. Service Layer Implementation
+
+**PostService.java:**
+```java
+public interface PostService {
+    PostDto createPost(PostDto postDto);
+    List<PostDto> getAllPosts();
+    PostDto getPostById(Long id);
+    List<PostDto> findByTitleContaining(String keyword);  // New search method
+}
+```
+
+**PostServiceImpl.java:**
+```java
+@Override
+public List<PostDto> findByTitleContaining(String keyword) {
+    List<Post> posts = postRepository.findByTitleContaining(keyword);
+    return posts.stream()
+            .map(this::mapToDTO)
+            .collect(Collectors.toList());
+}
+
+// Helper method for entity to DTO conversion
+private PostDto mapToDTO(Post post) {
+    PostDto postDto = new PostDto();
+    postDto.setId(post.getId());
+    postDto.setTitle(post.getTitle());
+    postDto.setDescription(post.getDescription());
+    postDto.setContent(post.getContent());
+    return postDto;
+}
+```
+
+### 3. Controller Layer Implementation
+
+**PostController.java:**
+```java
+@RestController
+@RequestMapping("/api/v1/posts")
+public class PostController {
+
+    @Autowired
+    private PostService postService;
+
+    // Create a new post
+    @PostMapping
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
+        PostDto postResponse = postService.createPost(postDto);
+        return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
+    }
+
+    // Get all posts
+    @GetMapping
+    public ResponseEntity<List<PostDto>> getAllPosts() {
+        List<PostDto> posts = postService.getAllPosts();
+        return ResponseEntity.ok(posts);
+    }
+
+    // Search posts by title containing keyword
+    @GetMapping("/search")
+    public ResponseEntity<List<PostDto>> searchPostsByTitle(@RequestParam String keyword) {
+        List<PostDto> posts = postService.findByTitleContaining(keyword);
+        return ResponseEntity.ok(posts);
+    }
+
+    // Get post by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto> getPostById(@PathVariable Long id) {
+        PostDto post = postService.getPostById(id);
+        return ResponseEntity.ok(post);
+    }
+}
+```
+
+### 4. Test Data Created
+
+**Created the following test posts using POST requests:**
+
+1. **测试帖子** - "这是一个测试帖子的描述"
+2. **我的第一篇帖子** - "这是描述信息"
+3. **从 Postman 创建的帖子** - "这是通过 Postman API 创建的帖子描述"
+4. **Spring Boot 学习指南** - "全面的Spring Boot开发教程"
+5. **Java 编程技巧** - "Java开发中的实用技巧分享"
+6. **MySQL 数据库优化** - "数据库性能调优指南"
+7. **前端开发框架对比** - "React vs Vue vs Angular"
+
+### 5. API Testing Results
+
+**Available Endpoints:**
+- `GET /api/v1/posts` - Get all posts
+- `GET /api/v1/posts/search?keyword=xxx` - Search posts by keyword
+- `GET /api/v1/posts/{id}` - Get post by ID
+- `POST /api/v1/posts` - Create new post
+
+**Search Test Results:**
+
+1. **Search for "Spring":**
+   ```bash
+   curl -s "http://localhost:8080/api/v1/posts/search?keyword=Spring"
+   ```
+   **Result:** Found 1 post - "Spring Boot 学习指南"
+
+2. **Search for "Java":**
+   ```bash
+   curl -s "http://localhost:8080/api/v1/posts/search?keyword=Java"
+   ```
+   **Result:** Found 1 post - "Java 编程技巧"
+
+3. **Search for "Boot":**
+   ```bash
+   curl -s "http://localhost:8080/api/v1/posts/search?keyword=Boot"
+   ```
+   **Result:** Found 1 post - "Spring Boot 学习指南" (partial match)
+
+4. **Search for "Python":**
+   ```bash
+   curl -s "http://localhost:8080/api/v1/posts/search?keyword=Python"
+   ```
+   **Result:** Empty array `[]` (no matches)
+
+5. **Get specific post by ID:**
+   ```bash
+   curl -s "http://localhost:8080/api/v1/posts/5"
+   ```
+   **Result:** Returns "Java 编程技巧" post details
+
+### 6. Key Features Implemented
+
+ **Spring Data JPA Automatic Query Generation** - `findByTitleContaining()` automatically generates `WHERE title LIKE '%keyword%'`
+
+ **Partial Matching** - Search "Boot" finds "Spring Boot 学习指南"
+
+ **Case Sensitive Search** - Default behavior (can be changed with `IgnoreCase` method)
+
+ **Multiple Search Options** - Provided several search method variations
+
+ **REST API Integration** - Full CRUD operations with search functionality
+
+ **Proper Layer Architecture** - Repository → Service → Controller separation
+
+ **Empty Result Handling** - Returns empty array when no matches found
+
+### 7. Usage in Postman
+
+**Search Request Setup:**
+- **Method:** GET
+- **URL:** `http://localhost:8080/api/v1/posts/search?keyword=Spring`
+- **Headers:** None required
+- **Body:** None required
+
+**Example Search URLs:**
+- `http://localhost:8080/api/v1/posts/search?keyword=Spring`
+- `http://localhost:8080/api/v1/posts/search?keyword=Java`
+- `http://localhost:8080/api/v1/posts/search?keyword=Boot`
