@@ -57,13 +57,18 @@ By default, JPA uses a **naming strategy** that maps:
 - Use `@PathVariable` for required, REST-style identifiers.
 - Use `@RequestParam` for optional or filter parameter in URLs.
 
-Write a method in a repository to find all posts with the title containing a certain keyword. (Create some
-test posts if necessary)
+**Write a method in a repository to find all posts with the title containing a certain keyword. (Create some
+test posts if necessary)**
 
 ![controller](./images/hw9_controller.png)
+
 ![repository](./images/hw9_repository.png)
+
 ![service](./images/hw9_service.png)
+
 ![serviceImpl](./images/hw9_serviceImpl.png)
-![data](./images/data.png)
-![result](./images/result.png)
+
+![data](./images/hw9_data.png)
+
+![result](./images/hw9_result.png)
 
