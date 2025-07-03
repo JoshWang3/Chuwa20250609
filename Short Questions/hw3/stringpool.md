@@ -1,0 +1,4 @@
+Java String pool is a special area within the Java Heap memory that stores String literals.
+When a String literal is created, JVM first checks the pool to see if an identical String object has been created. If it's created, JVM will return a reference to the existing object and if not, JVM will create a new String object. This can help optimizing memory usage and improve performance by reusing same objects.
+
+String immunity means Java String objects are immutable -- once they are created, they cannot be changed. Any operations that changes the string results in the creation of a new String object (different sequence -> different Strings)

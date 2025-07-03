@@ -1,0 +1,3 @@
+A method's signature is defined as the combination of its method name and its parameter list. The method signature (method name + parameter list) is how the Java compiler distinguishes between the methods at compile time.
+1. Method overloading allows you to define multiple methods in the same class with the same name, as long as they have different method signatures.
+2. Method overriding occurs when a subclass provides its own implementation of a method that is already defined in its superclass and the method must have the same method signature.
