@@ -102,7 +102,7 @@ Note: you can give explicit name by using:
 ---
 ### 7. Hands On:
 #### Write a method in a repository to find all posts with the title containing a certain keyword.  
-{For my myself:} code is in springboot-redbook/`lang_wang_hw9` branch
+{For myself: code is in springboot-redbook/`lang_wang_hw9` branch}
 
 
 PostRepository:
@@ -116,31 +116,38 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 PostServiceImpl:
 ```java
 @Override
-public List<PostDto> getPostsByTitle(String title) {
-    List<Post> posts = postRepository.findByTitleContainingIgnoreCase(title);
-    return posts.stream()
-            .map(this::mapToDTO)
-            .collect(Collectors.toList());
+public List<PostDto> getAllPosts(String title) {
+    List<Post> posts = postRepository.findAll();
+    List<PostDto> postDtos = posts.stream().map( post -> mapToDTO(post)).collect(Collectors.toList());
+
+    if (title != null && !title.isEmpty()) {
+        posts = postRepository.findByTitleContainingIgnoreCase(title);
+        postDtos = posts.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+    return postDtos;
 }
 ```
 
 PostController:
 ```java
 @GetMapping
-public ResponseEntity<List<PostDto>> getAllPosts(@RequestParam(value = "title", required = false) String title) {
-    if (title == null || title.isBlank()) {
-        return ResponseEntity.ok(postService.getAllPosts());
-    } else {
-        return ResponseEntity.ok(postService.getPostsByTitle(title));
-    }
+public ResponseEntity<List<PostDto>> getAllPosts(@RequestParam(required = false) String title) {
+    List<PostDto> result = postService.getAllPosts(title);
+    return new ResponseEntity<>(result, HttpStatus.OK);
 }
 ```
 
-Client (Postman):
-![postman.png](images/postman.png)
+Client (Postman):  
+_Get all posts without the query parameter `title`:_
+![without_title](images/postman1.png)
 
-_If no title matches the query parameter, then return an empty list:_
-![postman_no_match.png](images/postman_no_match.png)
+_Get all posts with the query parameter `title`:_
+![with_title](images/postman2.png)
+
+_Get all posts with the query parameter `title`, but no title matches, so return an empty list:_
+![with_title_no_match](images/postman3.png)
 
 
 
