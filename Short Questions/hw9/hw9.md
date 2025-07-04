@@ -58,3 +58,7 @@ Example URL: /users/123
 @RequestParam - Extracts from the query string
 Used when the value is passed as a query parameter.
 Example URL: /search?keyword=java
+
+
+## HandsOn
+![](findAllByTitle.png)
