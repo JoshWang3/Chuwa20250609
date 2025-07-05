@@ -19,44 +19,44 @@
 
 ## 1  JDK 17
 
-![JDK](screenshots/01-jdk-version.png)
+![JDK](screenshots/01_jdk-version.png)
 
 ---
 
 ## 2  IntelliJ IDEA
 
-![IDE](screenshots/IDE.png)
-![IDE_sample](screenshots/IDE_output.png)
+![IDE](screenshots/01_IDE.png)
+![IDE_sample](screenshots/01_IDE_output.png)
 
 ---
 
 ## 3  Maven 3.9+
 
-![Maven](screenshots/mvn.png)
+![Maven](screenshots/01_mvn.png)
 
 ---
 
 ## 4  Git CLI
 
-![Git](screenshots/CLI.png)
+![Git](screenshots/01_CLI.png)
 ---
 
 ## 5  MySQL 8.4
 
-![myqsl](screenshots/mysql.png)
-![table](screenshots/table.png)
+![myqsl](screenshots/01_mysql.png)
+![table](screenshots/01_table.png)
 
 ## 6 NoSQL
 
-![mongodb](screenshots/mongodb.png)
-![cassandra](screenshots/cassandra.png)
+![mongodb](screenshots/01_mongodb.png)
+![cassandra](screenshots/01_cassandra.png)
 
 ## 7  Docker Desktop
 
-![Maven](screenshots/docker.png)
+![Maven](screenshots/01_docker.png)
 
 ---
 
 ## 8  Postman
 
-![Postman](screenshots/postman.png)
+![Postman](screenshots/01_postman.png)
