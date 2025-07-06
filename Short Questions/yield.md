@@ -1,0 +1,1 @@
+yield() method asks the current thread to pause its execution and allow another thread with same priority to run.

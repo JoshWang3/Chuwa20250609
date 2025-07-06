@@ -1,0 +1,1 @@
+join() method asks a thread to wait for the completion of another thread.
