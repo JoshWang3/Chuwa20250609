@@ -616,31 +616,18 @@ public class AtomicExamples {
 ### 19. What is the concurrent collections? List some concurrent (thread-safe) data structures.
 > **Concurrent Collections** are thread-safe data structures designed for use in multithreaded environments.   
 >
-> They handle synchronization internally to avoid race conditions.
+>
+These collections are in the `java.util.concurrent` package.
 
-**Common Concurrent (Thread-Safe) Data Structures:**
+| Interface | Non-Thread-Safe                  | Thread-Safe                                 |
+|-----------|----------------------------------|---------------------------------------------|
+| List      | ArrayList                        | CopyOnWriteArrayList                        |
+| Map       | HashMap                          | ConcurrentHashMap                           |
+| Set       | HashSet / TreeSet                | CopyOnWriteArraySet                         |
+| Queue     | ArrayDeque / LinkedList          | ArrayBlockingQueue / LinkedBlockingQueue    |
+| Deque     | ArrayDeque / LinkedList          | LinkedBlockingDeque                         |
 
-| Data Structure                     | Description |
-|----------------------------------|-------------|
-| `ConcurrentHashMap`              | Thread-safe hash map. Allows concurrent reads and segmented writes. |
-| `ConcurrentLinkedQueue`         | Non-blocking FIFO queue. Suitable for high-concurrency scenarios. |
-| `ConcurrentLinkedDeque`         | Non-blocking double-ended queue. Supports FIFO and LIFO. |
-| `CopyOnWriteArrayList`          | Thread-safe variant of `ArrayList`. Good for many reads, few writes. |
-| `CopyOnWriteArraySet`           | Thread-safe set using copy-on-write. Backed by `CopyOnWriteArrayList`. |
-| `BlockingQueue` (Interface)     | Supports thread-safe `put()` and `take()` operations (e.g., in producer-consumer). |
-| └── `LinkedBlockingQueue`       | Linked nodes; optionally bounded. |
-| └── `ArrayBlockingQueue`        | Bounded, backed by array. |
-| └── `PriorityBlockingQueue`     | Priority-based blocking queue. |
-| └── `DelayQueue`                | Elements become available after a delay. |
-| └── `SynchronousQueue`          | No capacity; each insert waits for a remove. |
-| `ConcurrentSkipListMap`         | Thread-safe sorted map (like `TreeMap`). |
-| `ConcurrentSkipListSet`         | Thread-safe sorted set (like `TreeSet`). |
-
-**Notes:**
-- These collections are in `java.util.concurrent` package.
-- Prefer them over synchronizing regular collections.
-- Use the right one based on your use case: read-heavy, write-heavy, ordered, bounded, etc.
-
+  
 
 ---
 ### 20. What kind of locks do you know? What is the advantage of each lock?
