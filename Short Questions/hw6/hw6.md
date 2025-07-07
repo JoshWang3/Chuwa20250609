@@ -2,22 +2,22 @@
 ### 2. Write a thread-safe singleton class.
 > Double-Checked Locking Singleton - Lazy + Efficient:
 ```java
-public class DoubleCheckedSingleton {
+public class Singleton {
 
     // `volatile` ensures visibility across threads and prevents reordering
-    private static volatile DoubleCheckedSingleton instance;
+    private static volatile Singleton instance;
 
     // Private constructor prevents instantiation from outside 
-    private DoubleCheckedSingleton() {}
+    private Singleton() {}
 
-    public static DoubleCheckedSingleton getInstance() {
+    public static Singleton getInstance() {
         // First check (no locking) — fast path for already-initialized instance
         if (instance == null) {
             // Synchronize only the first time
-            synchronized (DoubleCheckedSingleton.class) {
+            synchronized (Singleton.class) {
                 // Second check (with locking) — handles multi-thread race condition
                 if (instance == null) {
-                    instance = new DoubleCheckedSingleton();
+                    instance = new Singleton();
                 }
             }
         }
@@ -38,7 +38,7 @@ public class DoubleCheckedSingleton {
 
 
 3. JVM Guarantee:
-    - Class-level lock on `DoubleCheckedSingleton.class` ensures only one thread can enter the critical section during initialization.
+    - Class-level lock on `Singleton.class` ensures only one thread can enter the critical section during initialization.
     - Once initialized, all threads return the same reference, avoiding duplicate instances.
 
     
