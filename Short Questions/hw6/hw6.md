@@ -646,53 +646,56 @@ public class AtomicExamples {
 ### 20. What kind of locks do you know? What is the advantage of each lock?
 >Java provides several locking mechanisms for thread synchronization in `java.util.concurrent.locks`.
 
-1. `ReentrantLock`
-- **Advantage**: Explicit lock with more control than `synchronized`.
-- **Features**: Try-lock, timed-lock, interruptible lock, fairness policy.
-- **Use case**: When you need fine-grained locking control.
-
-2. `ReentrantReadWriteLock`
-- **Advantage**: Improves concurrency for read-heavy workloads.
-- **Features**: Multiple readers allowed, exclusive write lock.
-- **Use case**: Many threads reading, few writing (e.g., cache).
-
-3. `StampedLock`
-- **Advantage**: Higher throughput with optimistic reads.
-- **Features**: Supports optimistic locking, read/write stamps.
-- **Use case**: High-performance read-dominated scenarios.
-
-4. `Semaphore`
-- **Advantage**: Controls number of threads accessing a resource.
-- **Features**: Permits-based locking, fair/non-fair modes.
-- **Use case**: Limit concurrent access (e.g., DB connections).
-
-5. `CountDownLatch`
-- **Advantage**: Allows threads to wait until others finish.
-- **Features**: One-time countdown, cannot be reset.
-- **Use case**: Wait for N threads/tasks to complete.
-
-6. `CyclicBarrier`
-- **Advantage**: Allows multiple threads to wait for each other.
-- **Features**: Reusable barrier, executes a barrier action.
-- **Use case**: Coordinating phases in parallel computation.
-
-7. `ReadWriteLock` (Interface)
-- **Advantage**: Defines locking semantics for read/write.
-- **Features**: Used to create custom read-write locks.
-- **Use case**: Used by `ReentrantReadWriteLock`.
-
-**Summary Table:**
-
-| Lock Type              | Advantage                             | Best For                        |
-|------------------------|----------------------------------------|---------------------------------|
-| `ReentrantLock`        | More flexible than `synchronized`      | General locking with control    |
-| `ReentrantReadWriteLock` | Concurrent reads, exclusive write     | Read-heavy workloads            |
-| `StampedLock`          | Optimistic reads for better performance| High-read throughput scenarios  |
-| `Semaphore`            | Limit concurrent access                | Resource pool management        |
-| `CountDownLatch`       | Wait until all tasks complete          | One-time task coordination      |
-| `CyclicBarrier`        | Wait for group of threads              | Parallel processing phases      |
+>1. **ReentrantLock**:
+- More flexible than `synchronized`, supporting:
+    - `tryLock()` (non-blocking attempt)
+    - Timed lock (`tryLock(timeout)`)
+    - Interruptible lock acquisition
+    - Fairness policy (FIFO locking order)
+- **Use case:** Fine-grained locking or when needing more control over thread synchronization.
 
 
+>2. **ReadWriteLock**:
+- How it works:
+  - When one writer thread is writing, no other thread can proceed.
+  - Multiple reader threads can read concurrently when no writer is active.
+  
+- `ReadWriteLock` is considered a `pessimistic lock` because it blocks other operations (reads or writes) to prevent conflicts:
+  - When Read lock is held:	 Blocks writers, allows other readers.
+  - When Write lock is held: Blocks everyone (readers + writers).
+- **Use case:** Read-heavy application with rare writes.
+
+
+>3. **StampedLock**:
+- How it works:
+    - Introduced in Java 8 as an alternative to `ReadWriteLock`.
+    - Provides three modes:
+        - **Read Lock:** Like `ReadWriteLock`'s read lock — shared and blocks writers.
+        - **Write Lock:** Exclusive — blocks all other readers and writers.
+        - **Optimistic Read:** Non-blocking read; does **not** acquire a traditional lock. May proceed even if a write is ongoing — but **must validate** afterward to check if the data was modified.
+
+- `StampedLock` is considered an **optimistic lock** because:
+    - It allows optimistic reads without locking.
+    - Assumes reads won't conflict with writes (i.e., no modification during read), and only re-validates if necessary.
+
+- **Use case:** Read-heavy application with rare writes.
+
+
+>4. **CountDownLatch:**
+- Initialized with a count; each `countDown()` call decrements it.
+- Waiting threads call `await()` and proceed when count reaches zero.
+- **Use case:** Waiting for multiple tasks to complete before continuing (e.g., main thread waiting for worker threads).
+
+
+>5. **CyclicBarrier:**
+- A **reusable** synchronization aid.
+- Allows a group of threads to wait at a barrier point until all reach it.
+- Once all parties arrive, barrier is tripped, and threads proceed.
+- Can be reused for multiple rounds.
+- **Use case:** Phased computation or iteration-based parallel tasks.
+
+
+ 
 ---
 ### 21. What is future and completableFuture? List some main methods of CompletableFuture.
 
