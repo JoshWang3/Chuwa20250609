@@ -1,4 +1,4 @@
-# 🔧 HW1 – Homework Submission
+# HW1 – Homework Submission
 
 **Student:** Juan Wu  
 **Date:** 2025-06-25  
