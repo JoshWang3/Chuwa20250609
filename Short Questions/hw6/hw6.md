@@ -530,14 +530,14 @@ public class Main {
 #### Give me some code example of Atomic classes and its main methods. 
 >Atomic classes are part of `java.util.concurrent.atomic` package.
 > 
->They support **lock-free, thread-safe** operations on single variables.
+>They support **lock-free, thread-safe** operations on **single variable**s.
 > 
 >Use **CAS (Compare-And-Swap)** internally to ensure atomicity.
 
 
 > When to Use?  
 >- When multiple threads update a **single variable concurrently**.
->- Useful for **counter**, **flag**, or **accumulator** without using `synchronized`.
+>- Useful for **counter**, **flag**, or **accumulator**.
 
 > Common Types of Atomic Classes:  
 
@@ -551,7 +551,7 @@ public class Main {
 | `AtomicLongArray`         | Atomic operations on `long[]`            |
 | `AtomicReferenceArray<V>` | Atomic operations on object arrays       |
 
->Code Example:
+Code Example:
 ```java
 import java.util.concurrent.atomic.*;
 
