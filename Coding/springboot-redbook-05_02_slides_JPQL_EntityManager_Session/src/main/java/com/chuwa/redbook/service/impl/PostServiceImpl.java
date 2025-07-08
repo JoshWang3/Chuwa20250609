@@ -1,10 +1,12 @@
 package com.chuwa.redbook.service.impl;
 
+import com.chuwa.redbook.dao.PostCustomRepository;
 import com.chuwa.redbook.dao.PostJPQLRepository;
 import com.chuwa.redbook.dao.PostRepository;
 import com.chuwa.redbook.entity.Post;
 import com.chuwa.redbook.exception.ResourceNotFoundException;
 import com.chuwa.redbook.payload.PostDto;
+import com.chuwa.redbook.payload.PostStatsDto;
 import com.chuwa.redbook.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,43 +26,18 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     PostJPQLRepository postJPQLRepository;
+    
+    @Autowired
+    private PostCustomRepository postCustomRepository;
 
     @Override
     public PostDto createPost(PostDto postDto) {
-        // 把payload转换成entity，这样才能dao去把该数据存到数据库中。
-//        Post post = new Post();
-//        if (postDto.getTitle() != null) {
-//            post.setTitle(postDto.getTitle());
-//        } else {
-//            post.setTitle("");
-//        }
-//        post.setDescription(postDto.getDescription());
-//        post.setContent(postDto.getContent());
-        // 此时已成功把request body的信息传递给entity
-
-        // covert DTO to Entity
         Post post = mapToEntity(postDto);
-
-        // 调用Dao的save 方法，将entity的数据存储到数据库MySQL
-        // save()会返回存储在数据库中的数据
         Post savedPost = postRepository.save(post);
-
-        // 将save() 返回的数据转换成controller/前端 需要的数据，然后return给controller
-//        PostDto postResponse = new PostDto();
-//        postResponse.setId(savedPost.getId());
-//        postResponse.setTitle(savedPost.getTitle());
-//        postResponse.setDescription(savedPost.getDescription());
-//        postResponse.setContent(savedPost.getContent());
-
         PostDto postResponse = mapToDTO(savedPost);
-
         return postResponse;
     }
 
-    /**
-     * 此处练习了lambda， stream API
-     * @return
-     */
     @Override
     public List<PostDto> getAllPost() {
         List<Post> posts = postRepository.findAll();
@@ -68,26 +45,14 @@ public class PostServiceImpl implements PostService {
         return postDtos;
     }
 
-    /**
-     * 此处顺便练习Optional
-     * @param id
-     * @return
-     */
     @Override
     public PostDto getPostById(long id) {
-//        Optional<Post> post = postRepository.findById(id);
-//        post.orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
-
-//        Post post = postRepository.findById(id).get();
-
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
-
         return mapToDTO(post);
     }
 
     @Override
     public PostDto updatePost(PostDto postDto, long id) {
-        //  Question, why do we need to find it out firstly?
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
@@ -99,7 +64,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostById(long id) {
-        //  Question, why do we need to find it out firstly?
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
         postRepository.delete(post);
     }
@@ -132,6 +96,37 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.getPostByIDOrTitleWithSQLNamedParameters(id, title);
         return mapToDTO(post);
     }
+    
+    // ========== New JPQL and Native SQL Query Methods ==========
+    
+    @Override
+    public List<PostDto> findPostsWithTitleLongerThan(int minLength) {
+        List<Post> posts = postCustomRepository.findPostsWithTitleLongerThan(minLength);
+        return posts.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<PostDto> searchPostsByKeywordJPQL(String keyword) {
+        List<Post> posts = postCustomRepository.searchPostsByKeywordJPQL(keyword);
+        return posts.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<PostStatsDto> getPostStatsByContentLength() {
+        List<Object[]> results = postCustomRepository.getPostStatsByContentLength();
+        return results.stream()
+                .map(result -> new PostStatsDto(
+                    (String) result[0],  // content_category
+                    ((Number) result[1]).longValue()  // post_count
+                ))
+                .collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<PostDto> findRecentPostsNativeSQL(int days) {
+        List<Post> posts = postCustomRepository.findRecentPostsNativeSQL(days);
+        return posts.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
 
     private PostDto mapToDTO(Post post) {
         PostDto postDto = new PostDto();
@@ -139,7 +134,6 @@ public class PostServiceImpl implements PostService {
         postDto.setTitle(post.getTitle());
         postDto.setDescription(post.getDescription());
         postDto.setContent(post.getContent());
-
         return postDto;
     }
 
@@ -148,7 +142,6 @@ public class PostServiceImpl implements PostService {
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
         post.setContent(postDto.getContent());
-
         return post;
     }
 }
