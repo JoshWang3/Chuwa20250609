@@ -51,4 +51,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(value = "select * from posts p where p.id = :key or p.title = :title", nativeQuery = true)
     Post getPostByIDOrTitleWithSQLNamedParameters(@Param("key") Long id,
                                                   @Param("title") String title);
+
+    List<Post> findByTitleContaining(String keyword);
+
+    @Query("select p from Post p where p.title like CONCAT('%', :keyword, '%')")
+    List<Post> findByTitleContainingJPQL(@Param("keyword")String keyword);
+
+    @Query(value="select * from posts p where p.title like CONCAT('%', :keyword, '%')",nativeQuery = true)
+    List<Post> findByTitleContainingJPQLNative(@Param("keyword")String keyword);
 }

@@ -25,4 +25,9 @@ public interface PostService {
     PostDto getPostByIdJPQLNamedParameter(Long id, String title);
     PostDto getPostByIdSQLIndexParameter(Long id, String title);
     PostDto getPostByIdSQLNamedParameter(Long id, String title);
+
+    List<PostDto> findPostsByTitleContaining(String keyword);
+
+    List<PostDto> findPostsByTitleContainingJPQL(String keyword);
+    List<PostDto> findPostsByTitleContainingJPQLNative(String keyword);
 }

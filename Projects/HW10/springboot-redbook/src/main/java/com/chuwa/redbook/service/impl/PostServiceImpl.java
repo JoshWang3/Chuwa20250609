@@ -133,6 +133,24 @@ public class PostServiceImpl implements PostService {
         return mapToDTO(post);
     }
 
+    @Override
+    public List<PostDto> findPostsByTitleContaining(String keyword){
+        List<Post> posts=postRepository.findByTitleContaining(keyword);
+        return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostDto> findPostsByTitleContainingJPQL(String keyword){
+        List<Post> posts=postRepository.findByTitleContainingJPQL(keyword);
+        return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostDto> findPostsByTitleContainingJPQLNative(String keyword){
+        List<Post> posts=postRepository.findByTitleContainingJPQLNative(keyword);
+        return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
     private PostDto mapToDTO(Post post) {
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());

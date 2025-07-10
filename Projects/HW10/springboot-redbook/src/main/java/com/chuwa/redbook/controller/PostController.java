@@ -77,4 +77,21 @@ public class PostController {
         return new ResponseEntity<>("Post entity deleted successfully.", HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<PostDto>> searchPost(@RequestParam(value = "keyword") String keyword) {
+        List<PostDto> postResponse=postService.findPostsByTitleContaining(keyword);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/search-jpql")
+    public ResponseEntity<List<PostDto>> searchPostJPQL(@RequestParam(value = "keyword") String keyword) {
+        List<PostDto> postResponse=postService.findPostsByTitleContainingJPQL(keyword);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/search-jpql-native")
+    public ResponseEntity<List<PostDto>> searchPostJPQLNative(@RequestParam(value = "keyword") String keyword) {
+        List<PostDto> postResponse=postService.findPostsByTitleContainingJPQLNative(keyword);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
 }
