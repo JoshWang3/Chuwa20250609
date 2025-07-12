@@ -293,3 +293,110 @@ private String name;
 
 ---
 
+## 10. Error handling
+
+### `@ExceptionHandler`
+
+**Used to handle specific exceptions in a controller globally or locally**
+
+```java
+@ExceptionHandler(ResourceNotFoundException.class)
+public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+}
+```
+
+### `@ResponseStatus`
+
+**Used to set the HTTP status code for exceptions or controller methods.**
+
+```java
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
+```
+
+### `@ControllerAdvice`
+
+**Used to Used to define a global exception handler or global controller logic.**
+
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+}
+```
+
+---
+
+## 11. Extra
+
+### `@SpringBootApplication`
+
+**Marks the main Spring Boot application class. It combines three annotations: `@Configuration`, `@EnableAutoConfiguration`, `@ComponentScan`.**
+
+```java
+@SpringBootApplication
+public class MyApp {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApp.class, args);
+    }
+}
+
+```
+
+### `ComponentScan`
+
+**Explicitly tells Spring where to scan for beans (`@Component`, `@Service`, etc.).
+Only needed if you're scanning outside the default package.**
+
+```java
+@Configuration
+@ComponentScan("com.example.services")
+public class AppConfig {}
+```
+
+### `@Scope`
+
+**Defines the bean lifecycle scope (e.g., singleton, prototype, request, session).**
+
+```java
+@Component
+@Scope("prototype")
+public class Invoice {
+    public Invoice() {
+        System.out.println("New Invoice instance created");
+    }
+}
+```
+
+### `@Primary`
+
+**Marks one bean as the default when multiple candidates of the same type exist.**
+
+```java
+public interface PaymentService {
+    void pay();
+}
+
+@Component
+@Primary
+public class PaypalService implements PaymentService {
+    public void pay() { System.out.println("Pay with PayPal"); }
+}
+
+@Component
+public class StripeService implements PaymentService {
+    public void pay() { System.out.println("Pay with Stripe"); }
+}
+
+@Autowired
+private PaymentService paymentService;
+```
