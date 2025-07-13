@@ -2,7 +2,7 @@ package com.chuwa.redbook.service.impl;
 
 import com.chuwa.redbook.dao.PostRepository;
 import com.chuwa.redbook.entity.Post;
-import com.chuwa.redbook.exception.ResourceNotFoundException;
+import com.chuwa.redbook.exception.*;
 import com.chuwa.redbook.payload.PostDto;
 import com.chuwa.redbook.payload.PostResponse;
 import com.chuwa.redbook.service.PostService;
@@ -34,19 +34,27 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto createPost(PostDto postDto) {
+        // Validation checks
+        if (postDto.getTitle() == null || postDto.getTitle().trim().isEmpty()) {
+            throw new ValidationException("Post title cannot be empty");
+        }
+        if (postDto.getContent() == null || postDto.getContent().trim().isEmpty()) {
+            throw new ValidationException("Post content cannot be empty");
+        }
+        
+        try {
+            // covert DTO to Entity
+            Post post = modelMapper.map(postDto, Post.class);
 
-        // covert DTO to Entity
-//        Post post = mapToEntity(postDto);
-        Post post = modelMapper.map(postDto, Post.class);
+            // 调用Dao的save 方法，将entity的数据存储到数据库MySQL
+            // save()会返回存储在数据库中的数据
+            Post savedPost = postRepository.save(post);
 
-        // 调用Dao的save 方法，将entity的数据存储到数据库MySQL
-        // save()会返回存储在数据库中的数据
-        Post savedPost = postRepository.save(post);
-
-        // 将save() 返回的数据转换成controller/前端 需要的数据，然后return给controller
-//        PostDto postResponse = mapToDTO(savedPost);
-
-        return modelMapper.map(savedPost, PostDto.class);
+            // 将save() 返回的数据转换成controller/前端 需要的数据，然后return给controller
+            return modelMapper.map(savedPost, PostDto.class);
+        } catch (Exception e) {
+            throw new InternalServerException("Failed to create post: " + e.getMessage());
+        }
     }
 
     /**
@@ -67,11 +75,11 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     public PostDto getPostById(long id) {
-//        Optional<Post> post = postRepository.findById(id);
-//        post.orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
-
-//        Post post = postRepository.findById(id).get();
-
+        // Validate ID
+        if (id <= 0) {
+            throw new ValidationException("Post ID must be greater than 0");
+        }
+        
         Post post = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
 
         return modelMapper.map(post, PostDto.class);
