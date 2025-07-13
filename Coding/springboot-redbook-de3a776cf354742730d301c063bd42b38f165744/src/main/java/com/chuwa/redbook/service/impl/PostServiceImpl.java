@@ -7,6 +7,8 @@ import com.chuwa.redbook.payload.PostDto;
 import com.chuwa.redbook.payload.PostResponse;
 import com.chuwa.redbook.service.PostService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements PostService {
 
+    private static final Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
+
     @Autowired
     private PostRepository postRepository;
 
@@ -34,22 +38,31 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto createPost(PostDto postDto) {
+        logger.info("Service: Creating post with title: {}", postDto.getTitle());
+        
         // Regex validation checks
+        logger.debug("Validating post fields for title: {}", postDto.getTitle());
         validatePostTitle(postDto.getTitle());
         validatePostDescription(postDto.getDescription());
         validatePostContent(postDto.getContent());
+        logger.debug("Validation completed successfully for post: {}", postDto.getTitle());
         
         try {
             // covert DTO to Entity
             Post post = modelMapper.map(postDto, Post.class);
+            logger.debug("Mapped DTO to entity for post: {}", postDto.getTitle());
 
             // 调用Dao的save 方法，将entity的数据存储到数据库MySQL
             // save()会返回存储在数据库中的数据
             Post savedPost = postRepository.save(post);
+            logger.info("Successfully saved post to database with ID: {}", savedPost.getId());
 
             // 将save() 返回的数据转换成controller/前端 需要的数据，然后return给controller
-            return modelMapper.map(savedPost, PostDto.class);
+            PostDto result = modelMapper.map(savedPost, PostDto.class);
+            logger.debug("Mapped entity back to DTO for post ID: {}", savedPost.getId());
+            return result;
         } catch (Exception e) {
+            logger.error("Failed to create post: {}", e.getMessage(), e);
             throw new InternalServerException("Failed to create post: " + e.getMessage());
         }
     }

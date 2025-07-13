@@ -4,6 +4,8 @@ import com.chuwa.redbook.payload.PostDto;
 import com.chuwa.redbook.payload.PostResponse;
 import com.chuwa.redbook.service.PostService;
 import com.chuwa.redbook.util.AppConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +21,22 @@ import java.util.List;
 @RequestMapping("/api/v1/posts")
 public class PostController {
 
+    private static final Logger logger = LoggerFactory.getLogger(PostController.class);
+
     @Autowired
     private PostService postService;
 
     @PostMapping()
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
-        PostDto postResponse = postService.createPost(postDto);
-        return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
+        logger.info("Creating new post with title: {}", postDto.getTitle());
+        try {
+            PostDto postResponse = postService.createPost(postDto);
+            logger.info("Successfully created post with ID: {}", postResponse.getId());
+            return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
+        } catch (Exception e) {
+            logger.error("Error creating post: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 
     @GetMapping()
@@ -40,7 +51,10 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id) {
-        return ResponseEntity.ok(postService.getPostById(id));
+        logger.info("Fetching post with ID: {}", id);
+        PostDto postDto = postService.getPostById(id);
+        logger.debug("Retrieved post: {}", postDto.getTitle());
+        return ResponseEntity.ok(postDto);
     }
 
     @PutMapping("/{id}")
