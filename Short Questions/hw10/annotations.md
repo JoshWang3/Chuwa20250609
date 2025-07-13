@@ -78,3 +78,6 @@
 - **@PostConstruct**: Marks a method to be executed after dependency injection is done.
 - **@PreDestroy**: Marks a method to be executed before the bean is destroyed.
 
+@ControllerAdvice
+@ExceptionHandler
+@ResponseStatus
