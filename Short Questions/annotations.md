@@ -180,6 +180,7 @@ public class UserController {
 ```
 
 
+
 ## Annotations used by Repository
 ### `@Entity`
 Marks a class as a JPA entity (a table in the database).
