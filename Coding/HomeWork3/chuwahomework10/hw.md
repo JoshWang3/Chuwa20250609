@@ -1,5 +1,34 @@
 ### 1 spring annotation cheatsheet
-    @Repostory: 
+    DB
+    Annotation	Description
+    @Entity	Marks a class as a JPA entity mapped to a DB table.
+    @Table(name = "name")	(Optional) Specifies table name for entity.
+    @Id	Marks a field as the primary key.
+    @GeneratedValue	Auto-generates PK value (strategies: AUTO, IDENTITY, SEQUENCE).
+    @Column	Customize a DB column (name, nullable, length, etc).
+    @Repository	Marks a DAO class as a Spring-managed bean; enables exception translation.
+    @Query	Define custom JPQL or native SQL query in a repository method.
+    @Modifying	Used with @Query for update/delete operations. Requires @Transactional.
+    @Transactional	Marks a method/class to run within a transaction.
+    @ManyToOne, @OneToMany, @OneToOne, @ManyToMany	Define relationships between entities.
+    @JoinColumn	Customizes foreign key column in a relationship.
+    @Lob	Used for large objects like BLOB or CLOB.
+    @Embeddable	Used for classes that are embedded in other entities.
+    @Embedded	Used in an entity to embed another class.
+    @Enumerated(EnumType.STRING)	Persist enums as Strings (or ORDINAL).
+
+    network
+    @RestController	Combines @Controller + @ResponseBody. Handles web requests + JSON output.
+    @RequestMapping	Maps HTTP requests to methods or controllers (can specify path + method).
+    @GetMapping / @PostMapping / @PutMapping / @DeleteMapping	Shortcut mappings for specific HTTP methods.
+    @RequestParam	Extracts query parameters (e.g. ?page=1).
+    @PathVariable	Extracts variables from the URL path (e.g. /users/{id}).
+    @RequestBody	Binds request JSON body to a Java object.
+    @ResponseBody	Serializes the return value to the HTTP response body.
+    @ResponseStatus	Sets a specific HTTP status on response.
+    @ExceptionHandler	Handles specific exceptions in controller methods.
+    @CrossOrigin	Enables CORS for a controller or method.
+    
 
 
 
