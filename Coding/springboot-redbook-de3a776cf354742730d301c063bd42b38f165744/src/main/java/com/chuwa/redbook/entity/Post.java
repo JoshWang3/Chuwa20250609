@@ -4,6 +4,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,12 +28,18 @@ public class Post {
     private Long id;
 
     @Column(name = "title", nullable = false)
+    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-_.,!?'\"()]{3,100}$", 
+             message = "Title must be 3-100 characters, alphanumeric with basic punctuation")
     private String title;
 
     @Column(name = "description", nullable = false)
+    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-_.,!?'\"()\\n\\r]{10,500}$", 
+             message = "Description must be 10-500 characters, no special symbols")
     private String description;
 
     @Column(name = "content", nullable = false)
+    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-_.,!?'\"()\\n\\r@#$%&*+=/<>{}\\[\\]]{20,5000}$", 
+             message = "Content must be 20-5000 characters, standard text allowed")
     private String content;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)

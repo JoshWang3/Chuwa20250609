@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 
 /**
@@ -19,8 +21,17 @@ public class Comment {
     private long id;
 
     @JsonProperty("name")
+    @Pattern(regexp = "^[a-zA-Z\\s'-]{2,50}$", 
+             message = "Name must be 2-50 characters, letters and spaces only")
     private String name;
+    
+    @Email(message = "Email must be valid format")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", 
+             message = "Email must be valid format (user@domain.com)")
     private String email;
+    
+    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-_.,!?'\"()\\n\\r]{5,1000}$", 
+             message = "Comment body must be 5-1000 characters, standard text allowed")
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -34,13 +34,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto createPost(PostDto postDto) {
-        // Validation checks
-        if (postDto.getTitle() == null || postDto.getTitle().trim().isEmpty()) {
-            throw new ValidationException("Post title cannot be empty");
-        }
-        if (postDto.getContent() == null || postDto.getContent().trim().isEmpty()) {
-            throw new ValidationException("Post content cannot be empty");
-        }
+        // Regex validation checks
+        validatePostTitle(postDto.getTitle());
+        validatePostDescription(postDto.getDescription());
+        validatePostContent(postDto.getContent());
         
         try {
             // covert DTO to Entity
@@ -129,5 +126,24 @@ public class PostServiceImpl implements PostService {
         postResponse.setTotalPages(pagePosts.getTotalPages());
         postResponse.setLast(pagePosts.isLast());
         return postResponse;
+    }
+
+    // Regex validation methods
+    private void validatePostTitle(String title) {
+        if (title == null || !title.matches("^[a-zA-Z0-9\\s\\-_.,!?'\"()]{3,100}$")) {
+            throw new ValidationException("Title must be 3-100 characters, alphanumeric with basic punctuation");
+        }
+    }
+
+    private void validatePostDescription(String description) {
+        if (description == null || !description.matches("^[a-zA-Z0-9\\s\\-_.,!?'\"()\\n\\r]{10,500}$")) {
+            throw new ValidationException("Description must be 10-500 characters, no special symbols");
+        }
+    }
+
+    private void validatePostContent(String content) {
+        if (content == null || !content.matches("^[a-zA-Z0-9\\s\\-_.,!?'\"()\\n\\r@#$%&*+=/<>{}\\[\\]]{20,5000}$")) {
+            throw new ValidationException("Content must be 20-5000 characters, standard text allowed");
+        }
     }
 }
