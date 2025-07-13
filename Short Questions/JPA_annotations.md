@@ -33,7 +33,20 @@ Specifies which bean to inject when multiple candidates are available.
 
 ---
 
-## 2. Spring Web Annotations (Spring MVC)
+
+---
+## 2. Dependency Injection Annotations
+
+@AutowiredAutomatically injects a bean by type.
+
+@ValueInjects values from property files.
+
+@Inject (from javax.inject)Alternative to @Autowired.
+
+@Resource (from JSR-250)Alternative injection by name.
+---
+
+## 3. Spring Web Annotations (Spring MVC)
 
 - `@RequestMapping`  
 Maps web requests to handler methods or classes.
@@ -67,7 +80,7 @@ Enables Cross-Origin Resource Sharing (CORS).
 
 ---
 
-## 3. Spring Boot Annotations
+## 4. Spring Boot Annotations
 
 - `@SpringBootApplication`  
 Combination of `@Configuration`, `@EnableAutoConfiguration`, and `@ComponentScan`.
@@ -83,7 +96,7 @@ Loads properties file.
 
 ---
 
-## 4. JPA & Hibernate Annotations
+## 5. JPA & Hibernate Annotations
 
 - `@Entity`  
 Marks a class as a JPA entity.
@@ -123,7 +136,7 @@ Maps enum types.
 
 ---
 
-## 5. Transaction Management
+## 6. Transaction Management
 
 - `@Transactional`  
 Defines transactional boundaries.
