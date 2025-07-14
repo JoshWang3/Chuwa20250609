@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -21,9 +23,13 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+    private static final Logger logger = LoggerFactory.getLogger(PostController.class);
+
 
     @PostMapping()
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
+        // LL-07132025 Add logger info
+        logger.info("Creating new post with title: {}", postDto.getTitle());
         PostDto postResponse = postService.createPost(postDto);
         return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
     }
