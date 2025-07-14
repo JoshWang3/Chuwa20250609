@@ -183,10 +183,10 @@ Customized API Exception:
 
 9. Write some regular expression to restrict the value of attributes that your Post or Comment can have. You may use https://regex101.com/ to construct and test/validate your regular expression.
 
-[Post](../../Coding/HW11/springboot-redbook/src/main/java/com/chuwa/redbook/entity/Post.java)
+[Post](../../Coding/HW11/springboot-redbook/src/main/java/com/chuwa/redbook/payload/PostDto.java)
 
 
-[Comment](../../Coding/HW11/springboot-redbook/src/main/java/com/chuwa/redbook/entity/Comment.java)
+[Comment](../../Coding/HW11/springboot-redbook/src/main/java/com/chuwa/redbook/payload/CommentDto.java)
 
 
 10. Explain Spring framework fundamental principles. And how can they help build business applications?
