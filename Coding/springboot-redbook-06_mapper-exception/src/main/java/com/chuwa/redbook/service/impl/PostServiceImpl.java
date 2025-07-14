@@ -2,6 +2,7 @@ package com.chuwa.redbook.service.impl;
 
 import com.chuwa.redbook.dao.PostRepository;
 import com.chuwa.redbook.entity.Post;
+import com.chuwa.redbook.exception.DuplicateTitleException;
 import com.chuwa.redbook.exception.ResourceNotFoundException;
 import com.chuwa.redbook.payload.PostDto;
 import com.chuwa.redbook.payload.PostResponse;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,12 +35,26 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private ModelMapper modelMapper;
 
+
+    private static final Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
+
+
     @Override
     public PostDto createPost(PostDto postDto) {
+        logger.info("Creating a new post with title: {}", postDto.getTitle());
+
 
         // covert DTO to Entity
 //        Post post = mapToEntity(postDto);
         Post post = modelMapper.map(postDto, Post.class);
+
+        // Check if the title already exists
+        Post existingPost = postRepository.findByTitle(post.getTitle());
+        if (existingPost != null) {
+            logger.warn("Duplicate post title detected: {}", postDto.getTitle());
+            throw new DuplicateTitleException("Post", "title", post.getTitle());
+        }
+        logger.info("Saving new post: {}", postDto.getTitle());
 
         // 调用Dao的save 方法，将entity的数据存储到数据库MySQL
         // save()会返回存储在数据库中的数据
