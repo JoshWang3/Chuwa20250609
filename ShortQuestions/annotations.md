@@ -107,3 +107,11 @@ To enable validation:
 - `@AllArgsConstructor`, `@NoArgsConstructor` – Generates constructors.
 - `@Data` – Combines `@Getter`, `@Setter`, `@ToString`, `@EqualsAndHashCode`, and `@RequiredArgsConstructor`.
 
+## Spring Security–Specific Annotations
+- `@EnableWebSecurity` - Enables Spring Security’s web security support and provides the Spring MVC integration.
+- `@EnableGlobalMethodSecurity(prePostEnabled = true)` - Allows the use of method-level security with annotations like `@PreAuthorize`.
+- `@PreAuthorize("hasRole('ROLE')")` - Checks the caller has a specific role before allowing access to the method or endpoint.
+- `@EnableRedisHttpSession` - Enables Redis-based HTTP session management.
+
+## JWT & Token Handling
+- `@Value("${property.key}")` - Injects values from application.properties (used in JwtTokenProvider).
