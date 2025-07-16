@@ -1,0 +1,48 @@
+package DeadLock;
+
+public class DeadLockFixed {
+
+    private static final Object BUN = new Object();
+    private static final Object PATTY = new Object();
+
+    public static void main(String[] args) {
+        Thread spongebob = new Thread(() -> {
+            synchronized (BUN) {
+                System.out.println("SpongeBob got the bun");
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ignored) {}
+                synchronized (PATTY) {
+                    System.out.println("SpongeBob assembled the Krabby Patty :)");
+                }
+            }
+        });
+
+        Thread squidward = new Thread(() -> {
+            synchronized (BUN) { // Squidward now locks BUN first too
+                System.out.println("Squidward got the bun");
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ignored) {}
+                synchronized (PATTY) {
+                    System.out.println("Squidward assembled the Krabby Patty :)");
+                }
+            }
+        });
+
+        spongebob.start();
+        squidward.start();
+
+    }
+
+}
+
+/*
+output: ✌️
+SpongeBob got the bun
+SpongeBob assembled the Krabby Patty :)
+Squidward got the bun
+Squidward assembled the Krabby Patty :)
+ */
