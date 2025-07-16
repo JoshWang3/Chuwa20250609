@@ -214,3 +214,9 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2025-07-13 17:48:06 [http-nio-8080-exec-6] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-07-13 17:48:06 [http-nio-8080-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2025-07-13 17:48:06 [http-nio-8080-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-07-13 17:50:32 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-13 17:50:32 [SpringApplicationShutdownHook] INFO  o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2025-07-13 17:50:32 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - drop table if exists comments CASCADE 
+2025-07-13 17:50:33 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - drop table if exists posts CASCADE 
+2025-07-13 17:50:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-07-13 17:50:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
