@@ -1,0 +1,74 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/opt/homebrew/Cellar/maven/3.9.10/libexec/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.chuwa:spring-security-https >-------------------
+[INFO] Building spring-security-https 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.1.0:run (default-cli) > test-compile @ spring-security-https >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ spring-security-https ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ spring-security-https ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ spring-security-https ---
+[INFO] skip non existing resourceDirectory /Users/marticztn/Desktop/chuwa/Chuwa20250609/Coding/spring-security-https/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ spring-security-https ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.1.0:run (default-cli) < test-compile @ spring-security-https <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.1.0:run (default-cli) @ spring-security-https ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.1.0)[0;39m
+
+[2m2025-07-16T19:36:36.720-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.c.s.HttpsApplication                  [0;39m [2m:[0;39m Starting HttpsApplication using Java 24.0.1 with PID 33205 (/Users/marticztn/Desktop/chuwa/Chuwa20250609/Coding/spring-security-https/target/classes started by marticztn in /Users/marticztn/Desktop/chuwa/Chuwa20250609/Coding/spring-security-https)
+[2m2025-07-16T19:36:36.721-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.c.s.HttpsApplication                  [0;39m [2m:[0;39m No active profile set, falling back to 1 default profile: "default"
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/marticztn/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.8/tomcat-embed-core-10.1.8.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+[2m2025-07-16T19:36:36.977-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 8443 (https)
+[2m2025-07-16T19:36:36.980-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.apache.catalina.core.StandardService  [0;39m [2m:[0;39m Starting service [Tomcat]
+[2m2025-07-16T19:36:36.980-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.apache.catalina.core.StandardEngine   [0;39m [2m:[0;39m Starting Servlet engine: [Apache Tomcat/10.1.8]
+[2m2025-07-16T19:36:37.001-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring embedded WebApplicationContext
+[2m2025-07-16T19:36:37.001-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 265 ms
+[2m2025-07-16T19:36:37.029-05:00[0;39m [33m WARN[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36m.s.s.UserDetailsServiceAutoConfiguration[0;39m [2m:[0;39m 
+
+Using generated security password: b11e91fb-859a-49a8-a68d-f8b6263a8d2b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+[2m2025-07-16T19:36:37.052-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.s.w.a.c.ChannelProcessingFilter     [0;39m [2m:[0;39m Validated configuration attributes
+[2m2025-07-16T19:36:37.052-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.s.web.DefaultSecurityFilterChain    [0;39m [2m:[0;39m Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@762637be, org.springframework.security.web.access.channel.ChannelProcessingFilter@74ecacc3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4b97c4ad, org.springframework.security.web.context.SecurityContextHolderFilter@5af8bb51, org.springframework.security.web.header.HeaderWriterFilter@5f0f9947, org.springframework.security.web.authentication.logout.LogoutFilter@296e281a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2e66bc32, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5fcfde70, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7640a5b1, org.springframework.security.web.access.ExceptionTranslationFilter@522bf64e, org.springframework.security.web.access.intercept.AuthorizationFilter@1305c126]
+[2m2025-07-16T19:36:37.162-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.a.t.util.net.NioEndpoint.certificate  [0;39m [2m:[0;39m Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/Users/marticztn/.keystore] using alias [myapp] and with trust store [null]
+[2m2025-07-16T19:36:37.165-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 8443 (https) with context path ''
+[2m2025-07-16T19:36:37.167-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.c.s.HttpsApplication                  [0;39m [2m:[0;39m Started HttpsApplication in 0.537 seconds (process running for 0.621)
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::invokeCleaner has been called by org.apache.tomcat.util.buf.ByteBufferUtils (file:/Users/marticztn/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.8/tomcat-embed-core-10.1.8.jar)
+WARNING: Please consider reporting this to the maintainers of class org.apache.tomcat.util.buf.ByteBufferUtils
+WARNING: sun.misc.Unsafe::invokeCleaner will be removed in a future release
+[2m2025-07-16T19:36:51.086-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[nio-8443-exec-4][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2m2025-07-16T19:36:51.086-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[nio-8443-exec-4][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2025-07-16T19:36:51.086-05:00[0;39m [32m INFO[0;39m [35m33205[0;39m [2m---[0;39m [2m[nio-8443-exec-4][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 0 ms
+[2m2025-07-16T19:36:51.088-05:00[0;39m [32mDEBUG[0;39m [35m33205[0;39m [2m---[0;39m [2m[nio-8443-exec-4][0;39m [36mo.s.security.web.FilterChainProxy       [0;39m [2m:[0;39m Securing GET /
+[2m2025-07-16T19:36:51.089-05:00[0;39m [32mDEBUG[0;39m [35m33205[0;39m [2m---[0;39m [2m[nio-8443-exec-4][0;39m [36mo.s.s.w.a.c.ChannelProcessingFilter     [0;39m [2m:[0;39m Request: filter invocation [GET /]; ConfigAttributes: [REQUIRES_SECURE_CHANNEL]
+[2m2025-07-16T19:36:51.091-05:00[0;39m [32mDEBUG[0;39m [35m33205[0;39m [2m---[0;39m [2m[nio-8443-exec-4][0;39m [36mo.s.security.web.FilterChainProxy       [0;39m [2m:[0;39m Secured GET /
+[2m2025-07-16T19:36:51.102-05:00[0;39m [32mDEBUG[0;39m [35m33205[0;39m [2m---[0;39m [2m[nio-8443-exec-4][0;39m [36mo.s.s.w.a.AnonymousAuthenticationFilter [0;39m [2m:[0;39m Set SecurityContextHolder to anonymous SecurityContext
