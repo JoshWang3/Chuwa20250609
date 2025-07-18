@@ -1,0 +1,13 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:keystore/server.jks
+    key-store-password: changeit
+    key-store-type: JKS
+    key-alias: server
+    key-password: changeit
+
+logging:
+  level:
+    org.springframework.security: DEBUG
