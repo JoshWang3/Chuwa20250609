@@ -239,7 +239,7 @@ class CommentServiceImplTest {
         );
         
         assertEquals("Comment does not belong to post", exception.getMessage());
-        assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
         
         verify(postRepository).findById(postId);
         verify(commentRepository).findById(commentId);
@@ -354,7 +354,7 @@ class CommentServiceImplTest {
         );
         
         assertEquals("Comment does not belong to post", exception.getMessage());
-        assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
         
         verify(postRepository).findById(postId);
         verify(commentRepository).findById(commentId);
@@ -443,7 +443,7 @@ class CommentServiceImplTest {
         );
         
         assertEquals("Comment does not belong to post", exception.getMessage());
-        assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
         
         verify(postRepository).findById(postId);
         verify(commentRepository).findById(commentId);
