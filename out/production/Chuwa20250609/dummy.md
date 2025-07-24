@@ -181,4 +181,34 @@ a hash-based data structure.
 ## Question13
 What is the Java load sequence?
 
-static variable/block -> constructor(used in Obj)
+1. Parent static block (runs once when class is loaded)
+2. Child static block (runs once when class is loaded)
+3. Memory allocation for new object
+4. Parent instance block (runs before constructor, for each object)
+5. Parent constructor (runs after instance block)
+6. Child instance block (runs before constructor, for each object)
+7. Child constructor (runs after instance block)
+
+## Question14 & Question15
+Code examples are in Question1.java
+Polymorphism has 2 main concepts. One is Overriding. In my saving account, the withdraw method overide its
+parent class, this is dynamic polymorphism - redefinition of parent method. The Other one is overloading. In
+my saving account example, withdraw method has another condition when the special user's Fee get waived.
+So the parameters are different. this is a method overloading.
+
+Encapsulation is creating a class, make the important values private. Modifying these values can only be
+done by given method. In my example - bank account: the balance should not be modified directly. Therefore
+this value can only be changed when using deposit/withdraw method.
+
+
+## Question16
+| Feature / Aspect         | **Interface**                                             | **Abstract Class**                                             |
+| ------------------------ |-----------------------------------------------------------| -------------------------------------------------------------- |
+| **Purpose**              | Defines a **contract** (what a class **must** do)         | Defines a **partial implementation** (what a class **can** do) |
+| **Methods**              | can have **default** and **static** methods               | Can have **abstract** and **concrete** methods                 |
+| **Fields**               | Only **public static final** (constants)                  | Can have **instance variables** (any access modifier)          |
+| **Constructors**         | ❌ No constructors                                         | ✅ Can have constructors                                        |
+| **Multiple Inheritance** | ✅ Supports multiple interfaces                            | ❌ Cannot extend multiple abstract classes                      |
+| **Access Modifiers**     | Methods are `public` by default                           | Methods and fields can have any access modifier                |
+| **Inheritance Keyword**  | Use `implements`                                          | Use `extends`                                                  |
+

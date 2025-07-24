@@ -5,6 +5,8 @@ public class Question13 {
 
         System.out.println("=== Creating the second Child Object === Static blocks will only run once");
         Child c2 = new Child();
+        Child.Inner.sayHello();
+
     }
 }
 
@@ -12,6 +14,7 @@ class Parent {
     static {
         System.out.println("1. Parent static block (runs once when class is loaded)");
     }
+
 
     {
         System.out.println("4. Parent instance block (runs before constructor, for each object)");
@@ -34,5 +37,16 @@ class Child extends Parent {
     public Child() {
         System.out.println("7. Child constructor (runs after instance block)");
     }
+
+    static class Inner {
+        static {
+            System.out.println("9. Child.Inner static block (runs only when Inner is first accessed)");
+        }
+
+        static void sayHello() {
+            System.out.println("10. Hello from Child.Inner!");
+        }
+    }
+
 }
 
