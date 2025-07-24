@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_7_20_2025_5_59_PM_[Changes]1" date="1753059569806" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2025_5_59_PM_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 7/20/2025 5:59 PM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Chuwa20250609/yifeili/Address.class" />
+    <option name="AFTER_PATH" value="out/production/Chuwa20250609/yifeili/Address.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2025_5_59_PM_[Changes]1/Address.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Chuwa20250609/yifeili/TestEmployee.class" />
+    <option name="AFTER_PATH" value="out/production/Chuwa20250609/yifeili/TestEmployee.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2025_5_59_PM_[Changes]1/TestEmployee.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Chuwa20250609/yifeili/Department.class" />
+    <option name="AFTER_PATH" value="out/production/Chuwa20250609/yifeili/Department.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2025_5_59_PM_[Changes]1/Department.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Chuwa20250609/yifeili/Employee.class" />
+    <option name="AFTER_PATH" value="out/production/Chuwa20250609/yifeili/Employee.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2025_5_59_PM_[Changes]1/Employee.class" />
+  </binary>
+</changelist>
