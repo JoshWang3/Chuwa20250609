@@ -1,0 +1,8 @@
+com/example/config/KafkaConfig.class
+com/example/service/MultiGroupConsumer.class
+com/example/controller/MessageController.class
+com/example/service/MessageProducer$1.class
+com/example/service/MessageConsumer.class
+com/example/service/MessageProducer$2.class
+com/example/KafkaConsumerApplication.class
+com/example/service/MessageProducer.class
