@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10d3ea43-0382-476c-8898-1d9776de24e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Coding/SingletonPatterns.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question1/AbstractFactoryPattern.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question1/BuilderPattern.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question1/FactoryPattern.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question1/SingletonPatterns.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question4.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coding/Question5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coding/SingletonPatterns.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coding/dummy.md" beforeDir="false" afterPath="$PROJECT_DIR$/Coding/dummy.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chuwa20250609/EagerLoadSingleton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chuwa20250609/SingletonPatterns.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Chuwa20250609/dummy.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Chuwa20250609/dummy.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +54,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.AbstractFactoryPattern.executor": "Run",
+    "Application.BuilderPattern.executor": "Run",
+    "Application.FactoryPattern.executor": "Run",
     "Application.Question1.executor": "Run",
     "Application.Question12.executor": "Run",
     "Application.Question13.executor": "Run",
+    "Application.Question2.executor": "Run",
     "Application.Question3.executor": "Run",
     "Application.Question4.executor": "Run",
+    "Application.Question5.executor": "Run",
     "Application.Question6_out_package.executor": "Run",
     "Application.Question8.executor": "Run",
     "Application.Question9.executor": "Run",
@@ -72,37 +90,37 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.SingletonPatterns">
-    <configuration name="Question12" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Question12" />
+  <component name="RunManager" selected="Application.Question5">
+    <configuration name="Question2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Question2" />
       <module name="Chuwa20250609" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Question13" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Question13" />
+    <configuration name="Question3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Question3" />
       <module name="Chuwa20250609" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Question8" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Question8" />
+    <configuration name="Question4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Question4" />
       <module name="Chuwa20250609" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Question9" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Question9" />
+    <configuration name="Question5" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Question5" />
       <module name="Chuwa20250609" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="SingletonPatterns" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SingletonPatterns" />
+      <option name="MAIN_CLASS_NAME" value="Question1.SingletonPatterns" />
       <module name="Chuwa20250609" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -110,11 +128,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Question5" />
+        <item itemvalue="Application.Question4" />
+        <item itemvalue="Application.Question3" />
+        <item itemvalue="Application.Question2" />
         <item itemvalue="Application.SingletonPatterns" />
-        <item itemvalue="Application.Question13" />
-        <item itemvalue="Application.Question12" />
-        <item itemvalue="Application.Question9" />
-        <item itemvalue="Application.Question8" />
       </list>
     </recent_temporary>
   </component>
@@ -140,6 +158,7 @@
       <workItem from="1753059808407" duration="14962000" />
       <workItem from="1753244659070" duration="12670000" />
       <workItem from="1753330140039" duration="548000" />
+      <workItem from="1753398431679" duration="8273000" />
     </task>
     <servers />
   </component>
