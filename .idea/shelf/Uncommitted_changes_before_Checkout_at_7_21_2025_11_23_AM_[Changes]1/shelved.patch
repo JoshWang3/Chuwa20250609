@@ -1,0 +1,261 @@
+Index: Short Questions/dummy.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>### Short Questions
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Short Questions/dummy.md b/Short Questions/dummy.md
+--- a/Short Questions/dummy.md	(revision ea25e7bbebf2440b63e99f5967ab1cc6f89fb6e1)
++++ b/Short Questions/dummy.md	(date 1753122208019)
+@@ -1,1 +1,49 @@
+-### Short Questions
+\ No newline at end of file
++### Short Questions
++## Question1
++
++## Question2
++What is wrapper data type classes (e.g. Integer, Double) in Java and Why we need wrapper class?
++
++The Wrapper Class in Java is the object version of 8 primitive data types in Java: 
++
++int - Integer
++
++double - Double
++
++char - Character
++
++boolean - Boolean
++
++byte - Byte
++
++short - Short
++
++long - Long
++
++float - Float
++
++
++The reason we need Wrapper class is because we want to use these data types in Java Collections which only accepts Objects.
++
++
++
++## Question3
++What is the difference between HashMap and HashTable?
++
++HashMap is not-synchronized, meaning can be viewed at the same time, therefore not thread safe.
++And therefore it is faster because of no-synchronization. Recommend using it in single-thread apps.
++
++While HashTable is synchronized, thread-safe but slow. Recommend using in multi-thread apps.
++
++## Question4
++What is String pool in Java and why we need String pool? Explain String immunity.
++
++String pool is a special memory in Java Heap Area in modern JVM. It stores unique String Literals
++The String pool only store unique String literals, so all the same Strings will point to the same address.
++The reason we need String pool is because of memory efficiency, string pool saves memory by reusing identical strings.
++Its performance is better than creating the same String objects.
++
++String is also immutable, once created, cannot be modified, this ensures thread safe and security.
++
++
++
+Index: Short Questions/Question3.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Short Questions/Question3.java b/Short Questions/Question3.java
+new file mode 100644
+--- /dev/null	(date 1753122208027)
++++ b/Short Questions/Question3.java	(date 1753122208027)
+@@ -0,0 +1,31 @@
++import java.util.*;
++
++
++public class Question3 {
++
++    public static void main(String[] args) throws InterruptedException {
++        Map<Integer, String> table = new Hashtable<>();
++        Map<Integer, String> map = new HashMap<>();
++
++        Runnable task = () -> {
++            for (int i = 0; i < 1000; i++) {
++                table.put(i, "Value " + i);
++                map.put(i, "Value " + i);
++            }
++        };
++
++        Thread t1 = new Thread(task);
++        Thread t2 = new Thread(task);
++
++        t1.start();
++        t2.start();
++
++        t1.join();
++        t2.join();
++
++        System.out.println("Hashtable size: " + table.size()); //Always 1000, thread safe
++        System.out.println("Hashmap size: " + map.size()); //not always 1000, thread not safe
++    }
++
++    //
++}
+Index: Short Questions/Question2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Short Questions/Question2.java b/Short Questions/Question2.java
+new file mode 100644
+--- /dev/null	(date 1753122208023)
++++ b/Short Questions/Question2.java	(date 1753122208023)
+@@ -0,0 +1,11 @@
++import java.util.ArrayList;
++
++public class Question2 {
++
++
++    //The reason we need Wrapper class is because we want to use these data types in Java Collections which only accepts Objects.
++
++    //ArrayList<int> list = new ArrayList<int>(); // not working with primitive types
++    ArrayList<Integer> list2 = new ArrayList<Integer>(); //Works with wrapper class
++
++}
+Index: Short Questions/Question4.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Short Questions/Question4.java b/Short Questions/Question4.java
+new file mode 100644
+--- /dev/null	(date 1753122208034)
++++ b/Short Questions/Question4.java	(date 1753122208034)
+@@ -0,0 +1,8 @@
++import 
++
++public class Question4 {
++    String s1 = "hello";
++    String s2 = "hello";
++    //Both s1 and s2 are pointing to the same memory address in the String pool.
++    System.identityHashCode(s1)
++}
+Index: Short Questions/Question1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Short Questions/Question1.java b/Short Questions/Question1.java
+new file mode 100644
+--- /dev/null	(date 1753122208030)
++++ b/Short Questions/Question1.java	(date 1753122208030)
+@@ -0,0 +1,108 @@
++public class Question1 {
++    public static void main(String[] args){
++
++        //Encapsulation Example
++        BankAccount myAccount = new BankAccount("John's bank account", "1234567");
++        myAccount.deposit(500);
++        myAccount.withdraw(125);
++        System.out.println("Account Name = " + myAccount.getAccountName());
++        System.out.println("Account Number = " + myAccount.getAccountNumber());
++        System.out.println("Account Balance = " + myAccount.getBalance());
++
++        //Inheritance Example
++        BankAccount myCheckingAccount = new CheckingAccount("John's checking account", "0123456");
++        BankAccount mySavingAccount = new SavingsAccount("John's saving account", "0123457");
++
++        myCheckingAccount.deposit(500);
++        mySavingAccount.deposit(500);
++        System.out.println("my Checking Account Balance = " + myCheckingAccount.getBalance());
++        System.out.println("my Saving Account Balance = " + mySavingAccount.getBalance());
++
++        //PolyMorphism - Overriding
++        myCheckingAccount.withdraw(125);
++        mySavingAccount.withdraw(125);
++        System.out.println("my Checking Account Balance = " + myCheckingAccount.getBalance());
++        System.out.println("my Saving Account Balance = " + mySavingAccount.getBalance());
++
++        //PolyMorphism - Overloading
++        SavingsAccount mySavingAccount2 = new SavingsAccount("John's saving account2", "0123457");
++        mySavingAccount2.deposit(500);
++        mySavingAccount2.withdraw(125, true);
++        System.out.println("my Saving Account Balance when Fee waived = " + mySavingAccount2.getBalance());
++
++
++    }
++
++
++    //Encapsulation
++    public static class BankAccount {
++        private String accountName;
++        private final String accountNumber;
++        private double balance;
++
++
++        public BankAccount(String accountName, String accountNumber) {
++            this.accountName = accountName;
++            this.accountNumber = accountNumber;
++            this.balance = 0;
++        }
++
++        public double getBalance(){return this.balance;}
++        public String getAccountName(){return this.accountName;}
++        public String getAccountNumber(){return this.accountNumber;}
++
++        public void setAccountName(String accountName){this.accountName = accountName;}
++        public void deposit(double amount){
++            if(amount > 0){
++                this.balance += amount;
++            } else {
++                System.out.println("Deposit number cannot be negative!");
++            }
++
++        }
++
++        public void withdraw(double amount){
++            if(amount > 0 && amount <= this.balance){
++                this.balance -= amount;
++            } else {
++                System.out.println("Insufficient fund or Withdraw amount cannot be negative!");
++            }
++        }
++
++    }
++
++    //Inheritance
++    public static class CheckingAccount extends BankAccount {
++        public CheckingAccount(String accountName, String accountNumber) {
++            super(accountName, accountNumber);
++        }
++    }
++
++    public static class SavingsAccount extends BankAccount {
++        private static final double processingFee = 1.25;
++        public SavingsAccount(String accountName, String accountNumber) {
++            super(accountName, accountNumber);
++        }
++
++        //Polymorphism - Overriding
++        @Override
++        public void withdraw(double amount) {
++            double totalAmount = amount + processingFee;
++            super.withdraw(totalAmount);
++        }
++
++        //Polymorphism - Overloading
++        public void withdraw(double amount, boolean feeWaived) {
++            if(feeWaived){
++                super.withdraw(amount);
++            } else {
++                double totalAmount = amount + processingFee;
++                super.withdraw(totalAmount);
++            }
++        }
++    }
++
++
++
++
++}
+\ No newline at end of file
