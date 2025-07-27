@@ -527,7 +527,7 @@ If lag is zero, the consumer is fully caught up.
 
 ## part1
 
-![image 1](101./.jpg)
+![image 1](./101.jpg)
 
 ## part2
 
@@ -544,7 +544,7 @@ If lag is zero, the consumer is fully caught up.
 
 ## part4
 
-![image 2](104./.jpg)
+![image 2](./104.jpg)
 
 ## part5
 
@@ -592,4 +592,4 @@ public class KafkaProducerService {
 
 ```
 
-![image 3](106./.jpg)
+![image 3](./106.jpg)
