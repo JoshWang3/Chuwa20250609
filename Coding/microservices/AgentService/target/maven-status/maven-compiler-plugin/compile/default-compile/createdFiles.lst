@@ -1,0 +1,9 @@
+com/codebase/microservices/AgentService/entity/Agent.class
+com/codebase/microservices/AgentService/model/RequiredResponse.class
+com/codebase/microservices/AgentService/controller/AgentController.class
+com/codebase/microservices/AgentService/model/VaccinationCenter.class
+com/codebase/microservices/AgentService/AgentServiceApplication.class
+com/codebase/microservices/AgentService/repository/AgentRepository.class
+com/codebase/microservices/AgentService/model/Citizen.class
+com/codebase/microservices/AgentService/client/VaccinationCenterClient.class
+com/codebase/microservices/AgentService/client/CitizenServiceClient.class

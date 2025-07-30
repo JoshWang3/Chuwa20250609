@@ -1,0 +1,9 @@
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/controller/AgentController.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/repository/AgentRepository.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/model/VaccinationCenter.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/model/RequiredResponse.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/client/CitizenServiceClient.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/AgentServiceApplication.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/model/Citizen.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/client/VaccinationCenterClient.java
+/Users/marticztn/Desktop/chuwa/Chuwa20250609/microservices/AgentService/src/main/java/com/codebase/microservices/AgentService/entity/Agent.java
