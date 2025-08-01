@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redbook
+  labels:
+    app: redbook
+    version: "1.0"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redbook
+  template:
+    metadata:
+      labels:
+        app: redbook
+        version: "1.0"
+    spec:
+      containers:
+        - name: redbook
+          image: redbook:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "docker"
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-service:3306/redbook?allowPublicKeyRetrieval=true&useSSL=false
+            - name: SPRING_DATASOURCE_USERNAME
+              value: chuwa
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: chuwa
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /api/v1/posts/readiness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/posts/liveness
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redbook-service
+  labels:
+    app: redbook
+spec:
+  type: NodePort
+  selector:
+    app: redbook
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30080
+      name: http
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: secret
+            - name: MYSQL_DATABASE
+              value: redbook
+            - name: MYSQL_USER
+              value: chuwa
+            - name: MYSQL_PASSWORD
+              value: chuwa
+          ports:
+            - containerPort: 3306
+              name: mysql
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    app: mysql
+spec:
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+      name: mysql
