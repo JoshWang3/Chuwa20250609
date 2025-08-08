@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lucky Number Generator</title>
+    </head>
+    <body>
+        <h2>Lucky Number Generator</h2>
+
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" />
+        <button onclick="generateLuckyNumber()">Get Lucky Number</button>
+
+        <p id="result"></p>
+
+        <script>
+            function generateLuckyNumber() {
+                const name = document.getElementById("name").value.trim();
+                if (!name) {
+                    document.getElementById("result").textContent = "Please enter your name.";
+                    return;
+                }
+
+                // Use current timestamp and user input to generate a consistent hash
+                const now = new Date().toISOString();
+                const seed = name + now;
+
+                // Simple hash function
+                let hash = 0;
+                for (let i = 0; i < seed.length; i++) {
+                    hash = (hash << 5) - hash + seed.charCodeAt(i);
+                    hash |= 0; // Convert to 32-bit integer
+                }
+
+                // Convert hash to a positive number between 1 and 100
+                const luckyNumber = Math.abs(hash % 100) + 1;
+
+                document.getElementById("result").textContent =
+                    `Hi ${name}, your lucky number is: ${luckyNumber}`;
+            }
+        </script>
+    </body>
+</html>
