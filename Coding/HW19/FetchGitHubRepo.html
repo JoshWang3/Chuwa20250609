@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repositories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        #repos {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>GitHub Repository Fetcher</h1>
+    <p>Enter a GitHub user ID to fetch their repositories:</p>
+    <input type="text" id="userId" placeholder="Enter GitHub user ID" />
+    <button id="fetchBtn">Fetch Repos</button>
+    <div id="repos"></div>
+
+    <script>
+
+        // Approach : Using async/await
+        async function fetchReposWithAsync() {
+            const userId = document.getElementById('userId').value.trim();
+            const reposDiv = document.getElementById('repos');
+            reposDiv.innerHTML = ""; // Clear previous results
+
+            if (!userId) {
+                reposDiv.textContent = "Please enter a GitHub user ID!";
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api.github.com/users/${userId}/repos`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch repos: ${response.statusText}`);
+                }
+                const data = await response.json();
+                if (data.length === 0) {
+                    reposDiv.textContent = "No repositories found for this user.";
+                } else {
+                    reposDiv.innerHTML = `<h2>Repositories:</h2><ul>${data.map(repo => `<li>${repo.name}</li>`).join('')}</ul>`;
+                }
+            } catch (error) {
+                reposDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        // Approach 2: Using fetch with .then()
+        // function fetchReposWithThen() {
+        //     const userId = document.getElementById('userId').value.trim();
+        //     const reposDiv = document.getElementById('repos');
+        //     reposDiv.innerHTML = ""; // Clear previous results
+
+        //     if (!userId) {
+        //         reposDiv.textContent = "Please enter a GitHub user ID!";
+        //         return;
+        //     }
+
+        //     fetch(`https://api.github.com/users/${userId}/repos`)
+        //         .then(response => {
+        //             if (!response.ok) {
+        //                 throw new Error(`Failed to fetch repos: ${response.statusText}`);
+        //             }
+        //             return response.json();
+        //         })
+        //         .then(data => {
+        //             if (data.length === 0) {
+        //                 reposDiv.textContent = "No repositories found for this user.";
+        //             } else {
+        //                 reposDiv.innerHTML = `<h2>Repositories:</h2><ul>${data.map(repo => `<li>${repo.name}</li>`).join('')}</ul>`;
+        //             }
+        //         })
+        //         .catch(error => {
+        //             reposDiv.textContent = `Error: ${error.message}`;
+        //         });
+        // }
+
+        // Attach event listeners
+        document.getElementById('fetchBtn').addEventListener('click', fetchReposWithAsync); // Switch between fetchReposWithThen and fetchReposWithAsync
+    </script>
+</body>
+
+</html>
