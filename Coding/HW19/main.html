@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div>
+    Type any string in input and press enter or click the button to get a random lucky number
+</div>
+<div>
+    <input type="text" id="input">
+</div>
+<div>
+    <button id="button">
+        Confirm
+    </button>
+</div>
+<div id="result" style="margin-top:10px; font-weight:bold; font-size:20px;">
+</div>
+
+<script>
+function getNum() {
+    let input = document.getElementById("input").value.trim();
+    let result = document.getElementById("result");
+
+    if (!input) {
+        result.textContent = "Please type something first!";
+        return;
+    }
+
+    let now = new Date();
+    let seedStr = input + now.toISOString();
+
+    let hash = 0;
+    for (let i = 0; i < seedStr.length; i++) {
+        hash = (hash * 31 + seedStr.charCodeAt(i)) % 100; 
+    }
+
+    let luckyNumber = (hash % 100) + 1;
+
+    result.textContent = "Your lucky number is: " + luckyNumber;
+}
+
+document.getElementById("button").addEventListener("click", getNum);
+
+document.getElementById("input").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        getNum();
+    }
+});
+</script>
+</body>
+</html>
