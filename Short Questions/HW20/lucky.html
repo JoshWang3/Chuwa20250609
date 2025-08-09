@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lucky Number Generator</title>
+</head>
+<body>
+  <h2>Lucky Number Generator</h2>
+  <input id="name" placeholder="Enter your name">
+  <button id="btn">Get Lucky Number</button>
+  <p id="result"></p>
+
+  <script>
+    function generateLucky() {
+      const name = document.getElementById('name').value;
+      const seed = Date.now() + name.length;
+      const lucky = Math.floor((seed * Math.random()) % 100) + 1;
+      document.getElementById('result').textContent = `Your lucky number: ${lucky}`;
+    }
+
+    document.getElementById('btn').onclick = generateLucky;
+    document.getElementById('name').addEventListener('keypress', e => {
+      if (e.key === 'Enter') generateLucky();
+    });
+  </script>
+</body>
+</html>
