@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Repos Fetcher</title>
+</head>
+<body>
+<h1>GitHub Repository Viewer</h1>
+<p>Enter a GitHub username:</p>
+
+<input type="text" id="username" placeholder="e.g. octocat">
+<button id="fetchThenBtn">Get Repos (fetch + then)</button>
+<button id="fetchAsyncBtn">Get Repos (async/await)</button>
+
+<h2>Results</h2>
+<pre id="output"></pre>
+
+<script>
+    const output = document.getElementById("output");
+
+    // ---- Approach 1: fetch + then ----
+    document.getElementById("fetchThenBtn").addEventListener("click", () => {
+        const user = document.getElementById("username").value.trim();
+        if (!user) {
+            output.textContent = "⚠️ Please enter a GitHub username.";
+            return;
+        }
+        fetch(`https://api.github.com/users/${encodeURIComponent(user)}/repos`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.length === 0) {
+                    output.textContent = "No repositories found for this user.";
+                } else {
+                    output.textContent = JSON.stringify(data, null, 2);
+                }
+            })
+            .catch(error => {
+                output.textContent = `Could not fetch repositories. Reason: ${error.message}`;
+            });
+    });
+
+    // ---- Approach 2: async / await ----
+    document.getElementById("fetchAsyncBtn").addEventListener("click", async () => {
+        const user = document.getElementById("username").value.trim();
+        if (!user) {
+            output.textContent = "⚠️ Please enter a GitHub username.";
+            return;
+        }
+        try {
+            const response = await fetch(`https://api.github.com/users/${encodeURIComponent(user)}/repos`);
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+            }
+            const data = await response.json();
+            if (data.length === 0) {
+                output.textContent = "No repositories found for this user.";
+            } else {
+                output.textContent = JSON.stringify(data, null, 2);
+            }
+        } catch (error) {
+            output.textContent = `Could not fetch repositories. Reason: ${error.message}`;
+        }
+    });
+</script>
+</body>
+</html>
