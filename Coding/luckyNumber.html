@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lucky Number Generator</title>
+</head>
+<body>
+<h1>Lucky Number Generator</h1>
+<p>Type something and press Enter or click the button:</p>
+
+<input type="text" id="userInput" placeholder="Enter your text">
+<button id="generateBtn">Get Lucky Number</button>
+
+<p id="result"></p>
+
+<script>
+    function hashString(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash += str.charCodeAt(i);
+        }
+        return Math.abs(hash);
+    }
+
+    function generateLuckyNumber(input) {
+        const now = new Date();
+        const seed = input + now.toISOString();
+        const hash = hashString(seed);
+        return (hash % 10) + 1;
+    }
+
+    function showLuckyNumber() {
+        const userInput = document.getElementById("userInput").value;
+        const luckyNumber = generateLuckyNumber(userInput);
+        document.getElementById("result").textContent = "Your lucky number is: " + luckyNumber;
+    }
+
+    document.getElementById("generateBtn").addEventListener("click", showLuckyNumber);
+    document.getElementById("userInput").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            showLuckyNumber();
+        }
+    });
+</script>
+</body>
+</html>
