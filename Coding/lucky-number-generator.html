@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Number Generator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+        .lucky-number {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 10px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .info {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .sparkle {
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍀 Lucky Number Generator</h1>
+        
+        <div class="input-group">
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" placeholder="Enter your name">
+        </div>
+
+        <div class="input-group">
+            <label for="birthYear">Birth Year:</label>
+            <input type="number" id="birthYear" placeholder="e.g., 1990" min="1900" max="2024">
+        </div>
+
+        <div class="input-group">
+            <label for="favoriteNumber">Your Favorite Number:</label>
+            <input type="number" id="favoriteNumber" placeholder="Enter any number">
+        </div>
+
+        <button class="generate-btn" onclick="generateLuckyNumber()">
+            Generate My Lucky Number! ✨
+        </button>
+
+        <div class="lucky-number" id="luckyNumberDisplay">
+            Click the button to reveal your lucky number!
+        </div>
+
+        <div class="info">
+            💡 Your lucky number is calculated using the current date, time, and your personal inputs
+        </div>
+    </div>
+
+    <script>
+        function generateLuckyNumber() {
+            // Get user inputs
+            const userName = document.getElementById('userName').value.trim();
+            const birthYear = parseInt(document.getElementById('birthYear').value);
+            const favoriteNumber = parseInt(document.getElementById('favoriteNumber').value);
+            
+            // Validate inputs
+            if (!userName) {
+                alert('Please enter your name!');
+                return;
+            }
+            
+            if (!birthYear || birthYear < 1900 || birthYear > 2024) {
+                alert('Please enter a valid birth year!');
+                return;
+            }
+            
+            if (!favoriteNumber && favoriteNumber !== 0) {
+                alert('Please enter your favorite number!');
+                return;
+            }
+
+            // Get current date and time
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth() + 1;
+            const currentDay = now.getDate();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentSecond = now.getSeconds();
+
+            // Calculate name hash (simple character sum)
+            let nameHash = 0;
+            for (let i = 0; i < userName.length; i++) {
+                nameHash += userName.charCodeAt(i);
+            }
+
+            // Complex lucky number calculation
+            const seed1 = (currentYear * currentMonth * currentDay) % 1000;
+            const seed2 = (currentHour * currentMinute * currentSecond) % 100;
+            const seed3 = (birthYear + favoriteNumber + nameHash) % 10000;
+            
+            // Create a more sophisticated algorithm
+            const timeFactor = (currentHour * 60 + currentMinute) / 1440; // 0-1 based on time of day
+            const dateFactor = (currentMonth * 31 + currentDay) / 365; // 0-1 based on date
+            const personalFactor = Math.abs(favoriteNumber) % 100;
+            
+            // Generate lucky number (1-999)
+            let luckyNumber = Math.floor(
+                (seed1 * 0.4 + seed2 * 0.3 + seed3 * 0.3 + 
+                 timeFactor * 100 + dateFactor * 50 + personalFactor) % 999
+            ) + 1;
+
+            // Ensure it's always a positive number between 1-999
+            luckyNumber = Math.abs(luckyNumber) % 999 + 1;
+
+            // Display with animation
+            const display = document.getElementById('luckyNumberDisplay');
+            display.classList.add('sparkle');
+            display.innerHTML = `Your Lucky Number is: ${luckyNumber}`;
+            
+            // Remove animation after 1.5 seconds
+            setTimeout(() => {
+                display.classList.remove('sparkle');
+            }, 1500);
+
+            console.log('Lucky number calculation:');
+            console.log(`Name: ${userName}, Hash: ${nameHash}`);
+            console.log(`Birth Year: ${birthYear}`);
+            console.log(`Favorite Number: ${favoriteNumber}`);
+            console.log(`Date: ${currentMonth}/${currentDay}/${currentYear}`);
+            console.log(`Time: ${currentHour}:${currentMinute}:${currentSecond}`);
+            console.log(`Lucky Number: ${luckyNumber}`);
+        }
+
+        // Allow Enter key to generate lucky number
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                generateLuckyNumber();
+            }
+        });
+
+        // Add some interactive feedback for inputs
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#667eea';
+                this.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.borderColor = '#e1e1e1';
+                this.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repository Fetcher</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #58a6ff;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .search-section {
+            background: #21262d;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            color: #f0f6fc;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #238636;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2ea043;
+        }
+
+        .btn-secondary {
+            background: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+        }
+
+        .btn-secondary:hover {
+            background: #30363d;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #58a6ff;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid #21262d;
+            border-top: 3px solid #58a6ff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #da3633;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .results {
+            background: #21262d;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+            padding: 20px;
+            display: none;
+        }
+
+        .repo-count {
+            color: #7d8590;
+            margin-bottom: 20px;
+        }
+
+        .repo-item {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: border-color 0.2s ease;
+        }
+
+        .repo-item:hover {
+            border-color: #58a6ff;
+        }
+
+        .repo-name {
+            color: #58a6ff;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .repo-name:hover {
+            text-decoration: underline;
+        }
+
+        .repo-description {
+            color: #c9d1d9;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            font-size: 14px;
+            color: #7d8590;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-badge {
+            background: #58a6ff;
+            color: #0d1117;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .approaches-section {
+            margin-top: 30px;
+            background: #21262d;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+        }
+
+        .approach-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 15px;
+            overflow-x: auto;
+            color: #c9d1d9;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .repo-stats {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐙 GitHub Repository Fetcher</h1>
+        
+        <div class="search-section">
+            <div class="input-group">
+                <div class="form-group">
+                    <label for="githubUsername">GitHub Username:</label>
+                    <input type="text" id="githubUsername" placeholder="Enter GitHub username (e.g., octocat)">
+                </div>
+                <button class="btn btn-primary" onclick="fetchRepositories()">Fetch Repositories</button>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                Fetching repositories...
+            </div>
+            
+            <div class="error" id="errorMessage"></div>
+        </div>
+
+        <div class="results" id="results">
+            <div class="repo-count" id="repoCount"></div>
+            <div id="repositoryList"></div>
+        </div>
+
+        <div class="approaches-section">
+            <h3 style="color: #f0f6fc; margin-bottom: 15px;">Different Asynchronous Approaches:</h3>
+            <div class="approach-buttons">
+                <button class="btn btn-secondary" onclick="demonstratePromises()">Promises</button>
+                <button class="btn btn-secondary" onclick="demonstrateAsyncAwait()">Async/Await</button>
+                <button class="btn btn-secondary" onclick="demonstrateFetchAPI()">Fetch API</button>
+            </div>
+            <pre id="codeExample"></pre>
+        </div>
+    </div>
+
+    <script>
+        // Global variable to store current username
+        let currentUsername = '';
+
+        // Main function using async/await
+        async function fetchRepositories() {
+            const username = document.getElementById('githubUsername').value.trim();
+            
+            if (!username) {
+                showError('Please enter a GitHub username');
+                return;
+            }
+
+            currentUsername = username;
+            showLoading(true);
+            hideError();
+            hideResults();
+
+            try {
+                const response = await fetch(`https://api.github.com/users/${username}/repos`);
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error(`User "${username}" not found. Please check the username and try again.`);
+                    } else if (response.status === 403) {
+                        throw new Error('GitHub API rate limit exceeded. Please try again later.');
+                    } else {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+                }
+
+                const repositories = await response.json();
+                displayRepositories(repositories, username);
+                
+            } catch (error) {
+                console.error('Error fetching repositories:', error);
+                showError(error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Alternative approach using Promises
+        function fetchRepositoriesWithPromises() {
+            const username = currentUsername || 'octocat';
+            
+            showLoading(true);
+            hideError();
+            
+            fetch(`https://api.github.com/users/${username}/repos`)
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            throw new Error(`User "${username}" not found`);
+                        } else {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                    }
+                    return response.json();
+                })
+                .then(repositories => {
+                    displayRepositories(repositories, username);
+                    console.log('Fetched with Promises approach');
+                })
+                .catch(error => {
+                    console.error('Promise error:', error);
+                    showError(error.message);
+                })
+                .finally(() => {
+                    showLoading(false);
+                });
+        }
+
+        // Alternative approach using XMLHttpRequest (older callback style)
+        function fetchRepositoriesWithXHR() {
+            const username = currentUsername || 'octocat';
+            
+            showLoading(true);
+            hideError();
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `https://api.github.com/users/${username}/repos`, true);
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    showLoading(false);
+                    
+                    if (xhr.status === 200) {
+                        try {
+                            const repositories = JSON.parse(xhr.responseText);
+                            displayRepositories(repositories, username);
+                            console.log('Fetched with XMLHttpRequest approach');
+                        } catch (error) {
+                            showError('Error parsing response data');
+                        }
+                    } else if (xhr.status === 404) {
+                        showError(`User "${username}" not found`);
+                    } else {
+                        showError(`Error: ${xhr.status} - ${xhr.statusText}`);
+                    }
+                }
+            };
+            
+            xhr.onerror = function() {
+                showLoading(false);
+                showError('Network error occurred');
+            };
+            
+            xhr.send();
+        }
+
+        function displayRepositories(repositories, username) {
+            const resultsDiv = document.getElementById('results');
+            const repoCount = document.getElementById('repoCount');
+            const repositoryList = document.getElementById('repositoryList');
+            
+            repoCount.textContent = `Found ${repositories.length} repositories for ${username}`;
+            
+            repositoryList.innerHTML = repositories.map(repo => `
+                <div class="repo-item">
+                    <a href="${repo.html_url}" class="repo-name" target="_blank">
+                        ${repo.name}
+                    </a>
+                    <div class="repo-description">
+                        ${repo.description || 'No description available'}
+                    </div>
+                    <div class="repo-stats">
+                        <div class="stat">⭐ ${repo.stargazers_count}</div>
+                        <div class="stat">🍴 ${repo.forks_count}</div>
+                        <div class="stat">👁️ ${repo.watchers_count}</div>
+                        ${repo.language ? `<div class="language-badge">${repo.language}</div>` : ''}
+                        <div class="stat">📅 Updated: ${new Date(repo.updated_at).toLocaleDateString()}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            resultsDiv.style.display = 'block';
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function hideResults() {
+            document.getElementById('results').style.display = 'none';
+        }
+
+        // Code demonstration functions
+        function demonstratePromises() {
+            const code = `// Using Promises
+function fetchWithPromises(username) {
+    return fetch(\`https://api.github.com/users/\${username}/repos\`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(\`HTTP error! status: \${response.status}\`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            return data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            throw error;
+        });
+}`;
+            document.getElementById('codeExample').textContent = code;
+        }
+
+        function demonstrateAsyncAwait() {
+            const code = `// Using Async/Await
+async function fetchWithAsyncAwait(username) {
+    try {
+        const response = await fetch(\`https://api.github.com/users/\${username}/repos\`);
+        
+        if (!response.ok) {
+            throw new Error(\`HTTP error! status: \${response.status}\`);
+        }
+        
+        const data = await response.json();
+        console.log('Success:', data);
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}`;
+            document.getElementById('codeExample').textContent = code;
+        }
+
+        function demonstrateFetchAPI() {
+            const code = `// Using Fetch API with error handling
+function fetchWithFetchAPI(username) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    
+    return fetch(\`https://api.github.com/users/\${username}/repos\`, {
+        signal: controller.signal,
+        headers: {
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    })
+    .then(response => {
+        clearTimeout(timeoutId);
+        
+        if (response.status === 404) {
+            throw new Error('User not found');
+        }
+        if (response.status === 403) {
+            throw new Error('Rate limit exceeded');
+        }
+        if (!response.ok) {
+            throw new Error(\`HTTP \${response.status}: \${response.statusText}\`);
+        }
+        
+        return response.json();
+    })
+    .catch(error => {
+        clearTimeout(timeoutId);
+        if (error.name === 'AbortError') {
+            throw new Error('Request timeout');
+        }
+        throw error;
+    });
+}`;
+            document.getElementById('codeExample').textContent = code;
+        }
+
+        // Allow Enter key to search
+        document.getElementById('githubUsername').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                fetchRepositories();
+            }
+        });
+
+        // Initialize with example code
+        demonstrateAsyncAwait();
+    </script>
+</body>
+</html>
