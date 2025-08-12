@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang = "en">
+<head>
+	<meta charset="utf-8" />
+	<title> Lucky Number </title>
+	<style>
+		body { font:16px; }
+	</style>
+</head>
+<body>
+	<h1> Get your lucky number </h1>
+	<label>
+		Enther something(name, word, etc.):
+		<input id="userInput" placeholder="e.g. Alice" autofocus />
+	</label>
+	<button id="goBtn">Get Lucky Number</button>
+	<div id="result"></div>
+	<script>
+		const input = document.getElementById('userInput');
+		const btn = document.getElementById('goBtn');
+		const result = document.getElementById('result');
+
+		function hashString(str){
+			let h = 0;
+			for (let i=0; i<str.length; i++){
+				h = (h*31 + str.charCodeAt(i)) >>> 0;
+			}
+			return h;
+		}
+
+		function getLuckyNumber(){
+			const userText = input.value.trim();
+			const now = new Date();
+			const ymdhm = [
+				now.getFullYear(),
+				now.getMonth()+1,
+				now.getDate(),
+				now.getHours(),
+				now.getMinutes()
+			].join('-');
+
+			const seed = hashString(userText + '|' + ymdhm);
+			const lucky = (seed % 100)+1;
+			result.textContent = `Your lucky number is: ${lucky}`;	
+		}
+		btn.addEventListener('click', getLuckyNumber);
+		input.addEventListener('keydown', (e)=> {
+			if (e.key === 'Enter') getLuckyNumber();
+		});
+	</script>
+</body>
+</html>
