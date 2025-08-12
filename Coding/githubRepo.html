@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Github Repos </title>
+</head>
+
+<body>
+	<h1> Github Repos Lookup</h1>
+	<input id="user" placeholder="Github username">
+	<button id="btn">Get Repos</button>
+	<pre id="output"></pre>
+</body>
+
+<script>
+	const input = document.getElementById('user');
+	const btn = document.getElementById('btn');
+	const out = document.getElementById('output');
+
+	async function getRepos(){
+		out.textContent = ''; // 每次查询前清空结果
+		const user = input.value.trim(); // 取输入框内容并去掉前后空格
+		if (!user) { out.textContent = 'Please enter a username'; return;}
+		try{
+			const res = await fetch(`https://api.github.com/users/${user}/repos`);
+			if (!res.ok) throw new Error('User not found or API error');
+			// 解析 JSON 数据
+			const data = await res.json();
+			out.textContent = JSON.stringify(data, null, 2); //2 表示缩进两个空格
+		} catch (err) {
+			out.textContent = 'Error: ' + err.message;
+		}
+	}
+
+	btn.addEventListener('click', getRepos);
+	input.addEventListener('keydown', e=> { if (e.key === 'Enter') getRepos(); });
+</script>
+
+</html>
