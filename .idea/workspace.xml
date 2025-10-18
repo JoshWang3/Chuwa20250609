@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dde4aa91-c5d5-4faf-838b-3c24d5773c37" name="Changes" comment="API hw7 by Siyan Wen">
-      <change beforePath="$PROJECT_DIR$/Coding/dummy.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Short Questions/dummy.md" beforeDir="false" />
-    </list>
+    <list default="true" id="dde4aa91-c5d5-4faf-838b-3c24d5773c37" name="Changes" comment="Java 8 new feature hw4 by Siyan Wen" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +78,7 @@
       <workItem from="1754039381839" duration="2347000" />
       <workItem from="1755298521202" duration="1213000" />
       <workItem from="1760787868015" duration="2234000" />
-      <workItem from="1760790517892" duration="302000" />
+      <workItem from="1760790517892" duration="1065000" />
     </task>
     <task id="LOCAL-00001" summary="hw2 for 06/11/2025 Java OOP part 1">
       <option name="closed" value="true" />
@@ -99,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760790020581</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Java 8 new feature hw4 by Siyan Wen">
+      <option name="closed" value="true" />
+      <created>1760790930858</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760790930858</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,7 +114,8 @@
     <MESSAGE value="hw7 of 0625" />
     <MESSAGE value="hw2 for 06/11/2025 Java OOP part 1" />
     <MESSAGE value="API hw7 by Siyan Wen" />
-    <option name="LAST_COMMIT_MESSAGE" value="API hw7 by Siyan Wen" />
+    <MESSAGE value="Java 8 new feature hw4 by Siyan Wen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Java 8 new feature hw4 by Siyan Wen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
