@@ -41,6 +41,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "siyan__wen/hw10",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/A_Chuwa/springboot-redbook",
     "node.js.detected.package.eslint": "true",
@@ -88,6 +89,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cannot checkout kept saying inversioned files &lt;/&gt;vcs.xml so I commited" />
     <MESSAGE value="hw1" />
-    <option name="LAST_COMMIT_MESSAGE" value="hw1" />
+    <MESSAGE value="added hw10" />
+    <option name="LAST_COMMIT_MESSAGE" value="added hw10" />
   </component>
 </project>
