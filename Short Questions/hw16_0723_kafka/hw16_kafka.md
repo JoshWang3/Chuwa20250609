@@ -308,7 +308,7 @@ transactional.id=<unique-id>
 This ensures:
 -   No duplicate writes in producers
 -   No partial writes
--   Atomic write + offset commit in the same transaction
+-   Atomic "write + offset commit" in the same transaction
 Used mostly by Kafka Streams and financial systems.
 
 # 5. What will happen if some consumers are down in a consumer group? Will data loss occur? Why?
