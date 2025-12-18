@@ -1,0 +1,83 @@
+// Controller:
+
+@RestController
+@RequestMapping("/api/v1/posts")
+public class PostController {
+
+    @Autowired
+    private PostService postService;
+
+    /**
+     *  custom JPA methods using Spring Data JPA naming conventions
+     */
+    @GetMapping("/search/{title}")
+    public List<PostDto> searchPostByTitleStartsWith(@PathVariable(name = "title") String title) {
+        return postService.searchPostByTitleStartingWith(title);
+    }
+
+    /**
+     * JPQL query using the @Query annotation
+     */
+    @GetMapping("/jpql-search")
+    public List<PostDto> searchPostByIdLessThanOrEqual(@RequestParam(value = "id", required = false) long id) {
+        return postService.searchPostByIdLessThanOrEqual(id);
+    }
+
+    /**
+     * Native SQL query using @Query(native = true)
+     */
+    @GetMapping("/sql-search")
+    public List<PostDto> searchPostByContentLongerThan(@RequestParam(value = "length", required = false) long length) {
+        return postService.searchPostByContentLongerThanOrEqual (length);
+    }
+}
+
+// Service:
+
+public interface PostService {
+    List<PostDto> searchPostByTitleStartingWith(String title);
+    List<PostDto> searchPostByIdLessThanOrEqual(long id);
+    List<PostDto> searchPostByContentLongerThanOrEqual(long length);
+}
+
+//ServiceImpl:
+
+@Service
+public class PostServiceImpl implements PostService {
+
+    @Autowired
+    private PostRepository postRepository;
+
+
+    @Override
+    public List<PostDto> searchPostByTitleStartingWith(String title) {
+        List<Post> posts = postRepository.searchPostByTitleStartingWith(title);
+        return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+    @Override
+    public List<PostDto> searchPostByIdLessThanOrEqual(long id) {
+        List<Post> posts = postRepository.searchPostByIdLessThanOrEqual(id);
+        return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<PostDto> searchPostByContentLongerThanOrEqual(long length) {
+        List<Post> posts = postRepository.searchPostByContentLongerThanOrEqual(length);
+        return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
+}
+
+// Repo:
+
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+    List<Post> searchPostByTitleStartingWith(String title);
+
+    @Query("select p from Post p where p.id <= ?1")
+    List<Post> searchPostByIdLessThanOrEqual(Long id);
+
+    @Query(value = "select * from posts p where LENGTH(p.content) >= ?1", nativeQuery = true)
+    List<Post> searchPostByContentLongerThanOrEqual(Long length);
+}
