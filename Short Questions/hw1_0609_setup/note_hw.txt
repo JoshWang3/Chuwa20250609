@@ -1,0 +1,12 @@
+Please consider the syllabus as a guideline instead of a table of content, as we are doing "vibe trainings" : )
+Repos I mentioned in class: https://github.com/CTYue/springboot-redbook
+https://github.com/CTYue/chuwa-eij-tutorial
+
+hw
+
+June 9 2025 Assignment DUE Jun 11th 2025 5:30PM PST
+1. Setup necessary tools as above.
+2. Setup git cli on your local
+3. Learn and practice git on https://learngitbranching.js.org/?locale=en_US
+4. Please submit screenshots, in a markdown file, as your homework submission, to our assignment git repo, the repo link and access will be provided by Josh J. 
+ 
